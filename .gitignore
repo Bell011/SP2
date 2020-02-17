@@ -1,2 +1,10 @@
 
 .vs/DM2122 Prac/v15/.suo
+.vs/DM2122 Prac/v16/.suo
+*.db
+*.opendb
+*.ipch
+*.ipch
+*.db-shm
+*.db-wal
+x64/Debug/Common.pdb
