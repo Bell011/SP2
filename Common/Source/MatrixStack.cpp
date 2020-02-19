@@ -132,6 +132,22 @@ void MS::Rotate(float degrees, float axisX, float axisY, float axisZ) {
 	mat.SetToRotation(degrees, axisX, axisY, axisZ);
 	ms.top() = ms.top() * mat;
 }
+/******************************************************************************/
+/*!
+\brief
+Multiply the top matrix with a rotation matrix based on the following parameters
+
+\param	Rotate
+	Vector with parameters which are angle of rotation, in degrees, clockwise,
+	and the component of the X, Y, Z component of the rotation axis
+*/
+/******************************************************************************/
+void MS::Rotate(Vector4& Rotate)
+{
+	Mtx44 mat;
+	mat.SetToRotation(Rotate.degree, Rotate.x, Rotate.y, Rotate.z);
+	ms.top() = ms.top() * mat;
+}
 
 /******************************************************************************/
 /*!
@@ -149,6 +165,21 @@ Multiply the top matrix with a scale matrix based on the following parameters
 void MS::Scale(float scaleX, float scaleY, float scaleZ) {
 	Mtx44 mat;
 	mat.SetToScale(scaleX, scaleY, scaleZ);
+	ms.top() = ms.top() * mat;
+}
+/******************************************************************************/
+/*!
+\brief
+Multiply the top matrix with a scale matrix based on the following parameters
+
+\param	Scale
+	Vector with parameters of the factors to scale along x, y and z axis
+*/
+/******************************************************************************/
+void MS::Scale(Vector3& Scale)
+{
+	Mtx44 mat;
+	mat.SetToScale(Scale.x, Scale.y, Scale.z);
 	ms.top() = ms.top() * mat;
 }
 
@@ -169,6 +200,22 @@ parameters
 void MS::Translate(float translateX, float translateY, float translateZ) {
 	Mtx44 mat;
 	mat.SetToTranslation(translateX, translateY, translateZ);
+	ms.top() = ms.top() * mat;
+}
+/******************************************************************************/
+/*!
+\brief
+Multiply the top matrix with a translation matrix based on the following
+parameters
+
+\param	Translate
+	Vector with parameters of offsets along x, y  and z axis
+*/
+/******************************************************************************/
+void MS::Translate(Vector3& Translate)
+{
+	Mtx44 mat;
+	mat.SetToTranslation(Translate.x, Translate.y, Translate.z);
 	ms.top() = ms.top() * mat;
 }
 

@@ -45,3 +45,7 @@ void Camera::Update(double dt)
 		position.y -= (float)(CAMERA_SPEED * 0.2 * dt);
 	}
 }
+
+void Camera::mouse_callback() {
+
+}
