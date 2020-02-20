@@ -1,6 +1,7 @@
 #ifndef _SCENE_RACING_H
 #define _SCENE_RACING_H
 #include "Scene.h"
+#include "CarEntity.h"
 #include <MatrixStack.h>
 #include "Camera2.h"
 #include "Mesh.h"
@@ -19,6 +20,9 @@ class SceneRacing : public Scene
 		GEO_BACK,
 		GEO_CHAR,
 		GEO_DICE,
+		GEO_CAR1,
+		GEO_CAR2,
+		GEO_CAR3,
 		GEO_LIGHTSPHERE,
 		GEO_TEXT,
 		NUM_GEOMETRY,
@@ -70,10 +74,15 @@ private:
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
+	void RenderCars();
 
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
+
+	float carSpeed;
+	entityCar* carPlayer;
+	entityCar* Car1;
 
 public:
 	SceneRacing();
