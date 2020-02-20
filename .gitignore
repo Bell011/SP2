@@ -7,3 +7,4 @@
 *.db-shm
 *.db-wal
 x64/Debug/Common.pdb
+.vs/DM2122 Prac/v16/.suo
