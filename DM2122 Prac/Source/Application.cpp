@@ -7,11 +7,10 @@
 //Include the standard C++ headers
 #include <stdio.h>
 #include <stdlib.h>
-
-
 #include "Application.h"
-
+#include "Camera.h"
 #include "SceneText.h"
+#include "Scene1.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -72,7 +71,7 @@ void Application::Init()
 
 	//Create a window and create its OpenGL context
 	m_window = glfwCreateWindow(800, 600, "Test Window", NULL, NULL);
-
+	//glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	//If the window couldn't be created
 	if (!m_window)
 	{
@@ -80,7 +79,6 @@ void Application::Init()
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-
 	//This function makes the context of the specified window current on the calling thread. 
 	glfwMakeContextCurrent(m_window);
 
@@ -106,13 +104,21 @@ void Application::Run()
 {
 	//Main Loop
 
-	Scene* scene = new SceneText();
-
-	scene->Init();
+	Scene* scene1 = new Scene1();
+	Scene* scene2 = new SceneText();
+	Scene* scene = scene1;
+	scene1->Init();
+	scene2->Init();
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
+		if (IsKeyPressed('9')) {
+			scene = scene1;
+		}
+		else if (IsKeyPressed('0')) {
+			scene = scene2;
+		}
 		scene->Update(m_timer.getElapsedTime());
 		scene->Render();
 		//Swap buffers
@@ -122,8 +128,11 @@ void Application::Run()
         m_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.   
 
 	} //Check if the ESC key had been pressed or if the window had been closed
-	scene->Exit();
-	delete scene;
+	scene1->Exit();
+	delete scene1;
+	scene2->Exit();
+	delete scene2;
+
 }
 
 void Application::Exit()

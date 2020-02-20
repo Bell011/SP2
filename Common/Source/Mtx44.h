@@ -12,7 +12,7 @@ Matrix 4 by 4 use for affine transformation
 
 #include "MyMath.h"
 #include "Vector3.h"
-
+#include "trs.h"
 #pragma warning( disable: 4290 ) //for throw(DivideByZero)
 
 /******************************************************************************/
