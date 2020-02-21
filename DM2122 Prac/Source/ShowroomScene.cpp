@@ -219,20 +219,6 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_ARCADE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_ARCADE]->material.kShininess = 1.f;
 
-	meshList[GEO_ARCADE1] = MeshBuilder::GenerateOBJ("Arcade", "OBJ//arcade.obj");
-	meshList[GEO_ARCADE1]->textureID = LoadTGA("Image//arcade.tga");
-	meshList[GEO_ARCADE1]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_ARCADE1]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_ARCADE1]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_ARCADE1]->material.kShininess = 1.f;
-
-	meshList[GEO_ARCADE2] = MeshBuilder::GenerateOBJ("Arcade", "OBJ//arcade.obj");
-	meshList[GEO_ARCADE2]->textureID = LoadTGA("Image//arcade.tga");
-	meshList[GEO_ARCADE2]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_ARCADE2]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_ARCADE2]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_ARCADE2]->material.kShininess = 1.f;
-
 	meshList[GEO_BENCH] = MeshBuilder::GenerateOBJ("Bench", "OBJ//bench.obj");
 	meshList[GEO_BENCH]->textureID = LoadTGA("Image//bench.tga");
 	meshList[GEO_BENCH]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
