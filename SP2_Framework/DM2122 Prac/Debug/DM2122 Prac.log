@@ -1,0 +1,16 @@
+﻿  miniGameTwo.cpp
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(77,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(78,72): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(78,50): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(78,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(92,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(92,56): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(92,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(103,75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(103,52): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(103,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(137,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(141,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(145,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\DM2122 Prac\Source\miniGameTwo.cpp(149,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  DM2122 Prac.vcxproj -> C:\Users\gohbe\Documents\NYP\Year 1 Sem 2\Computer Graphics Project\SP2_Framework\Debug\DM2122 Prac.exe
