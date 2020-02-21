@@ -1,1 +1,16 @@
-﻿
+﻿  SceneText.cpp
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(186,76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(186,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(186,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(197,66): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(197,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(197,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(210,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(400,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(416,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(421,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(426,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(431,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(436,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(441,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  DM2122 Prac.vcxproj -> C:\Users\wanti\Documents\GitHub\SP2\Debug\DM2122 Prac.exe

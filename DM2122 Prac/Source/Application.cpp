@@ -107,7 +107,7 @@ void Application::Run()
 
 	Scene* scene1 = new Scene1();
 	Scene* scene2 = new SceneText();
-	Scene* scene = scene1;
+	Scene* scene = scene2;
 	scene1->Init();
 	scene2->Init();
 
