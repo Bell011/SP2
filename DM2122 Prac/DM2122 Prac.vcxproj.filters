@@ -66,6 +66,9 @@
     <ClInclude Include="Source\collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ShowroomScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\shader.cpp">
@@ -105,6 +108,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShowroomScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

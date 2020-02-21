@@ -25,23 +25,6 @@ class SceneText : public Scene
 		GEO_CUBE,
 		GEO_CHAR,
 
-		GEO_ARCADE,
-		GEO_ARCADE1,
-		GEO_ARCADE2,
-		GEO_BENCH,
-		GEO_BSIGN,
-		GEO_CAR3,
-		GEO_CAR4,
-		GEO_SCREEN,
-		GEO_SCREEN1,
-		GEO_SSIGN,
-		GEO_SSIGN1,
-		GEO_STAGE,
-		GEO_STRUCTURESMALL,
-		GEO_STRUCTUREBIG,
-		GEO_WHEEL1,
-		GEO_WHEEL2,
-		GEO_WHEEL3,
 
 		GEO_LIGHTSPHERE,
 		GEO_TEXT,
@@ -109,23 +92,6 @@ private:
 	object cube;
 	object player;
 
-	TRS ARCADE;
-	TRS ARCADE1;
-	TRS ARCADE2;
-	TRS BENCH;
-	TRS BSIGN;
-	TRS CAR3;
-	TRS CAR4;
-	TRS SCREEN;
-	TRS SCREEN1;
-	TRS SSIGN;
-	TRS SSIGN1;
-	TRS STAGE;
-	TRS STRUCTURESMALL;
-	TRS STRUCTUREBIG;
-	TRS WHEEL1;
-	TRS WHEEL2;;
-	TRS WHEEL3;
 
 	float movex;
 	float movey;
@@ -136,7 +102,6 @@ private:
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
-	void InitObjects();
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();

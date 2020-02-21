@@ -94,6 +94,7 @@ void camerafps::Reset()
 }
 void camerafps::mouse_callback()
 {
+
 	view = (target - position).Normalized();
 	right = view.Cross(up).Normalized();
 	POINT mousePos;
@@ -106,7 +107,6 @@ void camerafps::mouse_callback()
 		lastY = ypos;
 		firstMouse = false;
 	}
-
 	float xoffset = xpos - lastX;
 	float yoffset = lastY - ypos;
 	lastX = xpos;
