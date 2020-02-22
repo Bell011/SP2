@@ -271,6 +271,13 @@ void miniGameTwo::Render()
 	}
 }
 
+bool miniGameTwo::Change()
+{
+	return false;
+}
+
+
+
 /******************************************************************************/
 /*!
 \brief

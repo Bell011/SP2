@@ -331,7 +331,7 @@ void TestDriveScene::Update(double dt)
 
 	}
 	doCollision();
-	camera.mouse_callback();
+	//camera.mouse_callback();
 }
 void TestDriveScene::doCollision() {
 	if (CheckCollision(player, cube)) {
@@ -375,7 +375,7 @@ void TestDriveScene::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	viewStack.LoadIdentity();
-	viewStack.LookAt(camera.position.x, camera.position.y+30, camera.position.z+10, camera.target.x, camera.target.y, camera.target.z-5, camera.up.x, camera.up.y, camera.up.z);
+	viewStack.LookAt(camera.position.x, camera.position.y, camera.position.z, camera.target.x, camera.target.y, camera.target.z, camera.up.x, camera.up.y, camera.up.z);
 	modelStack.LoadIdentity();
 
 	// passing the light direction if it is a direction light	
@@ -444,6 +444,12 @@ void TestDriveScene::Render()
 
 
 }
+
+bool TestDriveScene::Change()
+{
+	return false;
+}
+
 
 void TestDriveScene::Exit()
 {
