@@ -300,22 +300,22 @@ void TestDriveScene::Update(double dt)
 			}
 		}
 	}
-	if (Application::IsKeyPressed(VK_LEFT))
+	if (Application::IsKeyPressed('A'))
 	{
 		movex -= 5 * dt;
 		
 	}
-	if (Application::IsKeyPressed(VK_RIGHT))
+	if (Application::IsKeyPressed('D'))
 	{
 		movex += 5 * dt;
 
 	}
-	if (Application::IsKeyPressed(VK_UP))
+	if (Application::IsKeyPressed('W'))
 	{
 		movez -= 5 * dt;
 
 	}
-	if (Application::IsKeyPressed(VK_DOWN))
+	if (Application::IsKeyPressed('S'))
 	{
 		movez += 5 * dt;
 
@@ -375,7 +375,7 @@ void TestDriveScene::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	viewStack.LoadIdentity();
-	viewStack.LookAt(camera.position.x, camera.position.y, camera.position.z, camera.target.x, camera.target.y, camera.target.z, camera.up.x, camera.up.y, camera.up.z);
+	viewStack.LookAt(camera.position.x, camera.position.y+30, camera.position.z+10, camera.target.x, camera.target.y, camera.target.z-5, camera.up.x, camera.up.y, camera.up.z);
 	modelStack.LoadIdentity();
 
 	// passing the light direction if it is a direction light	
@@ -427,11 +427,11 @@ void TestDriveScene::Render()
 
 	//RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
 	////Update the translate vector if theres is any transformation
-	//PLAYER.Translate = Vector3(movex, movey, movez);
+	PLAYER.Translate = Vector3(movex, movey, movez);
 	////Update the pos vector as well
 	////if object is scaled, update the size vector
-	//player.pos = Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z);
-	//RenderOBJ(meshList[GEO_CHAR], PLAYER, true, true);
+	player.pos = Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z);
+	RenderOBJ(meshList[GEO_CHAR], PLAYER, true, true);
 
 
 	modelStack.PushMatrix();

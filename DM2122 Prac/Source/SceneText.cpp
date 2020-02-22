@@ -291,45 +291,31 @@ void SceneText::Update(double dt)
 		}
 	}
 	if (Application::IsKeyPressed(VK_LEFT))
-	{
 		movex -= 5 * dt;
 		
-	}
 	if (Application::IsKeyPressed(VK_RIGHT))
-	{
 		movex += 5 * dt;
 
-	}
 	if (Application::IsKeyPressed(VK_UP))
-	{
 		movez -= 5 * dt;
 
-	}
 	if (Application::IsKeyPressed(VK_DOWN))
-	{
 		movez += 5 * dt;
 
-	}
 	if (Application::IsKeyPressed(VK_SPACE))
-	{
 		movey += 5 * dt;
 
-	}
 	if (Application::IsKeyPressed(VK_SHIFT))
-	{
 		movey -= 5 * dt;
 
-	}
 	doCollision();
 	camera.mouse_callback();
 }
 void SceneText::doCollision() {
-	if (CheckCollision(player, cube)) {
+	if (CheckCollision(player, cube))
 		printf("YES\n");
-
-	}else
-
-	printf("NO\n");
+	else
+		printf("NO\n");
 }
 /******************************************************************************/
 /*!

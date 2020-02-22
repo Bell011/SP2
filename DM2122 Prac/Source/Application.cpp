@@ -15,6 +15,7 @@
 #include "Scene1.h"
 #include "TestDriveScene.h"
 #include "miniGameTwo.h"
+#include "SceneLuckyDraw.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -108,7 +109,7 @@ void Application::Run()
 	//Main Loop
 
 	Scene* scene1 = new TestDriveScene();
-	Scene* scene2 = new miniGameTwo();
+	Scene* scene2 = new SceneLuckyDraw();
 	Scene* scene = scene2;
 	scene1->Init();
 	scene2->Init();
