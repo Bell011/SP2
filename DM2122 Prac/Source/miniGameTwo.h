@@ -25,7 +25,9 @@ class miniGameTwo : public Scene
 		GEO_GAMESCREEN,
 
 		GEO_TARGET,
-		GEO_BLUEPRINT,
+		GEO_BLUEPRINT1,
+		GEO_BLUEPRINT2,
+		GEO_BLUEPRINT3,
 		GEO_SPACING,
 		NUM_GEOMETRY,
 	};
@@ -54,9 +56,15 @@ private:
 
 	camerafps camera;
 
-	TRS BLUEPRINT;
-	object blueprint;
-	Vector3 bluePrintInitialPos;
+	TRS BLUEPRINT1;
+	object blueprint1;
+	Vector3 bluePrintInitialPos1;
+	TRS BLUEPRINT2;
+	object blueprint2;
+	Vector3 bluePrintInitialPos2;
+	TRS BLUEPRINT3;
+	object blueprint3;
+	Vector3 bluePrintInitialPos3;
 
 	TRS SPACING;
 	object spacing;

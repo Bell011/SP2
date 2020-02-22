@@ -85,16 +85,16 @@ void miniGameTwo::Init()
 	//meshList[GEO_TARGET]->textureID = LoadTGA("Image//target.tga");
 	movex = 0; movey = -10; movez = 0;
 
-	meshList[GEO_BLUEPRINT] = MeshBuilder::GenerateCuboid("TargetCube", Color(1, 0, 0), 1.f, 1.f, 1.f);
-	BLUEPRINT.Translate = Vector3(2, -10, -4.5);
-	BLUEPRINT.Scale = Vector3(1, 1, 1);
-	bluePrintInitialPos = BLUEPRINT.Translate;
-	blueprint.size = Vector3(0.5 * BLUEPRINT.Scale.x, 0.5 * BLUEPRINT.Scale.y, 0.5 * BLUEPRINT.Scale.z);
-	blueprint.pos = Vector3(BLUEPRINT.Translate.x, BLUEPRINT.Translate.y, BLUEPRINT.Translate.z);
-	meshList[GEO_BLUEPRINT]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_BLUEPRINT]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_BLUEPRINT]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_BLUEPRINT]->material.kShininess = 1.f;
+	meshList[GEO_BLUEPRINT1] = MeshBuilder::GenerateCuboid("TargetCube", Color(1, 0, 0), 1.f, 1.f, 1.f);
+	BLUEPRINT1.Translate = Vector3(2, -10, -4.5);
+	BLUEPRINT1.Scale = Vector3(1, 1, 1);
+	bluePrintInitialPos1 = BLUEPRINT1.Translate;
+	blueprint1.size = Vector3(0.5 * BLUEPRINT1.Scale.x, 0.5 * BLUEPRINT1.Scale.y, 0.5 * BLUEPRINT1.Scale.z);
+	blueprint1.pos = Vector3(BLUEPRINT1.Translate.x, BLUEPRINT1.Translate.y, BLUEPRINT1.Translate.z);
+	meshList[GEO_BLUEPRINT1]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
+	meshList[GEO_BLUEPRINT1]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_BLUEPRINT1]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_BLUEPRINT1]->material.kShininess = 1.f;
 
 	// Space for the blueprints
 	meshList[GEO_SPACING] = MeshBuilder::GenerateCuboid("Testing", Color(0, 1, 0), 1.f, 1.f, 1.f);
@@ -161,11 +161,11 @@ void miniGameTwo::Update(double dt)
 
 			if (!pickBluePrint)
 			{
-				if (CheckCollision(target, blueprint)) // Succeed in picking up blueprint
+				if (CheckCollision(target, blueprint1)) // Succeed in picking up blueprint
 				{
 					pickBluePrint = true;
 				}
-				else if (!CheckCollision(target, blueprint)) // Failed in picking up blueprint
+				else if (!CheckCollision(target, blueprint1)) // Failed in picking up blueprint
 				{
 					pickBluePrint = false;
 				}
@@ -173,11 +173,11 @@ void miniGameTwo::Update(double dt)
 			else if (pickBluePrint) // Target is moving with the blueprint
 			{
 				followingTarget = true;
-				if (!matchBluePrint && CheckCollision(blueprint, spacing)) // Blueprint match space
+				if (!matchBluePrint && CheckCollision(blueprint1, spacing)) // Blueprint match space
 				{
 					matchBluePrint = true;
 				}
-				else if (!matchBluePrint && !CheckCollision(blueprint, spacing)) // Blueprint does not match space
+				else if (!matchBluePrint && !CheckCollision(blueprint1, spacing)) // Blueprint does not match space
 				{
 					matchBluePrint = false;
 				}
@@ -236,7 +236,7 @@ void miniGameTwo::Render()
 		{
 			// Failed to pick up blueprint
 			// Everything remains at their original position
-			RenderOBJ(meshList[GEO_BLUEPRINT], BLUEPRINT, true, true);
+			RenderOBJ(meshList[GEO_BLUEPRINT1], BLUEPRINT1, true, true);
 			RenderOBJ(meshList[GEO_SPACING], SPACING, true, true);
 		}
 	}
@@ -247,25 +247,25 @@ void miniGameTwo::Render()
 			if (matchBluePrint) // Blueprint match spacing
 			{
 				// Blueprint fills up spacing
-				BLUEPRINT.Translate = Vector3(SPACING.Translate.x, SPACING.Translate.y, SPACING.Translate.z);
-				BLUEPRINT.Scale = Vector3(SPACING.Scale.x, SPACING.Scale.y, SPACING.Scale.z);
-				RenderOBJ(meshList[GEO_BLUEPRINT], BLUEPRINT, true, true);
+				BLUEPRINT1.Translate = Vector3(SPACING.Translate.x, SPACING.Translate.y, SPACING.Translate.z);
+				BLUEPRINT1.Scale = Vector3(SPACING.Scale.x, SPACING.Scale.y, SPACING.Scale.z);
+				RenderOBJ(meshList[GEO_BLUEPRINT1], BLUEPRINT1, true, true);
 			}
 			else if (!matchBluePrint) // Blueprint does not match spacing
 			{
 				// Blueprint returns to its original position
-				BLUEPRINT.Translate = bluePrintInitialPos;
-				blueprint.pos = Vector3(BLUEPRINT.Translate.x, BLUEPRINT.Translate.y, BLUEPRINT.Translate.z);
-				RenderOBJ(meshList[GEO_BLUEPRINT], BLUEPRINT, true, true);
+				BLUEPRINT1.Translate = bluePrintInitialPos1;
+				blueprint1.pos = Vector3(BLUEPRINT1.Translate.x, BLUEPRINT1.Translate.y, BLUEPRINT1.Translate.z);
+				RenderOBJ(meshList[GEO_BLUEPRINT1], BLUEPRINT1, true, true);
 				RenderOBJ(meshList[GEO_SPACING], SPACING, true, true);
 			}
 		}
 		else if (!followingTarget)
 		{
 			// Blueprint will follow target
-			BLUEPRINT.Translate = Vector3(movex, movey, movez);
-			blueprint.pos = Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z);
-			RenderOBJ(meshList[GEO_BLUEPRINT], BLUEPRINT, true, true);
+			BLUEPRINT1.Translate = Vector3(movex, movey, movez);
+			blueprint1.pos = Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z);
+			RenderOBJ(meshList[GEO_BLUEPRINT1], BLUEPRINT1, true, true);
 			RenderOBJ(meshList[GEO_SPACING], SPACING, true, true);
 		}
 	}
@@ -457,7 +457,7 @@ bool miniGameTwo::CheckCollision(object& one, object& two)
 
 void miniGameTwo::doPickUpCollision()
 {
-	if (CheckCollision(target, blueprint)) // Pick up
+	if (CheckCollision(target, blueprint1)) // Pick up
 	{
 		printf("YES\n");
 	}
@@ -469,7 +469,7 @@ void miniGameTwo::doPickUpCollision()
 
 void miniGameTwo::doMatchingCollision()
 {
-	if (CheckCollision(blueprint, spacing)) // Match
+	if (CheckCollision(blueprint1, spacing)) // Match
 	{
 		printf("YES\n");
 	}
