@@ -11,7 +11,7 @@
 #include "Application.h"
 #include "Camera.h"
 #include "SceneText.h"
-#include "Scene1.h"
+#include "miniGameTwo.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -105,8 +105,8 @@ void Application::Run()
 {
 	//Main Loop
 
-	Scene* scene1 = new Scene1();
-	Scene* scene2 = new SceneText();
+	Scene* scene1 = new SceneText();
+	Scene* scene2 = new miniGameTwo();
 	Scene* scene = scene1;
 	scene1->Init();
 	scene2->Init();

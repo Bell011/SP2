@@ -36,16 +36,16 @@ void SceneText::Init()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	
 
-	camera.Init(Vector3(0, 0, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
+
+	camera.Init(Vector3(0, -10, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
 	projectionStack.LoadMatrix(projection);
-	
+
 	m_programID = LoadShaders("Shader//Texture.vertexshader", "Shader//Text.fragmentshader");
-	
+
 	//m_programID = LoadShaders("Shader//Texture.vertexshader", "Shader//Texture.fragmentshader"); 
 
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
@@ -83,13 +83,13 @@ void SceneText::Init()
 	m_parameters[U_LIGHT1_COSINNER] = glGetUniformLocation(m_programID, "lights[1].cosInner");
 	m_parameters[U_LIGHT1_EXPONENT] = glGetUniformLocation(m_programID, "lights[1].exponent");
 
+
 	//Get a handle for our "colorTexture" uniform
 	m_parameters[U_COLOR_TEXTURE_ENABLED] = glGetUniformLocation(m_programID, "colorTextureEnabled");
 	m_parameters[U_COLOR_TEXTURE] = glGetUniformLocation(m_programID, "colorTexture");
 	// Get a handle for our "textColor" uniform
 	m_parameters[U_TEXT_ENABLED] = glGetUniformLocation(m_programID, "textEnabled");
 	m_parameters[U_TEXT_COLOR] = glGetUniformLocation(m_programID, "textColor");
-
 
 	glUseProgram(m_programID);
 	// Enable depth test
@@ -142,7 +142,7 @@ void SceneText::Init()
 	glUniform1f(m_parameters[U_LIGHT1_COSINNER], light[1].cosInner);
 	glUniform1f(m_parameters[U_LIGHT1_EXPONENT], light[1].exponent);
 
-	glUniform1i(m_parameters[U_NUMLIGHTS], 2); 
+	glUniform1i(m_parameters[U_NUMLIGHTS], 2);
 
 	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_LEFT]->textureID = LoadTGA("Image//left.tga");
@@ -162,23 +162,28 @@ void SceneText::Init()
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back.tga");
 
-	meshList[GEO_CHAR] = MeshBuilder::GenerateQuad("char", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_CHAR]->textureID = LoadTGA("Image//chopper.tga");
+	meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("Dice", "OBJ//mushroom.obj");
+	meshList[GEO_CHAR]->textureID = LoadTGA("Image//mushroom.tga");
+	movex = 0;	movey = -10;	movez = 0;
+	PLAYER.Translate = Vector3(0, -10, 0);
+	PLAYER.Scale = Vector3(2, 2, 2);
+	player.size = Vector3(0.94 * PLAYER.Scale.x, 0.865 * PLAYER.Scale.y, 0.95 * PLAYER.Scale.z);
 	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CHAR]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CHAR]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CHAR]->material.kShininess = 1.f;
 
-	meshList[GEO_CUBE] = MeshBuilder::GenerateCuboid("Cube", Color(1, 0, 0), 2.f, 2.f, 2.f);
-	cube.Translate = Vector3(0, -10, 0);
-	cube.Scale = Vector3(15, 1, 5);
-
+	meshList[GEO_CUBE] = MeshBuilder::GenerateCuboid("Cube", Color(1, 0, 0), 1.f, 1.f, 1.f);
+	CUBE.Translate = Vector3(2, -10, 0);
+	CUBE.Scale = Vector3(2, 2, 2);
+	cube.size = Vector3(0.5 * CUBE.Scale.x, 0.5 * CUBE.Scale.y, 0.5 * CUBE.Scale.z);
+	cube.pos = Vector3(CUBE.Translate.x, CUBE.Translate.y, CUBE.Translate.z);
 	meshList[GEO_CUBE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CUBE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CUBE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CUBE]->material.kShininess = 1.f;
 
-	meshList[GEO_DICE] = MeshBuilder::GenerateOBJ("Dice","OBJ//mushroom.obj");
+	meshList[GEO_DICE] = MeshBuilder::GenerateOBJ("Dice", "OBJ//mushroom.obj");
 	meshList[GEO_DICE]->textureID = LoadTGA("Image//mushroom.tga");
 
 	meshList[GEO_LIGHTSPHERE] = MeshBuilder::GenerateSphere("lightBall", Color(1.f, 1.f, 1.f), 9, 36, 1.f);
@@ -189,7 +194,17 @@ void SceneText::Init()
 	bouncetime = 0.f;
 	switchlights = false;
 }
-
+bool SceneText::CheckCollision(object& one, object& two)
+{
+	if (
+		(one.pos.x - one.size.x <= two.pos.x + two.size.x && one.pos.x + one.size.x >= two.pos.x - two.size.x) &&
+		(one.pos.y - one.size.y <= two.pos.y + two.size.y && one.pos.y + one.size.y >= two.pos.y - two.size.y) &&
+		(one.pos.z - one.size.z <= two.pos.z + two.size.z && one.pos.z + one.size.z >= two.pos.z - two.size.z)
+		) {
+		return true;
+	}
+	return false;
+}
 void SceneText::Update(double dt)
 {
 	if (Application::IsKeyPressed(0x31))
@@ -257,9 +272,48 @@ void SceneText::Update(double dt)
 			}
 		}
 	}
+	if (Application::IsKeyPressed(VK_LEFT))
+	{
+		movex -= 5 * dt;
+
+	}
+	if (Application::IsKeyPressed(VK_RIGHT))
+	{
+		movex += 5 * dt;
+
+	}
+	if (Application::IsKeyPressed(VK_UP))
+	{
+		movez -= 5 * dt;
+
+	}
+	if (Application::IsKeyPressed(VK_DOWN))
+	{
+		movez += 5 * dt;
+
+	}
+	if (Application::IsKeyPressed(VK_SPACE))
+	{
+		movey += 5 * dt;
+
+	}
+	if (Application::IsKeyPressed(VK_SHIFT))
+	{
+		movey -= 5 * dt;
+
+	}
+	doCollision();
 	camera.mouse_callback();
 }
+void SceneText::doCollision() {
+	if (CheckCollision(player, cube)) {
+		printf("YES\n");
 
+	}
+	else
+
+		printf("NO\n");
+}
 /******************************************************************************/
 /*!
 \brief
@@ -340,22 +394,22 @@ void SceneText::Render()
 		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
 	}
 
-
 	RenderSkybox();
 
-	modelStack.PushMatrix();
+	/*modelStack.PushMatrix();
 	modelStack.Translate(light[0].position.x, light[0].position.y, light[0].position.z);
 	RenderMesh(meshList[GEO_DICE], false);
-	modelStack.PopMatrix();
+	modelStack.PopMatrix();*/
 
+	//cube.size = Vector3(length/2*CUBE.Scale.x, height/2* CUBE.Scale.y, width/2 * CUBE.Scale.z);
+	//cube.size = Vector3(0.5*CUBE.Scale.x,0.5 * CUBE.Scale.y,0.5 * CUBE.Scale.z);
+	//cube.pos = Vector3(CUBE.Translate.x, CUBE.Translate.y, CUBE.Translate.z);
+	RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
 
-
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0,-10,0);
-	//modelStack.Scale(15, 1, 5);
-	//RenderMesh(meshList[GEO_CUBE], true);
-	//modelStack.PopMatrix();
-	RenderOBJ(meshList[GEO_CUBE], cube, true, true);
+	PLAYER.Translate = Vector3(movex, movey, movez);
+	//player.size = Vector3(0.94 * PLAYER.Scale.x, 0.865 * PLAYER.Scale.y, 0.95 * PLAYER.Scale.z);
+	player.pos = Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z);
+	RenderOBJ(meshList[GEO_CHAR], PLAYER, true, true);
 
 	modelStack.PushMatrix();
 	modelStack.Translate(light[1].position.x, light[1].position.y, light[1].position.z);
@@ -364,13 +418,6 @@ void SceneText::Render()
 
 	//No transform needed
 	RenderTextOnScreen(meshList[GEO_TEXT], "Hello World", Color(0, 1, 0), 2, 0, 0);
-
-	modelStack.PushMatrix();
-	modelStack.Translate(0, -3, 0);
-	modelStack.Scale(4, 5, 5);
-	RenderMesh(meshList[GEO_CHAR], true);
-	modelStack.PopMatrix();
-
 }
 
 void SceneText::Exit()
@@ -415,67 +462,68 @@ void SceneText::RenderMesh(Mesh* mesh, bool enableLight)
 		glUniform1i(m_parameters[U_LIGHTENABLED], 0);
 	}
 
-	if(mesh->textureID > 0){ 
+	if (mesh->textureID > 0) {
 		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-		glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);} 
-	else { 
+		glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+	}
+	else {
 		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 0);
-	} 
+	}
 	mesh->Render(); //this line should only be called once in the whole function
 
-	if(mesh->textureID > 0) glBindTexture(GL_TEXTURE_2D, 0);
+	if (mesh->textureID > 0) glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void SceneText::RenderSkybox()
 {
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(-50.f, 0.f, 0.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(90.f, 0.f, 1.f, 0.f);
-		RenderMesh(meshList[GEO_LEFT], false);
+	///scale, translate, rotate 
+	modelStack.Translate(-50.f, 0.f, 0.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(90.f, 0.f, 1.f, 0.f);
+	RenderMesh(meshList[GEO_LEFT], false);
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(50.f, 0.f, 0.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(-90.f, 0.f, 1.f, 0.f);
-		RenderMesh(meshList[GEO_RIGHT], false);
+	///scale, translate, rotate 
+	modelStack.Translate(50.f, 0.f, 0.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(-90.f, 0.f, 1.f, 0.f);
+	RenderMesh(meshList[GEO_RIGHT], false);
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(0.f, 50.f, 0.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(90.f, 1.f, 0.f, 0.f);
-		modelStack.PushMatrix();
-			modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
-			RenderMesh(meshList[GEO_TOP], false);
-		modelStack.PopMatrix();
+	///scale, translate, rotate 
+	modelStack.Translate(0.f, 50.f, 0.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(90.f, 1.f, 0.f, 0.f);
+	modelStack.PushMatrix();
+	modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
+	RenderMesh(meshList[GEO_TOP], false);
+	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(0.f, -50.f, 0.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(-90.f, 1.f, 0.f, 0.f);
-		modelStack.PushMatrix();
-		modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
-		RenderMesh(meshList[GEO_BOTTOM], false);
-		modelStack.PopMatrix();
-		modelStack.PopMatrix();
+	///scale, translate, rotate 
+	modelStack.Translate(0.f, -50.f, 0.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(-90.f, 1.f, 0.f, 0.f);
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(0.f, 0.f, -50.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		RenderMesh(meshList[GEO_FRONT], false);
+	modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
+	RenderMesh(meshList[GEO_BOTTOM], false);
+	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(0.f, 0.f, 50.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-		RenderMesh(meshList[GEO_BACK], false);
+	///scale, translate, rotate 
+	modelStack.Translate(0.f, 0.f, -50.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	RenderMesh(meshList[GEO_FRONT], false);
+	modelStack.PopMatrix();
+	modelStack.PushMatrix();
+	///scale, translate, rotate 
+	modelStack.Translate(0.f, 0.f, 50.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
+	RenderMesh(meshList[GEO_BACK], false);
 	modelStack.PopMatrix();
 }
 
