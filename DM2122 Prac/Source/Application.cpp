@@ -13,6 +13,7 @@
 #include "SceneText.h"
 #include "ShowroomScene.h"
 #include "Scene1.h"
+#include "TestDriveScene.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -105,7 +106,7 @@ void Application::Run()
 {
 	//Main Loop
 
-	Scene* scene1 = new SceneText();
+	Scene* scene1 = new TestDriveScene();
 	Scene* scene2 = new ShowroomScene();
 	Scene* scene = scene2;
 	scene1->Init();
@@ -115,10 +116,14 @@ void Application::Run()
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
 		if (IsKeyPressed('9')) {
+			Scene* scene1 = new TestDriveScene();
+			scene1->Init();
 			scene = scene1;
 		}
 		else if (IsKeyPressed('0')) {
+			
 			scene = scene2;
+		
 		}
 		scene->Update(m_timer.getElapsedTime());
 		scene->Render();
