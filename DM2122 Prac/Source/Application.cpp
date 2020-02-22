@@ -11,7 +11,9 @@
 #include "Application.h"
 #include "Camera.h"
 #include "SceneText.h"
+#include "ShowroomScene.h"
 #include "Scene1.h"
+#include "TestDriveScene.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -72,7 +74,6 @@ void Application::Init()
 
 	//Create a window and create its OpenGL context
 	m_window = glfwCreateWindow(800, 600, "Test Window", NULL, NULL);
-	//glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	//If the window couldn't be created
 	if (!m_window)
 	{
@@ -105,9 +106,9 @@ void Application::Run()
 {
 	//Main Loop
 
-	Scene* scene1 = new Scene1();
-	Scene* scene2 = new SceneText();
-	Scene* scene = scene1;
+	Scene* scene1 = new TestDriveScene();
+	Scene* scene2 = new ShowroomScene();
+	Scene* scene = scene2;
 	scene1->Init();
 	scene2->Init();
 
@@ -115,10 +116,14 @@ void Application::Run()
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
 		if (IsKeyPressed('9')) {
+			Scene* scene1 = new TestDriveScene();
+			scene1->Init();
 			scene = scene1;
 		}
 		else if (IsKeyPressed('0')) {
+			
 			scene = scene2;
+		
 		}
 		scene->Update(m_timer.getElapsedTime());
 		scene->Render();

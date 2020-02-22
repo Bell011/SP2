@@ -4,12 +4,17 @@
 #include <vector>
 #include "Vertex.h"
 #include "Vector3.h"
-
+struct MinMax {
+	std::vector<Position>& xvalues;
+	std::vector<Position>& yvalues;
+	std::vector<Position>& zvalues;
+};
 bool LoadOBJ(
 	const char *file_path, 
 	std::vector<Position> & out_vertices, 
 	std::vector<TexCoord> & out_uvs, 
 	std::vector<Vector3> & out_normals
+
 );
 
 void IndexVBO(

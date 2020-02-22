@@ -23,8 +23,13 @@ bool LoadOBJ(
 	std::vector<TexCoord> temp_uvs;
 	std::vector<Vector3> temp_normals;
 
+	std::vector<Position> xvalues;
+	std::vector<Position> yvalues;
+	std::vector<Position> zvalues;
+
 	while(!fileStream.eof())
 	{
+
 		char buf[256];
 		fileStream.getline(buf, 256);
 		if(strncmp("v ", buf, 2) == 0)
@@ -32,6 +37,9 @@ bool LoadOBJ(
 			Position vertex;
 			sscanf_s((buf + 2), "%f%f%f", &vertex.x, &vertex.y, &vertex.z);
 			temp_vertices.push_back(vertex);
+			xvalues.push_back(vertex.x);
+			yvalues.push_back(vertex.y);
+			zvalues.push_back(vertex.z);
 		}
 		else if(strncmp("vt ", buf, 3) == 0)
 		{
