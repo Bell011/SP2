@@ -75,6 +75,24 @@ FUNCTIONS
 *////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool entityCar::isCollide(entityCar* enemy, entityCar* player)
+{	
+	if (enemy->carPos.x * enemy->carSize.x >= player->carPos.x * player->carSize.x && enemy->carPos.z * enemy->carSize.z == player->carPos.z * carSize.z)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void entityCar::updatePos()
+{
+	
+	carPos.z += carVel.z;
+}
+
+void entityCar::updateLives(int count)
 {
 
 }

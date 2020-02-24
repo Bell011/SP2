@@ -126,8 +126,11 @@ void SceneRacing::Init()
 	meshList[GEO_DICE] = MeshBuilder::GenerateOBJ("Dice", "OBJ//doorman.obj");
 	meshList[GEO_DICE]->textureID = LoadTGA("Image//doorman.tga");
 
-	meshList[GEO_CAR1] = MeshBuilder::GenerateQuad("Car1", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_CAR1] = MeshBuilder::GenerateQuad("Car1", Color(1, 1, 1), Car1->getSize().x, Car1->getSize().y);
 	//meshList[GEO_CAR1]->textureID = LoadTGA("Image//car1.tga");
+
+	meshList[GEO_MAP] = MeshBuilder::GenerateQuad("Map", Color(1, 1, 1), 1, 1);
+	//meshList[GEO_MAP]->textureID = LoadTGA("Image//map.tga");
 
 	meshList[GEO_LIGHTSPHERE] = MeshBuilder::GenerateSphere("lightBall", Color(1.f, 1.f, 1.f), 9, 36, 1.f);
 
@@ -148,6 +151,8 @@ void SceneRacing::Init()
 
 void SceneRacing::Update(double dt)
 {
+	Car1->updatePos();
+
 	if (Application::IsKeyPressed(0x31))
 	{
 		glDisable(GL_CULL_FACE);
@@ -196,6 +201,10 @@ void SceneRacing::Update(double dt)
 	if (Application::IsKeyPressed(VK_LEFT))
 	{
 
+	}
+	if (Car1->isCollide(Car1, carPlayer))
+	{
+		carPlayer->updateLives(-1);
 	}
 	camera.Update(dt);
 	CalculateFrameRate();

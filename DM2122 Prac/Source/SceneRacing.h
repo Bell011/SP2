@@ -23,6 +23,7 @@ class SceneRacing : public Scene
 		GEO_CAR1,
 		GEO_CAR2,
 		GEO_CAR3,
+		GEO_MAP,
 		GEO_LIGHTSPHERE,
 		GEO_TEXT,
 		NUM_GEOMETRY,
