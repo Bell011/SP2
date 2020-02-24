@@ -38,7 +38,7 @@ void TestDriveScene::Init()
 
 	
 
-	camera.Init(Vector3(0, 20, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(player.pos.x, player.pos.y, player.pos.z-10), Vector3(player.pos.x,player.pos.y,player.pos.z), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
@@ -280,6 +280,7 @@ void TestDriveScene::Update(double dt)
 		light[0].type = Light::LIGHT_SPOT;
 	}
 	camera.Update(dt);
+	SetCursorPos(camera.setCursorX, camera.setCursorY);
 	CalculateFrameRate();
 	if (Application::IsKeyPressed('P'))
 	{
@@ -300,22 +301,22 @@ void TestDriveScene::Update(double dt)
 			}
 		}
 	}
-	if (Application::IsKeyPressed('A'))
+	if (Application::IsKeyPressed(VK_LEFT))
 	{
 		movex -= 5 * dt;
 		
 	}
-	if (Application::IsKeyPressed('D'))
+	if (Application::IsKeyPressed(VK_RIGHT))
 	{
 		movex += 5 * dt;
 
 	}
-	if (Application::IsKeyPressed('W'))
+	if (Application::IsKeyPressed(VK_UP))
 	{
 		movez -= 5 * dt;
 
 	}
-	if (Application::IsKeyPressed('S'))
+	if (Application::IsKeyPressed(VK_DOWN))
 	{
 		movez += 5 * dt;
 

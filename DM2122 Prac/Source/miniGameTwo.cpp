@@ -85,6 +85,7 @@ void miniGameTwo::Init()
 	meshList[GEO_BLUEPRINT1] = MeshBuilder::GenerateOBJ("BluePrint1", "OBJ//g2bp1.obj");
 	meshList[GEO_BLUEPRINT1]->textureID = LoadTGA("Image//g2bp1.tga");
 	BLUEPRINT1.Translate = Vector3(0, -13, -4.5);
+	BLUEPRINT1.RotateY = Vector4(-90, 0, 1, 0);
 	//BLUEPRINT1.Scale = Vector3(1, 1, 1);
 	bluePrintInitialPos1 = BLUEPRINT1.Translate;
 	blueprint1.pos = Vector3(BLUEPRINT1.Translate.x, BLUEPRINT1.Translate.y, BLUEPRINT1.Translate.z);
@@ -96,6 +97,7 @@ void miniGameTwo::Init()
 	meshList[GEO_SPACING1] = MeshBuilder::GenerateOBJ("spacing1", "OBJ//g2bp1.obj");
 	SPACING1.Translate = Vector3(4.5, -7.7, -4.5);
 	SPACING1.Scale = Vector3(1.2, 1.2, 1.2);
+	SPACING1.RotateY = Vector4(90, 0, 1, 0);
 	spacing1.pos = Vector3(SPACING1.Translate.x, SPACING1.Translate.y, SPACING1.Translate.z);
 	meshList[GEO_SPACING1]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_SPACING1]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
@@ -105,6 +107,7 @@ void miniGameTwo::Init()
 	meshList[GEO_BLUEPRINT2] = MeshBuilder::GenerateOBJ("BluePrint2", "OBJ//g2bp2.obj");
 	meshList[GEO_BLUEPRINT2]->textureID = LoadTGA("Image//g2bp2.tga");
 	BLUEPRINT2.Translate = Vector3(-4.5, -13, -4.5);
+	BLUEPRINT2.RotateY = Vector4(-90, 0, 1, 0);
 	//BLUEPRINT2.Scale = Vector3(1, 1, 1);
 	bluePrintInitialPos2 = BLUEPRINT2.Translate;
 	blueprint2.pos = Vector3(BLUEPRINT2.Translate.x, BLUEPRINT2.Translate.y, BLUEPRINT2.Translate.z);
@@ -114,6 +117,7 @@ void miniGameTwo::Init()
 	meshList[GEO_BLUEPRINT2]->material.kShininess = 1.f;
 
 	meshList[GEO_SPACING2] = MeshBuilder::GenerateOBJ("spacing2", "OBJ//g2bp2.obj");
+	SPACING2.RotateY = Vector4(90, 0, 1, 0);
 	SPACING2.Translate = Vector3(0, -8, -4.5);
 	SPACING2.Scale = Vector3(1.2, 1.2, 1.2);
 	spacing2.pos = Vector3(SPACING2.Translate.x, SPACING2.Translate.y, SPACING2.Translate.z);
@@ -125,6 +129,7 @@ void miniGameTwo::Init()
 	meshList[GEO_BLUEPRINT3] = MeshBuilder::GenerateOBJ("BluePrint3", "OBJ//g2bp3.obj");
 	meshList[GEO_BLUEPRINT3]->textureID = LoadTGA("Image//g2bp3.tga");
 	BLUEPRINT3.Translate = Vector3(4.5, -13, -4.5);
+	BLUEPRINT3.RotateY = Vector4(-90, 0, 1, 0);
 	//BLUEPRINT3.Scale = Vector3(1, 1, 1);
 	bluePrintInitialPos3 = BLUEPRINT3.Translate;
 	blueprint3.pos = Vector3(BLUEPRINT3.Translate.x, BLUEPRINT3.Translate.y, BLUEPRINT3.Translate.z);
@@ -135,6 +140,7 @@ void miniGameTwo::Init()
 
 	meshList[GEO_SPACING3] = MeshBuilder::GenerateOBJ("spacing3", "OBJ//g2bp3.obj");
 	SPACING3.Translate = Vector3(-4.7, -8.7, -4.5);
+	SPACING3.RotateY = Vector4(90, 0, 1, 0);
 	SPACING3.Scale = Vector3(1.2, 1.2, 1.2);
 	spacing3.pos = Vector3(SPACING3.Translate.x, SPACING3.Translate.y, SPACING3.Translate.z);
 	meshList[GEO_SPACING3]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);

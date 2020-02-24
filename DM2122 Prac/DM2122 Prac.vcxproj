@@ -130,6 +130,8 @@
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera2.h" />
     <ClInclude Include="Source\camerafps.h" />
+    <ClInclude Include="Source\cameratpp.h" />
+    <ClInclude Include="Source\cirObject.h" />
     <ClInclude Include="Source\collision.h" />
     <ClInclude Include="Source\GameMenu.h" />
     <ClInclude Include="Source\Light.h" />
@@ -140,6 +142,8 @@
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\miniGameTwo.h" />
+    <ClInclude Include="Source\Object.h" />
+    <ClInclude Include="Source\rectObject.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Scene1.h" />
     <ClInclude Include="Source\SceneLuckyDraw.h" />
@@ -155,6 +159,9 @@
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\camerafps.cpp" />
+    <ClCompile Include="Source\cameratpp.cpp" />
+    <ClCompile Include="Source\cirObject.cpp" />
+    <ClCompile Include="Source\collision.cpp" />
     <ClCompile Include="Source\GameMenu.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
@@ -163,6 +170,8 @@
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\miniGameTwo.cpp" />
+    <ClCompile Include="Source\Object.cpp" />
+    <ClCompile Include="Source\rectObject.cpp" />
     <ClCompile Include="Source\Scene1.cpp" />
     <ClCompile Include="Source\SceneLuckyDraw.cpp" />
     <ClCompile Include="Source\SceneText.cpp" />
