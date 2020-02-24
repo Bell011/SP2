@@ -10,6 +10,7 @@ struct Vector4 {
 
 struct TRS {
 	Vector3 Translate = Vector3(0, 0, 0);
+	Vector3 distanceMoved = Vector3(0, 0, 0);
 	Vector4 RotateX = Vector4(0, 1, 0, 0);
 	Vector4 RotateY = Vector4(0, 0, 1, 0);
 	Vector4 RotateZ = Vector4(0, 0, 0, 1);

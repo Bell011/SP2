@@ -28,7 +28,9 @@ class miniGameTwo : public Scene
 		GEO_BLUEPRINT1,
 		GEO_BLUEPRINT2,
 		GEO_BLUEPRINT3,
-		GEO_SPACING,
+		GEO_SPACING1,
+		GEO_SPACING2,
+		GEO_SPACING3,
 		NUM_GEOMETRY,
 	};
 
@@ -57,24 +59,31 @@ private:
 	camerafps camera;
 
 	TRS BLUEPRINT1;
-	object blueprint1;
-	Vector3 bluePrintInitialPos1;
 	TRS BLUEPRINT2;
-	object blueprint2;
-	Vector3 bluePrintInitialPos2;
 	TRS BLUEPRINT3;
+	object blueprint1;
+	object blueprint2;
 	object blueprint3;
+	Vector3 bluePrintInitialPos1;
+	Vector3 bluePrintInitialPos2;
 	Vector3 bluePrintInitialPos3;
 
-	TRS SPACING;
-	object spacing;
-
+	TRS SPACING1;
+	TRS SPACING2;
+	TRS SPACING3;
 	TRS TARGET;
+	object spacing1;
+	object spacing2;
+	object spacing3;
 	object target;
 
+	bool bp1, bp2, bp3;
+	bool space1, space2, space3;
 	bool pickBluePrint;
 	bool matchBluePrint;
 	bool followingTarget;
+	int amountOfMoney;
+	int numberOfBP;
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
