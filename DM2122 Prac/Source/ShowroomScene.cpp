@@ -256,7 +256,7 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_CAR1]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CAR1]->material.kShininess = 1.f;
 	CAR1.Scale = Vector3(3, 3, 3);
-	CAR1.Translate = Vector3(45, -1, 30);
+	CAR1.Translate = Vector3(42, -1, 30);
 	CAR1.RotateY = Vector4(40, 0, 1, 0);
 
 	meshList[GEO_CAR2] = MeshBuilder::GenerateOBJ("car2", "OBJ//car2.obj");
@@ -676,6 +676,11 @@ void ShowroomScene::Render()
 	//RenderTextOnScreen(meshList[GEO_TEXT], "Hello World", Color(0, 1, 0), 2, 0, 0);
 
 
+}
+
+bool ShowroomScene::Change()
+{
+	return true;
 }
 
 void ShowroomScene::Exit()

@@ -1,5 +1,2 @@
-﻿  SceneLuckyDraw.cpp
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneLuckyDraw.cpp(289,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneLuckyDraw.cpp(293,26): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+﻿  cirObject.cpp
   DM2122 Prac.vcxproj -> C:\Users\wanti\Documents\GitHub\SP2\Debug\DM2122 Prac.exe

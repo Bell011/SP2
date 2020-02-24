@@ -16,6 +16,9 @@
 #include "TestDriveScene.h"
 #include "miniGameTwo.h"
 #include "SceneLuckyDraw.h"
+#include "MainMenu.h"
+#include "GameMenu.h"
+
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -108,23 +111,49 @@ void Application::Run()
 {
 	//Main Loop
 
-	Scene* scene1 = new TestDriveScene();
-	Scene* scene2 = new SceneLuckyDraw();
-	Scene* scene = scene2;
-	scene1->Init();
-	scene2->Init();
-
+	Scene* mainmenu = new SceneText();
+	Scene* showroomscene = new ShowroomScene();
+	Scene* gamemenu = new GameMenu();
+	Scene* luckydraw = new SceneLuckyDraw();
+	Scene* matchbp = new miniGameTwo ();
+	Scene* scene = mainmenu;
+	mainmenu->Init();
+	showroomscene->Init();
+	gamemenu->Init();
+	luckydraw->Init();
+	matchbp->Init();
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
-		if (IsKeyPressed('9')) {
-			Scene* scene1 = new TestDriveScene();
-			scene1->Init();
-			scene = scene1;
-		}
-		else if (IsKeyPressed('0')) {
+		if (mainmenu->Change()) {
+			if (IsKeyPressed(VK_RETURN)) {
+				Scene* showroomscene = new ShowroomScene();
+				showroomscene->Init();
+				scene = showroomscene;
+			}
 			
-			scene = scene2;
+		}
+		if (showroomscene->Change()) {
+			if (IsKeyPressed(VK_SHIFT)) {
+				Scene* gamemenu = new GameMenu();
+				gamemenu->Init();
+				scene = gamemenu;
+			}
+		}
+		if (gamemenu->Change()) {
+			if (IsKeyPressed('1')) {
+				Scene* luckydraw = new SceneLuckyDraw();
+				luckydraw->Init();
+				scene = luckydraw;
+			}
+			else if (IsKeyPressed('2')) {
+				Scene* matchbp = new miniGameTwo();
+				matchbp->Init();
+				scene = matchbp;
+			}
+			if (IsKeyPressed(VK_BACK)) {
+				scene = showroomscene;
+			}
 		
 		}
 		scene->Update(m_timer.getElapsedTime());
@@ -136,10 +165,16 @@ void Application::Run()
         m_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.   
 
 	} //Check if the ESC key had been pressed or if the window had been closed
-	scene1->Exit();
-	delete scene1;
-	scene2->Exit();
-	delete scene2;
+	mainmenu->Exit();
+	delete mainmenu;
+	showroomscene->Exit();
+	delete showroomscene;
+	gamemenu->Exit();
+	delete gamemenu;
+	luckydraw->Exit();
+	delete luckydraw;
+	matchbp->Exit();
+	delete matchbp;
 
 }
 
