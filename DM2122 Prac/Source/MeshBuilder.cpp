@@ -614,3 +614,155 @@ Mesh* MeshBuilder::GenerateText(const std::string& meshName, unsigned numRow, un
 	return mesh;
 
 }
+
+Mesh* MeshBuilder::GenerateHitbox(const std::string& meshName, Color color, float lengthX, float lengthY, float lengthZ)
+{
+	// An array of 3 vectors which represents 3 vertices
+	Vertex v;
+	std::vector<Vertex> vertex_buffer_data;
+	std::vector<GLuint> index_buffer_data;
+
+	float midvalueX = lengthX * 0.5;
+	float midvalueY = lengthY * 0.5;
+	float midvalueZ = lengthZ * 0.5;
+	v.color = color;
+
+	//Top
+	v.normal = Vector3(0.f, 1.f, 0.f);
+	v.pos.Set(midvalueX, midvalueY, midvalueZ);
+	v.texCoord.Set(0, 0);
+
+	vertex_buffer_data.push_back(v); //0
+	v.pos.Set(midvalueX, midvalueY, -midvalueZ);
+	v.texCoord.Set(1, 0);
+	vertex_buffer_data.push_back(v); //1
+	v.pos.Set(-midvalueX, midvalueY, -midvalueZ);
+	v.texCoord.Set(1, 1);
+	vertex_buffer_data.push_back(v); //2
+	v.pos.Set(-midvalueX, midvalueY, midvalueZ);
+	v.texCoord.Set(0, 1);
+	vertex_buffer_data.push_back(v); //3
+
+	index_buffer_data.push_back(0);
+	index_buffer_data.push_back(1);
+	index_buffer_data.push_back(2);
+	index_buffer_data.push_back(2);
+	index_buffer_data.push_back(3);
+	index_buffer_data.push_back(0);
+
+	//Rside
+	v.normal = Vector3(1.f, 0.f, 0.f);
+	v.pos.Set(midvalueX, -midvalueY, midvalueZ);
+	v.texCoord.Set(0, 0);
+	vertex_buffer_data.push_back(v); //4
+	v.pos.Set(midvalueX, -midvalueY, -midvalueZ);
+	v.texCoord.Set(1, 0);
+	vertex_buffer_data.push_back(v); //5
+	v.pos.Set(midvalueX, midvalueY, -midvalueZ);
+	v.texCoord.Set(1, 1);
+	vertex_buffer_data.push_back(v); //6
+	v.pos.Set(midvalueX, midvalueY, midvalueZ);
+	v.texCoord.Set(0, 1);
+	vertex_buffer_data.push_back(v); //7
+
+	index_buffer_data.push_back(4);
+	index_buffer_data.push_back(5);
+	index_buffer_data.push_back(6);
+	index_buffer_data.push_back(6);
+	index_buffer_data.push_back(7);
+	index_buffer_data.push_back(4);
+
+	//Front
+	v.normal = Vector3(0.f, 0.f, 1.f);
+	v.pos.Set(midvalueX, midvalueY, midvalueZ);
+	v.texCoord.Set(1, 1);
+	vertex_buffer_data.push_back(v); //8
+	v.pos.Set(-midvalueX, midvalueY, midvalueZ);
+	v.texCoord.Set(0, 1);
+	vertex_buffer_data.push_back(v); //8
+	v.pos.Set(-midvalueX, -midvalueY, midvalueZ);
+	v.texCoord.Set(0, 0);
+	vertex_buffer_data.push_back(v); //10
+	v.pos.Set(midvalueX, -midvalueY, midvalueZ);
+	v.texCoord.Set(1, 0);
+	vertex_buffer_data.push_back(v); //11
+
+	index_buffer_data.push_back(8);
+	index_buffer_data.push_back(9);
+	index_buffer_data.push_back(10);
+	index_buffer_data.push_back(10);
+	index_buffer_data.push_back(11);
+	index_buffer_data.push_back(8);
+
+	//Back
+	v.normal = Vector3(0.f, 0.f, -1.f);
+	v.pos.Set(midvalueX, -midvalueY, -midvalueZ);
+	v.texCoord.Set(0, 0);
+	vertex_buffer_data.push_back(v); //12
+	v.pos.Set(-midvalueX, -midvalueY, -midvalueZ);
+	v.texCoord.Set(1, 0);
+	vertex_buffer_data.push_back(v); //13
+	v.pos.Set(-midvalueX, midvalueY, -midvalueZ);
+	v.texCoord.Set(0, 1);
+	vertex_buffer_data.push_back(v); //14
+	v.pos.Set(midvalueX, midvalueY, -midvalueZ);
+	v.texCoord.Set(1, 1);
+	vertex_buffer_data.push_back(v); //15
+
+	index_buffer_data.push_back(12);
+	index_buffer_data.push_back(13);
+	index_buffer_data.push_back(14);
+	index_buffer_data.push_back(14);
+	index_buffer_data.push_back(15);
+	index_buffer_data.push_back(12);
+
+	//Lside
+	v.normal = Vector3(-1.f, 0.f, 0.f);
+	v.pos.Set(-midvalueX, -midvalueY, -midvalueZ);
+	vertex_buffer_data.push_back(v); //16
+	v.pos.Set(-midvalueX, -midvalueY, midvalueZ);
+	vertex_buffer_data.push_back(v); //17
+	v.pos.Set(-midvalueX, midvalueY, midvalueZ);
+	vertex_buffer_data.push_back(v); //18
+	v.pos.Set(-midvalueX, midvalueY, -midvalueZ);
+	vertex_buffer_data.push_back(v); //19
+
+	index_buffer_data.push_back(16);
+	index_buffer_data.push_back(17);
+	index_buffer_data.push_back(18);
+	index_buffer_data.push_back(18);
+	index_buffer_data.push_back(19);
+	index_buffer_data.push_back(16);
+
+	//Bottom
+	v.normal = Vector3(0.f, -1.f, 0.f);
+	v.pos.Set(-midvalueX, -midvalueY, -midvalueZ);
+	vertex_buffer_data.push_back(v); //20
+	v.pos.Set(midvalueX, -midvalueY, -midvalueZ);
+	vertex_buffer_data.push_back(v); //21
+	v.pos.Set(midvalueX, -midvalueY, midvalueZ);
+	vertex_buffer_data.push_back(v); //22
+	v.pos.Set(-midvalueX, -midvalueY, midvalueZ);
+	vertex_buffer_data.push_back(v); //23
+
+	index_buffer_data.push_back(20);
+	index_buffer_data.push_back(21);
+	index_buffer_data.push_back(22);
+	index_buffer_data.push_back(22);
+	index_buffer_data.push_back(23);
+	index_buffer_data.push_back(20);
+
+	Mesh* mesh = new Mesh(meshName);
+
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertex_buffer_data.size() * sizeof(Vertex), &vertex_buffer_data[0], GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
+
+	mesh->indexSize = 36;
+	mesh->mode = Mesh::DRAW_FAN;
+
+	return mesh;
+
+}

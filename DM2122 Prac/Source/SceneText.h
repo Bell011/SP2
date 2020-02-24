@@ -7,23 +7,28 @@
 #include "Mesh.h"
 #include "Light.h"
 #include "camerafps.h"
+#include "collision.h"
 
 class SceneText : public Scene
 {
 	enum GEOMETRY_TYPE
 	{
 		GEO_AXES = 0,
+
 		GEO_LEFT,
 		GEO_RIGHT,
 		GEO_TOP,
 		GEO_BOTTOM,
 		GEO_FRONT,
 		GEO_BACK,
+
+		GEO_CUBE,
 		GEO_CHAR,
-		GEO_DICE,
+
+
 		GEO_LIGHTSPHERE,
 		GEO_TEXT,
-		GEO_CUBE,
+
 		NUM_GEOMETRY,
 	};
 
@@ -82,18 +87,28 @@ private:
 
 	camerafps camera;
 	
-	TRS cube;
+	TRS CUBE;
+	TRS PLAYER;
+	object cube;
+	object player;
+
+
+	float movex;
+	float movey;
+	float movez;
 
 	int bouncetime;
 	bool switchlights;
+
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
-
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
 
+	bool CheckCollision(object& one, object& two);
+	void doCollision();
 public:
 	SceneText();
 	~SceneText();
