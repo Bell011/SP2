@@ -115,7 +115,7 @@ void Application::Run()
 	Scene* showroomscene = new ShowroomScene();
 	Scene* gamemenu = new GameMenu();
 	Scene* luckydraw = new SceneLuckyDraw();
-	Scene* matchbp = new miniGameTwo();
+	Scene* matchbp = new miniGameTwo ();
 	Scene* scene = mainmenu;
 	mainmenu->Init();
 	showroomscene->Init();

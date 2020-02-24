@@ -1,4 +1,6 @@
 ﻿  MatrixStack.cpp
   Mtx44.cpp
+  Vector3.cpp
+  timer.cpp
   Generating Code...
   Common.vcxproj -> C:\Users\wanti\Documents\GitHub\SP2\Debug\Common.lib
