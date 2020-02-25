@@ -18,7 +18,15 @@ Vector3 rectObject::getRight() {
 Vector3 rectObject::getUp() {
 	return up;
 }
-
+void rectObject::setFront(Vector3 f) {
+	front = f;
+}
+void rectObject::setRight(Vector3 r) {
+	right = r;
+}
+void rectObject::setUp(Vector3 u) {
+	up = u;
+}
 bool rectObject::CheckCollision(Object*obj)
 {
 	if (obj->getType() == REC) {

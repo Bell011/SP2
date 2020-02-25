@@ -7,8 +7,9 @@
 #include "Mesh.h"
 #include "Light.h"
 #include "camerafps.h"
-#include "collision.h"
 #include "Object.h"
+#include "cirObject.h"
+#include "rectObject.h"
 
 class SceneText : public Scene
 {
@@ -25,6 +26,8 @@ class SceneText : public Scene
 
 		GEO_CUBE,
 		GEO_CHAR,
+		GEO_SPHERE1,
+		GEO_SPHERE2,
 
 
 		GEO_LIGHTSPHERE,
@@ -90,9 +93,8 @@ private:
 	
 	TRS CUBE;
 	TRS PLAYER;
-	object cube;
-	object player;
-
+	Object* cube;
+	Object* player;
 
 	float movex;
 	float movey;
@@ -107,9 +109,8 @@ private:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
+	void docollision();
 
-	bool CheckCollision(object& one, object& two);
-	void doCollision();
 public:
 	SceneText();
 	~SceneText();

@@ -9,7 +9,9 @@ cirObject::~cirObject(){
 float cirObject::getRadius() {
 	return radius;
 }
-
+void cirObject::setRadius(float r) {
+	radius = r;
+}
 bool cirObject::CheckCollision(Object*obj)
 {
 	if (obj->getType() == CIRC) {

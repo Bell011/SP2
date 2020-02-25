@@ -161,45 +161,6 @@ void ShowroomScene::Init()
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//indoor_Back.tga");
 
-	meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("Dice", "OBJ//mushroom.obj");
-	meshList[GEO_CHAR]->textureID = LoadTGA("Image//mushroom.tga");
-	movex = 0;	movey = -10;	movez = 0;
-	PLAYER.Translate = Vector3(0, -10, 0);
-	PLAYER.Scale = Vector3(2, 2, 2);
-	//player.size = Vector3(length/2*CUBE.Scale.x, height/2* CUBE.Scale.y, width/2 * CUBE.Scale.z);
-	/*-----------------------------------------------------------------------------------------------
-	HOW TO GET LENGTH,  WIDTH, HEIGHT OF OBJECT:
-	1. OPEN THE OBJ FILE USING NOTEPAD
-	2. U WIlL SEE ROWS OF THESE:
-		v 1.656677 3.053495 0.519560
-		v 1.719025 2.998324 0.653901
-		v 1.720906 3.284813 0.462875
-	3. Each column represents x, y, z coord respectively
-	4. Add the 2 extreme values in each column and divide by 2 to get length, height and width
-		Eg. Greatest x value = 0.95		Smallest x value = -0.56;
-			length = (0.95 + 0.56) / 2
-
-	PS if i have free time i will make some function/class to read the values from the notepad file 
-	   n stuff and do the math oso..but so far just manually calculate first :)
-	---------------------------------------------------------------------------------------------*/
-	player.size = Vector3(0.94 * PLAYER.Scale.x, 0.865 * PLAYER.Scale.y, 0.95 * PLAYER.Scale.z);
-	player.pos = Vector3(CUBE.Translate.x, CUBE.Translate.y, CUBE.Translate.z);
-	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_CHAR]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_CHAR]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_CHAR]->material.kShininess = 1.f;
-
-	meshList[GEO_CUBE] = MeshBuilder::GenerateCuboid("Cube", Color(1, 0, 0), 1.f, 1.f, 1.f);
-	CUBE.Translate = Vector3(2, -10, 0);
-	CUBE.Scale = Vector3(2, 2, 2);
-	//cube.size = Vector3(length/2*CUBE.Scale.x, height/2* CUBE.Scale.y, width/2 * CUBE.Scale.z);
-	cube.size = Vector3(0.5 * CUBE.Scale.x, 0.5 * CUBE.Scale.y, 0.5 * CUBE.Scale.z);
-	cube.pos = Vector3(CUBE.Translate.x, CUBE.Translate.y, CUBE.Translate.z);
-	meshList[GEO_CUBE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_CUBE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_CUBE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_CUBE]->material.kShininess = 1.f;
-
 	meshList[GEO_LIGHTSPHERE] = MeshBuilder::GenerateSphere("lightBall", Color(1.f, 1.f, 1.f), 9, 36, 1.f);
 
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
@@ -212,6 +173,8 @@ void ShowroomScene::Init()
 
 }
 void ShowroomScene::InitObjects() {
+	player = new cirObject(Vector3(camera.position.x, camera.position.y, camera.position.z), 5.f);
+
 	meshList[GEO_ARCADE] = MeshBuilder::GenerateOBJ("Arcade", "OBJ//arcade.obj");
 	meshList[GEO_ARCADE]->textureID = LoadTGA("Image//arcade.tga");
 	meshList[GEO_ARCADE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -221,7 +184,8 @@ void ShowroomScene::InitObjects() {
 	ARCADE.Scale = Vector3(3, 3, 3);
 	ARCADE.Translate = Vector3(45, 0, 0);
 	ARCADE.RotateY = Vector4(180,0,1,0);
-
+//	arcade = new rectObject(Vector3(45, 0, 0));
+	arcade = new cirObject(Vector3(45, 0, 0), 10.f);
 	meshList[GEO_BENCH] = MeshBuilder::GenerateOBJ("Bench", "OBJ//bench.obj");
 	meshList[GEO_BENCH]->textureID = LoadTGA("Image//bench.tga");
 	meshList[GEO_BENCH]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -380,17 +344,7 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_WHEEL3]->material.kShininess = 1.f;
 
 }
-bool ShowroomScene:: CheckCollision(object& one, object& two)
-{
-	if (
-		(one.pos.x - one.size.x <= two.pos.x + two.size.x && one.pos.x + one.size.x >= two.pos.x - two.size.x) &&
-		(one.pos.y - one.size.y <= two.pos.y + two.size.y && one.pos.y + one.size.y >= two.pos.y - two.size.y) &&
-		(one.pos.z - one.size.z <= two.pos.z + two.size.z && one.pos.z + one.size.z >= two.pos.z - two.size.z)
-		) {
-		return true;
-	}
-	return false;
-}
+
 void ShowroomScene::Update(double dt)
 {
 	if (Application::IsKeyPressed(0x31))
@@ -492,12 +446,12 @@ void ShowroomScene::Update(double dt)
 	camera.mouse_callback();
 }
 void ShowroomScene::doCollision() {
-	if (CheckCollision(player, cube)) {
-		printf("YES\n");
-
-	}else
-
-	printf("NO\n");
+	if (arcade->CheckCollision(player)) {
+		printf("YES");
+	}
+	else {
+		printf("no");
+	}
 }
 /******************************************************************************/
 /*!
@@ -582,7 +536,7 @@ void ShowroomScene::Render()
 
 	RenderSkybox();
 
-
+	player->setPosition((camera.position.x, camera.position.y, camera.position.z));
 	//RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
 	////Update the translate vector if theres is any transformation
 	//PLAYER.Translate = Vector3(movex, movey, movez);

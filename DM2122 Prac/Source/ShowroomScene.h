@@ -7,7 +7,9 @@
 #include "Mesh.h"
 #include "Light.h"
 #include "camerafps.h"
-#include "collision.h"
+#include "Object.h"
+#include "cirObject.h"
+#include "rectObject.h"
 
 class ShowroomScene : public Scene
 {
@@ -105,11 +107,9 @@ private:
 	Light light[2];
 
 	camerafps camera;
-	
-	TRS CUBE;
-	TRS PLAYER;
-	object cube;
-	object player;
+
+	Object* player;
+	Object* arcade;
 
 	TRS ARCADE;
 	TRS BENCH;
@@ -146,7 +146,6 @@ private:
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
 
-	bool CheckCollision(object& one, object& two);
 	void doCollision();
 public:
 	ShowroomScene();

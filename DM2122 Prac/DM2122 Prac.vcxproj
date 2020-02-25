@@ -161,7 +161,6 @@
     <ClCompile Include="Source\camerafps.cpp" />
     <ClCompile Include="Source\cameratpp.cpp" />
     <ClCompile Include="Source\cirObject.cpp" />
-    <ClCompile Include="Source\collision.cpp" />
     <ClCompile Include="Source\GameMenu.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />

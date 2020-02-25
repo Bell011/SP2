@@ -10,6 +10,7 @@ public:
 	cirObject(Vector3 pos = Vector3(0.f, 0.f, 0.f), float r = 0.f);
 	~cirObject();
 	float getRadius();
+	void setRadius(float);
 	bool CheckCollision(Object*);
 };
 #endif

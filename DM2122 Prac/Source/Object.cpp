@@ -11,3 +11,6 @@ Vector3 Object::getPosition(){
 OBJECT_TYPE Object::getType() {
 	return type;
 }
+void Object::setPosition(Vector3 pos) {
+	position =  pos;
+}
