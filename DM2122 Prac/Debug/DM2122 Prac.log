@@ -1,3 +1,21 @@
-﻿  CarEntity.cpp
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+﻿  Application.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+C:\Users\Zheng Hong\Documents\New folder\SP2\glfw\include\GLFW\glfw3.h(104): message : see previous definition of 'APIENTRY'
+  CarEntity.cpp
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\CarEntity.cpp(47,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\CarEntity.cpp(77,13): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\CarEntity.cpp(101,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\CarEntity.cpp(102,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\CarEntity.cpp(103,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\CarEntity.cpp(122,32): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\CarEntity.cpp(130,32): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\CarEntity.cpp(135,20): warning C4553: '==': result of expression not used; did you intend '='?
+  SceneRacing.cpp
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\SceneRacing.cpp(179,29): warning C4244: 'argument': conversion from 'float' to 'const _Elem', possible loss of data
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\Zheng Hong\Documents\New folder\SP2\DM2122 Prac\Source\SceneRacing.cpp(184,17): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   DM2122 Prac.vcxproj -> C:\Users\Zheng Hong\Documents\New folder\SP2\Debug\DM2122 Prac.exe

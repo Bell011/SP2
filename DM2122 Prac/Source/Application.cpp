@@ -15,6 +15,7 @@
 #include "TestDriveScene.h"
 #include "miniGameTwo.h"
 #include "SceneLuckyDraw.h"
+#include "SceneRacing.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -109,22 +110,35 @@ void Application::Run()
 
 	Scene* scene1 = new TestDriveScene();
 	Scene* scene2 = new SceneLuckyDraw();
+	Scene* scene3 = new SceneRacing();
+	Scene* scene4 = new Scene1();
 	Scene* scene = scene2;
 	scene1->Init();
 	scene2->Init();
+	scene3->Init();
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
-		if (IsKeyPressed('9')) {
+		if (IsKeyPressed('9'))
+		{
 			Scene* scene1 = new TestDriveScene();
 			scene1->Init();
 			scene = scene1;
 		}
-		else if (IsKeyPressed('0')) {
+		else if (IsKeyPressed('0')) 
+		{
 			
 			scene = scene2;
 		
+		}
+		else if (IsKeyPressed('1'))
+		{
+			scene = scene3;
+		}
+		else if (IsKeyPressed('2'))
+		{
+			scene = scene4;
 		}
 		scene->Update(m_timer.getElapsedTime());
 		scene->Render();

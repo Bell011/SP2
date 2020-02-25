@@ -6,7 +6,7 @@
 #include "Camera2.h"
 #include "Mesh.h"
 #include "Light.h"
-
+#include <string.h>
 class SceneRacing : public Scene
 {
 	enum GEOMETRY_TYPE
@@ -23,6 +23,7 @@ class SceneRacing : public Scene
 		GEO_CAR1,
 		GEO_CAR2,
 		GEO_CAR3,
+		GEO_CAR4,
 		GEO_MAP,
 		GEO_LIGHTSPHERE,
 		GEO_TEXT,
@@ -82,8 +83,14 @@ private:
 	void CalculateFrameRate();
 
 	float carSpeed;
-	entityCar* carPlayer;
-	entityCar* Car1;
+	entityCar* carPlayer = new entityCar;
+	entityCar* Car1 = new entityCar;
+	entityCar* Car2 = new entityCar;
+	entityCar* Car3 = new entityCar;
+	bool isPlaying;
+	float invinTime;
+
+	std::string lives;
 
 public:
 	SceneRacing();

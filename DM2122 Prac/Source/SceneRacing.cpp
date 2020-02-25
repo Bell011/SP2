@@ -35,12 +35,21 @@ void SceneRacing::Init()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	camera.Init(Vector3(0, 0, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(5, 8, -20), Vector3(5, 10, 0), Vector3(0, 1, 0));
 
-	Mtx44 projection;
-	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
-	projectionStack.LoadMatrix(projection);
+	Mtx44 perspective;
+	perspective.SetToPerspective(45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
+	projectionStack.LoadMatrix(perspective);
 
+	//Mtx44 projection;
+	//projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
+	//projectionStack.LoadMatrix(projection);
+	/*
+	Mtx44 ortho;
+	ortho.SetToOrtho(0, 40, 0, 60, -10, 10); 
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	*/
 	m_programID = LoadShaders("Shader//Texture.vertexshader", "Shader//Text.fragmentshader");
 
 	//m_programID = LoadShaders("Shader//Texture.vertexshader", "Shader//Texture.fragmentshader"); 
@@ -79,7 +88,7 @@ void SceneRacing::Init()
 	glEnable(GL_DEPTH_TEST);
 
 	light[0].type = Light::LIGHT_POINT;
-	light[0].position.Set(0, 5, 0);
+	light[0].position.Set(100, 500, 100);
 	light[0].color.Set(0.5f, 0.5f, 0.5f);
 	light[0].power = 1;
 	light[0].kC = 1.f;
@@ -123,11 +132,17 @@ void SceneRacing::Init()
 	meshList[GEO_CHAR] = MeshBuilder::GenerateQuad("char", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_CHAR]->textureID = LoadTGA("Image//char.tga");
 
-	meshList[GEO_DICE] = MeshBuilder::GenerateOBJ("Dice", "OBJ//doorman.obj");
-	meshList[GEO_DICE]->textureID = LoadTGA("Image//doorman.tga");
+	meshList[GEO_CAR1] = MeshBuilder::GenerateOBJ("Car1", "Obj//car1.obj");
+	meshList[GEO_CAR1]->textureID = LoadTGA("Image//car1black.tga");
 
-	meshList[GEO_CAR1] = MeshBuilder::GenerateQuad("Car1", Color(1, 1, 1), Car1->getSize().x, Car1->getSize().y);
-	//meshList[GEO_CAR1]->textureID = LoadTGA("Image//car1.tga");
+	meshList[GEO_CAR2] = MeshBuilder::GenerateOBJ("Car2", "Obj//car2.obj");
+	meshList[GEO_CAR2]->textureID = LoadTGA("Image//car2red.tga");
+
+	meshList[GEO_CAR3] = MeshBuilder::GenerateOBJ("Car1", "Obj//car1.obj");
+	meshList[GEO_CAR3]->textureID = LoadTGA("Image//car1black.tga");
+
+	meshList[GEO_CAR4] = MeshBuilder::GenerateOBJ("Car1", "Obj//car1.obj");
+	meshList[GEO_CAR4]->textureID = LoadTGA("Image//car1black.tga");
 
 	meshList[GEO_MAP] = MeshBuilder::GenerateQuad("Map", Color(1, 1, 1), 1, 1);
 	//meshList[GEO_MAP]->textureID = LoadTGA("Image//map.tga");
@@ -137,22 +152,44 @@ void SceneRacing::Init()
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 
-	carSpeed = 10; // Enemy cars speed 
-	
-	Car1->setPos(0, 0, 100);
+	isPlaying = true;
+
+	carSpeed = -10.f; // Enemy cars speed 
+
+	Car1->setPos(0, 0, 50);
 	Car1->setVel(0, 0, carSpeed);
-	Car1->setSize(1, 1, 1);
+	Car1->setSize(5, 5, 5);
+
+	Car2->setPos(5, 0, 55);
+	Car2->setVel(0, 0, carSpeed);
+	Car2->setSize(5, 5, 5);
+
+	Car3->setPos(10, 0, 65);
+	Car3->setVel(0, 0, carSpeed);
+	Car3->setSize(5, 5, 5);
 
 
-	carPlayer->setPos(10, 0, -100);
+	carPlayer->setPos(5, 0, 0);
 	carPlayer->setVel(0, 0, 0);
-	carPlayer->setSize(1, 1, 1);
+	carPlayer->setSize(5, 5, 5);
+	carPlayer->setLives(3);
+
+	invinTime = 0.f;
+
+	lives = carPlayer->getLives();
 }
 
 void SceneRacing::Update(double dt)
 {
-	Car1->updatePos();
-
+	invinTime -= dt;
+	if (isPlaying)
+	{
+		entityCar::updatePos(Car1, Car2, Car3, carPlayer, dt);
+	}
+	if (carPlayer->getLives() <= 0)
+	{
+		isPlaying = false;
+	}
 	if (Application::IsKeyPressed(0x31))
 	{
 		glDisable(GL_CULL_FACE);
@@ -198,14 +235,30 @@ void SceneRacing::Update(double dt)
 		light[0].type = Light::LIGHT_SPOT;
 	}*/
 
-	if (Application::IsKeyPressed(VK_LEFT))
+	if (invinTime <= 0.f)
 	{
+		if (Car1->isCollide(Car1, carPlayer))
+		{
+			Car1->setPos(0, 0, 50);
+			carPlayer->updateLives(-1);
+			invinTime = 2.f;
+		}
 
+		if (Car2->isCollide(Car2, carPlayer))
+		{
+			Car2->setPos(0, 0, 55);
+			carPlayer->updateLives(-1);
+			invinTime = 2.f;
+		}
+
+		if (Car3->isCollide(Car3, carPlayer))
+		{
+			Car3->setPos(0, 0, 50);
+			carPlayer->updateLives(-1);
+			invinTime = 2.f;
+		}
 	}
-	if (Car1->isCollide(Car1, carPlayer))
-	{
-		carPlayer->updateLives(-1);
-	}
+
 	camera.Update(dt);
 	CalculateFrameRate();
 }
@@ -242,25 +295,25 @@ void SceneRacing::Render()
 	}
 
 	RenderSkybox();
+	RenderCars();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(light[0].position.x, light[0].position.y, light[0].position.z);
 	RenderMesh(meshList[GEO_LIGHTSPHERE], false);
 	modelStack.PopMatrix();
+	if (isPlaying == false)
+	{
+		modelStack.PushMatrix();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Game Over :(", Color(1, 1, 1), 3, 8, 15);
+		modelStack.PopMatrix();
+	}
 
-	//modelStack.PushMatrix();
-	//modelStack.Translate(0, -3, 0);
-	//RenderMesh(meshList[GEO_DICE], true);
-	//modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	//scale, translate, rotate
-	RenderText(meshList[GEO_TEXT], "HELLO WORLD", Color(0, 1, 0));
-	modelStack.PopMatrix();
-
-	//No transform needed
-	RenderTextOnScreen(meshList[GEO_TEXT], "Hello World", Color(0, 1, 0), 2, 0, 0);
-
+	if (isPlaying == true)
+	{
+		modelStack.PushMatrix();
+		RenderTextOnScreen(meshList[GEO_TEXT], "Lives: " + lives, Color(1, 1, 1), 3, 8, 15);
+		modelStack.PopMatrix();
+	}
 }
 
 void SceneRacing::Exit()
@@ -318,6 +371,35 @@ void SceneRacing::RenderMesh(Mesh* mesh, bool enableLight)
 
 	if (mesh->textureID > 0) glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+void SceneRacing::RenderCars()
+{
+	modelStack.PushMatrix();
+	modelStack.Translate(Car1->getPos().x, Car1->getPos().y, Car1->getPos().z);
+	modelStack.Scale(1, 1, 1);
+	RenderMesh(meshList[GEO_CAR1], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(carPlayer->getPos().x, carPlayer->getPos().y, carPlayer->getPos().z);
+	modelStack.Scale(1, 1, 1);
+	RenderMesh(meshList[GEO_CAR2], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(Car2->getPos().x, Car2->getPos().y, Car2->getPos().z);
+	modelStack.Scale(1, 1, 1);
+	RenderMesh(meshList[GEO_CAR3], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(Car3->getPos().x, Car3->getPos().y, Car3->getPos().z);
+	modelStack.Scale(1, 1, 1);
+	RenderMesh(meshList[GEO_CAR4], false);
+	modelStack.PopMatrix();
+}
+
+
 
 void SceneRacing::RenderSkybox()
 {

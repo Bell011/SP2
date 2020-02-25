@@ -2,13 +2,12 @@
 #define _CAR_ENTITY_H
 
 #include "Utility.h"
+#include "Application.h"
 
 
 class entityCar
 {
 private:
-	entityCar();
-	~entityCar();
 	Vector3 carPos;
 	Vector3 carSize;
 	Vector3 carVel;
@@ -16,6 +15,8 @@ private:
 	int lives;
 	float scoreRace;
 public:
+	entityCar();
+	~entityCar();
 	void setPos(float x, float y, float z);
 	void setVel(float x, float y, float z);
 	void setSize(float x, float y, float z);
@@ -30,7 +31,7 @@ public:
 	void updateLives(int count);
 
 	bool isCollide(entityCar* enemy, entityCar* player);
-	void updatePos();
+	static void updatePos(entityCar* enemy1, entityCar* enemy2, entityCar* enemy3, entityCar* player,double dt);
 
 };
 
