@@ -538,3 +538,10 @@ void SceneRacing::CalculateFrameRate()
 		framesPerSecond = 0;
 	}
 }
+
+
+
+bool SceneRacing::Change()
+{
+	return true;
+}
