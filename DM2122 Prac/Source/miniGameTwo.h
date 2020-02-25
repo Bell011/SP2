@@ -61,9 +61,9 @@ private:
 	TRS BLUEPRINT1;
 	TRS BLUEPRINT2;
 	TRS BLUEPRINT3;
-	rectObj blueprint1;
-	rectObj blueprint2;
-	rectObj blueprint3;
+	AABBobj blueprint1;
+	AABBobj blueprint2;
+	AABBobj blueprint3;
 	Vector3 bluePrintInitialPos1;
 	Vector3 bluePrintInitialPos2;
 	Vector3 bluePrintInitialPos3;
@@ -72,10 +72,10 @@ private:
 	TRS SPACING2;
 	TRS SPACING3;
 	TRS TARGET;
-	rectObj spacing1;
-	rectObj spacing2;
-	rectObj spacing3;
-	rectObj target;
+	AABBobj spacing1;
+	AABBobj spacing2;
+	AABBobj spacing3;
+	AABBobj target;
 
 	bool bp1, bp2, bp3;
 	bool space1, space2, space3;
@@ -96,7 +96,7 @@ private:
 	float movex;
 	float movey;
 	float movez;
-	bool CheckCollision(rectObj& one, rectObj& two);
+	bool CheckCollision(AABBobj& one, AABBobj& two);
 	void doPickUpCollision();
 	void doMatchingCollision();
 

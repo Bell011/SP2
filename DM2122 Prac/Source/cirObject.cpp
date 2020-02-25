@@ -1,5 +1,5 @@
 #include "cirObject.h"
-cirObject::cirObject(Vector3 pos, float r): Object (pos) {
+cirObject::cirObject(Vector3 pos, TRS trs, float r): Object (pos,trs) {
 	setType(CIRC);
 	radius = r;
 }
@@ -12,8 +12,10 @@ float cirObject::getRadius() {
 void cirObject::setRadius(float r) {
 	radius = r;
 }
-bool cirObject::CheckCollision(Object*obj)
+bool cirObject::CheckCollision(Object*obj, TRS& trs1,TRS& trs2)
 {
+	setPosition(Vector3(trs1.Translate.x, trs1.Translate.y, trs1.Translate.z));
+	obj->setPosition(Vector3(trs2.Translate.x, trs2.Translate.y, trs2.Translate.z));
 	if (obj->getType() == CIRC) {
 		if ((getPosition() - obj->getPosition()).LengthSquared() == (radius + ((cirObject*)obj)->getRadius()) * (radius + ((cirObject*)obj)->getRadius())) {
 			return true;

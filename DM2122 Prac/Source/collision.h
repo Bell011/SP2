@@ -1,12 +1,12 @@
 #ifndef COLLISION_H
 #define COLLISION_H
 #include "Vector3.h"
-class rectObj {
+class AABBobj {
 	private:
 	Vector3 size;
 	Vector3 pos;
 	public:
-	rectObj(Vector3 size = Vector3(1,1,1), Vector3 pos = Vector3(0,0,0)){ 
+	AABBobj(Vector3 size = Vector3(1,1,1), Vector3 pos = Vector3(0,0,0)){ 
 		this->size = size;
 		this->pos = pos;
 	}

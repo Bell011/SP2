@@ -7,11 +7,11 @@ class cirObject : public Object
 private:
 	float radius;
 public:
-	cirObject(Vector3 pos = Vector3(0.f, 0.f, 0.f), float r = 0.f);
+	cirObject(Vector3 pos, TRS trs, float r);
 	~cirObject();
 	float getRadius();
 	void setRadius(float);
-	bool CheckCollision(Object*);
+	bool CheckCollision(Object* obj, TRS& trs1, TRS& trs2);
 };
 #endif
 

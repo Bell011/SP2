@@ -1,6 +1,6 @@
 #include "rectObject.h"
 
-rectObject::rectObject(Vector3 pos, Vector3 f, Vector3 r, Vector3 u) : Object(pos){
+rectObject::rectObject(Vector3 pos, TRS trs, Vector3 f, Vector3 r, Vector3 u) : Object(pos,trs){
 	setType(REC);
 	front = f;
 	right = r;
@@ -27,8 +27,10 @@ void rectObject::setRight(Vector3 r) {
 void rectObject::setUp(Vector3 u) {
 	up = u;
 }
-bool rectObject::CheckCollision(Object*obj)
+bool rectObject::CheckCollision(Object*obj,TRS& trs1, TRS& trs2)
 {
+	setPosition(Vector3(trs1.Translate.x, trs1.Translate.y, trs1.Translate.z));
+	obj->setPosition(Vector3(trs2.Translate.x, trs2.Translate.y, trs2.Translate.z));
 	if (obj->getType() == REC) {
 		Vector3 corners[8] = {
 			(getPosition() + getFront() + getRight() + getUp()),
@@ -44,12 +46,12 @@ bool rectObject::CheckCollision(Object*obj)
 		Vector3 objcorners[8] = {
 		(obj->getPosition() + ((rectObject*)obj)->getFront() + ((rectObject*)obj)->getRight() + ((rectObject*)obj)->getUp()),
 		(obj->getPosition() + ((rectObject*)obj)->getFront() - ((rectObject*)obj)->getRight() + ((rectObject*)obj)->getUp()),
-		(obj->getPosition() + ((rectObject*)obj)->getFront() + ((rectObject*)obj)->getRight() + ((rectObject*)obj)->getUp()),
-		(obj->getPosition() + ((rectObject*)obj)->getFront() - ((rectObject*)obj)->getRight() + ((rectObject*)obj)->getUp()),
 		(obj->getPosition() + ((rectObject*)obj)->getFront() + ((rectObject*)obj)->getRight() - ((rectObject*)obj)->getUp()),
 		(obj->getPosition() + ((rectObject*)obj)->getFront() - ((rectObject*)obj)->getRight() - ((rectObject*)obj)->getUp()),
-		(obj->getPosition() + ((rectObject*)obj)->getFront() + ((rectObject*)obj)->getRight() - ((rectObject*)obj)->getUp()),
-		(obj->getPosition() + ((rectObject*)obj)->getFront() - ((rectObject*)obj)->getRight() - ((rectObject*)obj)->getUp())
+		(obj->getPosition() - ((rectObject*)obj)->getFront() + ((rectObject*)obj)->getRight() + ((rectObject*)obj)->getUp()),
+		(obj->getPosition() - ((rectObject*)obj)->getFront() - ((rectObject*)obj)->getRight() + ((rectObject*)obj)->getUp()),
+		(obj->getPosition() - ((rectObject*)obj)->getFront() + ((rectObject*)obj)->getRight() - ((rectObject*)obj)->getUp()),
+		(obj->getPosition() - ((rectObject*)obj)->getFront() - ((rectObject*)obj)->getRight() - ((rectObject*)obj)->getUp())
 		};
 		for (int i = 0; i < 8; ++i) {
 			if (fabsf((corners[i] - obj->getPosition()).Dot((((rectObject*)obj)->getFront()).Normalized())) <= (((rectObject*)obj)->getFront()).Length() && fabsf((corners[i] - obj->getPosition()).Dot((((rectObject*)obj)->getFront()).Normalized())) <= (((rectObject*)obj)->getRight()).Length() && fabsf((corners[i] - obj->getPosition()).Dot((((rectObject*)obj)->getUp()).Normalized())) <= (((rectObject*)obj)->getUp()).Length()

@@ -571,7 +571,7 @@ void miniGameTwo::RenderSkybox()
 	modelStack.PopMatrix();
 }
 
-bool miniGameTwo::CheckCollision(rectObj& one, rectObj& two)
+bool miniGameTwo::CheckCollision(AABBobj& one, AABBobj& two)
 {
 	if (!pickBluePrint) // To check whether target is in the blueprint spaces
 	{

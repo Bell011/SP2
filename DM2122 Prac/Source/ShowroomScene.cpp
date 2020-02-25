@@ -173,7 +173,7 @@ void ShowroomScene::Init()
 
 }
 void ShowroomScene::InitObjects() {
-	player = new cirObject(Vector3(camera.position.x, camera.position.y, camera.position.z), 5.f);
+	//player = new cirObject(Vector3(camera.position.x, camera.position.y, camera.position.z), 5.f);
 
 	meshList[GEO_ARCADE] = MeshBuilder::GenerateOBJ("Arcade", "OBJ//arcade.obj");
 	meshList[GEO_ARCADE]->textureID = LoadTGA("Image//arcade.tga");
@@ -185,7 +185,7 @@ void ShowroomScene::InitObjects() {
 	ARCADE.Translate = Vector3(45, 0, 0);
 	ARCADE.RotateY = Vector4(180,0,1,0);
 //	arcade = new rectObject(Vector3(45, 0, 0));
-	arcade = new cirObject(Vector3(45, 0, 0), 10.f);
+	//arcade = new cirObject(Vector3(45, 0, 0), 10.f);
 	meshList[GEO_BENCH] = MeshBuilder::GenerateOBJ("Bench", "OBJ//bench.obj");
 	meshList[GEO_BENCH]->textureID = LoadTGA("Image//bench.tga");
 	meshList[GEO_BENCH]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -446,12 +446,12 @@ void ShowroomScene::Update(double dt)
 	camera.mouse_callback();
 }
 void ShowroomScene::doCollision() {
-	if (arcade->CheckCollision(player)) {
-		printf("YES");
-	}
-	else {
-		printf("no");
-	}
+	//if (arcade->CheckCollision(player)) {
+	//	printf("YES");
+	//}
+	//else {
+	//	printf("no");
+	//}
 }
 /******************************************************************************/
 /*!
