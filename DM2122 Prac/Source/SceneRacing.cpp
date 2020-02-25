@@ -35,7 +35,7 @@ void SceneRacing::Init()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	camera.Init(Vector3(5, 8, -20), Vector3(5, 10, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(5, 8, -30), Vector3(5, 10, 0), Vector3(0, 1, 0));
 
 	Mtx44 perspective;
 	perspective.SetToPerspective(45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
@@ -246,14 +246,14 @@ void SceneRacing::Update(double dt)
 
 		if (Car2->isCollide(Car2, carPlayer))
 		{
-			Car2->setPos(0, 0, 55);
+			Car2->setPos(5, 0, 55);
 			carPlayer->updateLives(-1);
 			invinTime = 2.f;
 		}
 
 		if (Car3->isCollide(Car3, carPlayer))
 		{
-			Car3->setPos(0, 0, 50);
+			Car3->setPos(10, 0, 50);
 			carPlayer->updateLives(-1);
 			invinTime = 2.f;
 		}
