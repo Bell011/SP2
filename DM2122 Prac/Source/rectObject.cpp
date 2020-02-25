@@ -1,7 +1,7 @@
 #include "rectObject.h"
 
 rectObject::rectObject(Vector3 pos, Vector3 f, Vector3 r, Vector3 u) : Object(pos){
-	OBJECT_TYPE type = REC;
+	setType(REC);
 	front = f;
 	right = r;
 	up = u;

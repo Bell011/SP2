@@ -74,7 +74,7 @@ void miniGameTwo::Init()
 
 	//meshList[GEO_TARGET] = MeshBuilder::GenerateCuboid("target", Color(0, 0, 0), 1.f, 1.f, 1.f);
 	meshList[GEO_TARGET] = MeshBuilder::GenerateOBJ("target", "OBJ//target.obj");
-	target.pos = Vector3(TARGET.Translate.x, TARGET.Translate.y, 0.111);
+	target.setPos( Vector3(TARGET.Translate.x, TARGET.Translate.y, 0.111));
 	meshList[GEO_TARGET]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_TARGET]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_TARGET]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -87,7 +87,7 @@ void miniGameTwo::Init()
 	BLUEPRINT1.Translate = Vector3(0, -13, -4.5);
 	//BLUEPRINT1.Scale = Vector3(1, 1, 1);
 	bluePrintInitialPos1 = BLUEPRINT1.Translate;
-	blueprint1.pos = Vector3(BLUEPRINT1.Translate.x, BLUEPRINT1.Translate.y, BLUEPRINT1.Translate.z);
+	blueprint1.setPos(Vector3(BLUEPRINT1.Translate.x, BLUEPRINT1.Translate.y, BLUEPRINT1.Translate.z));
 	meshList[GEO_BLUEPRINT1]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_BLUEPRINT1]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_BLUEPRINT1]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -96,7 +96,7 @@ void miniGameTwo::Init()
 	meshList[GEO_SPACING1] = MeshBuilder::GenerateOBJ("spacing1", "OBJ//g2bp1.obj");
 	SPACING1.Translate = Vector3(4.5, -7.7, -4.5);
 	SPACING1.Scale = Vector3(1.2, 1.2, 1.2);
-	spacing1.pos = Vector3(SPACING1.Translate.x, SPACING1.Translate.y, SPACING1.Translate.z);
+	spacing1.setPos( Vector3(SPACING1.Translate.x, SPACING1.Translate.y, SPACING1.Translate.z));
 	meshList[GEO_SPACING1]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_SPACING1]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_SPACING1]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -107,7 +107,7 @@ void miniGameTwo::Init()
 	BLUEPRINT2.Translate = Vector3(-4.5, -13, -4.5);
 	//BLUEPRINT2.Scale = Vector3(1, 1, 1);
 	bluePrintInitialPos2 = BLUEPRINT2.Translate;
-	blueprint2.pos = Vector3(BLUEPRINT2.Translate.x, BLUEPRINT2.Translate.y, BLUEPRINT2.Translate.z);
+	blueprint2.setPos( Vector3(BLUEPRINT2.Translate.x, BLUEPRINT2.Translate.y, BLUEPRINT2.Translate.z));
 	meshList[GEO_BLUEPRINT2]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_BLUEPRINT2]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_BLUEPRINT2]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -116,7 +116,7 @@ void miniGameTwo::Init()
 	meshList[GEO_SPACING2] = MeshBuilder::GenerateOBJ("spacing2", "OBJ//g2bp2.obj");
 	SPACING2.Translate = Vector3(0, -8, -4.5);
 	SPACING2.Scale = Vector3(1.2, 1.2, 1.2);
-	spacing2.pos = Vector3(SPACING2.Translate.x, SPACING2.Translate.y, SPACING2.Translate.z);
+	spacing2.setPos( Vector3(SPACING2.Translate.x, SPACING2.Translate.y, SPACING2.Translate.z));
 	meshList[GEO_SPACING2]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_SPACING2]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_SPACING2]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -127,7 +127,7 @@ void miniGameTwo::Init()
 	BLUEPRINT3.Translate = Vector3(4.5, -13, -4.5);
 	//BLUEPRINT3.Scale = Vector3(1, 1, 1);
 	bluePrintInitialPos3 = BLUEPRINT3.Translate;
-	blueprint3.pos = Vector3(BLUEPRINT3.Translate.x, BLUEPRINT3.Translate.y, BLUEPRINT3.Translate.z);
+	blueprint3.setPos( Vector3(BLUEPRINT3.Translate.x, BLUEPRINT3.Translate.y, BLUEPRINT3.Translate.z));
 	meshList[GEO_BLUEPRINT3]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_BLUEPRINT3]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_BLUEPRINT3]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -136,7 +136,7 @@ void miniGameTwo::Init()
 	meshList[GEO_SPACING3] = MeshBuilder::GenerateOBJ("spacing3", "OBJ//g2bp3.obj");
 	SPACING3.Translate = Vector3(-4.7, -8.7, -4.5);
 	SPACING3.Scale = Vector3(1.2, 1.2, 1.2);
-	spacing3.pos = Vector3(SPACING3.Translate.x, SPACING3.Translate.y, SPACING3.Translate.z);
+	spacing3.setPos(Vector3(SPACING3.Translate.x, SPACING3.Translate.y, SPACING3.Translate.z));
 	meshList[GEO_SPACING3]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_SPACING3]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_SPACING3]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -188,7 +188,7 @@ void miniGameTwo::Update(double dt)
 	{
 		movey -= 5 * dt;
 	}
-	std::cout << target.pos.x << target.pos.y;
+	std::cout << target.getPos().x << target.getPos().y;
 	std::cout << numberOfBP;
 	if (Application::IsKeyPressed(VK_SPACE))
 	{
@@ -271,7 +271,7 @@ void miniGameTwo::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT], "PRESS 'SPACE' TO PICK AND DROP", Color(0, 0, 0), 2.5, 0, 0);
 
 	TARGET.Translate = Vector3(movex, movey, movez);
-	target.pos = Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z);
+	target.setPos(Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z));
 	RenderOBJ(meshList[GEO_TARGET], TARGET, true, true);
 	if (!pickBluePrint)
 	{
@@ -335,15 +335,15 @@ void miniGameTwo::Render()
 			{
 				// Blueprints returns to its original position
 				BLUEPRINT1.Translate = bluePrintInitialPos1;
-				blueprint1.pos = Vector3(BLUEPRINT1.Translate.x, BLUEPRINT1.Translate.y, BLUEPRINT1.Translate.z);
+				blueprint1.setPos( Vector3(BLUEPRINT1.Translate.x, BLUEPRINT1.Translate.y, BLUEPRINT1.Translate.z));
 				RenderOBJ(meshList[GEO_BLUEPRINT1], BLUEPRINT1, true, true);
 				RenderOBJ(meshList[GEO_SPACING1], SPACING1, true, true);
 				BLUEPRINT2.Translate = bluePrintInitialPos2;
-				blueprint2.pos = Vector3(BLUEPRINT2.Translate.x, BLUEPRINT2.Translate.y, BLUEPRINT2.Translate.z);
+				blueprint2.setPos( Vector3(BLUEPRINT2.Translate.x, BLUEPRINT2.Translate.y, BLUEPRINT2.Translate.z));
 				RenderOBJ(meshList[GEO_BLUEPRINT2], BLUEPRINT2, true, true);
 				RenderOBJ(meshList[GEO_SPACING2], SPACING2, true, true);
 				BLUEPRINT3.Translate = bluePrintInitialPos3;
-				blueprint3.pos = Vector3(BLUEPRINT3.Translate.x, BLUEPRINT3.Translate.y, BLUEPRINT3.Translate.z);
+				blueprint3.setPos(Vector3(BLUEPRINT3.Translate.x, BLUEPRINT3.Translate.y, BLUEPRINT3.Translate.z));
 				RenderOBJ(meshList[GEO_BLUEPRINT3], BLUEPRINT3, true, true);
 				RenderOBJ(meshList[GEO_SPACING3], SPACING3, true, true);
 			}
@@ -360,7 +360,7 @@ void miniGameTwo::Render()
 			if (bp1)
 			{
 				BLUEPRINT1.Translate = Vector3(movex, movey, movez);
-				blueprint1.pos = Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z);
+				blueprint1.setPos( Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z));
 				RenderOBJ(meshList[GEO_BLUEPRINT1], BLUEPRINT1, true, true);
 				RenderOBJ(meshList[GEO_SPACING1], SPACING1, true, true);
 				RenderOBJ(meshList[GEO_BLUEPRINT2], BLUEPRINT2, true, true);
@@ -371,7 +371,7 @@ void miniGameTwo::Render()
 			else if (bp2)
 			{
 				BLUEPRINT2.Translate = Vector3(movex, movey, movez);
-				blueprint2.pos = Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z);
+				blueprint2.setPos( Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z));
 				RenderOBJ(meshList[GEO_BLUEPRINT2], BLUEPRINT2, true, true);
 				RenderOBJ(meshList[GEO_SPACING2], SPACING2, true, true);
 				RenderOBJ(meshList[GEO_BLUEPRINT1], BLUEPRINT1, true, true);
@@ -382,7 +382,7 @@ void miniGameTwo::Render()
 			else if (bp3)
 			{
 				BLUEPRINT3.Translate = Vector3(movex, movey, movez);
-				blueprint3.pos = Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z);
+				blueprint3.setPos( Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z));
 				RenderOBJ(meshList[GEO_BLUEPRINT3], BLUEPRINT3, true, true);
 				RenderOBJ(meshList[GEO_SPACING3], SPACING3, true, true);
 				RenderOBJ(meshList[GEO_BLUEPRINT1], BLUEPRINT1, true, true);
@@ -571,21 +571,21 @@ void miniGameTwo::RenderSkybox()
 	modelStack.PopMatrix();
 }
 
-bool miniGameTwo::CheckCollision(object& one, object& two)
+bool miniGameTwo::CheckCollision(rectObj& one, rectObj& two)
 {
 	if (!pickBluePrint) // To check whether target is in the blueprint spaces
 	{
-		if ((one.pos.x >= -1.104 && one.pos.x <= 1.113) && (one.pos.y >= -12.133 && one.pos.y <= -10.512)) // Blueprint1
+		if ((one.getPos().x >= -1.104 && one.getPos().x <= 1.113) && (one.getPos().y >= -12.133 && one.getPos().y <= -10.512)) // Blueprint1
 		{
 			bp1 = true;
 			return true;
 		}
-		else if ((one.pos.x >= -4.031 && one.pos.x <= -2.239) && (one.pos.y >= -12.130 && one.pos.y <= -10.333)) // Blueprint2
+		else if ((one.getPos().x >= -4.031 && one.getPos().x <= -2.239) && (one.getPos().y >= -12.130 && one.getPos().y <= -10.333)) // Blueprint2
 		{
 			bp2 = true;
 			return true;
 		}
-		else if ((one.pos.x >= 2.224 && one.pos.x <= 4.012) && (one.pos.y >= -12.047 && one.pos.y <= -9.741)) // Blueprint3
+		else if ((one.getPos().x >= 2.224 && one.getPos().x <= 4.012) && (one.getPos().y >= -12.047 && one.getPos().y <= -9.741)) // Blueprint3
 		{
 			bp3 = true;
 			return true;
@@ -594,17 +594,17 @@ bool miniGameTwo::CheckCollision(object& one, object& two)
 	if (pickBluePrint) // To check whether blueprint is in the spacing
 	{
 		// Ensure that only the respective blueprints will get into the respective spaces
-		if (bp1 && (one.pos.x >= 1.769 && one.pos.x <= 4.507) && (one.pos.y >= -8.455 && one.pos.y <= -6.495)) // Spacing1
+		if (bp1 && (one.getPos().x >= 1.769 && one.getPos().x <= 4.507) && (one.getPos().y >= -8.455 && one.getPos().y <= -6.495)) // Spacing1
 		{
 			space1 = true;
 			return true;
 		}
-		else if (bp2 && (one.pos.x >= -1.031 && one.pos.x <= 1.100) && (one.pos.y >= -8.627 && one.pos.y <= -6.496)) // Spacing2
+		else if (bp2 && (one.getPos().x >= -1.031 && one.getPos().x <= 1.100) && (one.getPos().y >= -8.627 && one.getPos().y <= -6.496)) // Spacing2
 		{
 			space2 = true;
 			return true;
 		}
-		else if (bp3 && (one.pos.x >= -4.355 && one.pos.x <= -2.142) && (one.pos.y >= -9.136 && one.pos.y <= -6.240)) // Spacing3
+		else if (bp3 && (one.getPos().x >= -4.355 && one.getPos().x <= -2.142) && (one.getPos().y >= -9.136 && one.getPos().y <= -6.240)) // Spacing3
 		{
 			space3 = true;
 			return true;

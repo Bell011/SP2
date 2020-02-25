@@ -38,7 +38,7 @@ void TestDriveScene::Init()
 
 	
 
-	camera.Init(Vector3(player.pos.x, player.pos.y, player.pos.z-10), Vector3(player.pos.x,player.pos.y,player.pos.z), Vector3(0, 1, 0));
+	camera.Init(Vector3(player.getPos().x, player.getPos().y, player.getPos().z-10), Vector3(player.getPos().x,player.getPos().y,player.getPos().z), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
@@ -183,8 +183,7 @@ void TestDriveScene::Init()
 	PS if i have free time i will make some function/class to read the values from the notepad file 
 	   n stuff and do the math oso..but so far just manually calculate first :)
 	---------------------------------------------------------------------------------------------*/
-	player.size = Vector3(0.94 * PLAYER.Scale.x, 0.865 * PLAYER.Scale.y, 0.95 * PLAYER.Scale.z);
-	player.pos = Vector3(CUBE.Translate.x, CUBE.Translate.y, CUBE.Translate.z);
+
 	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CHAR]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CHAR]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -194,8 +193,6 @@ void TestDriveScene::Init()
 	CUBE.Translate = Vector3(2, 0, 0);
 	CUBE.Scale = Vector3(2, 2, 2);
 	//cube.size = Vector3(length/2*CUBE.Scale.x, height/2* CUBE.Scale.y, width/2 * CUBE.Scale.z);
-	cube.size = Vector3(0.5 * CUBE.Scale.x, 0.5 * CUBE.Scale.y, 0.5 * CUBE.Scale.z);
-	cube.pos = Vector3(CUBE.Translate.x, CUBE.Translate.y, CUBE.Translate.z);
 	meshList[GEO_CUBE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CUBE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CUBE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -222,17 +219,6 @@ void TestDriveScene::Init()
 
 }
 
-bool TestDriveScene:: CheckCollision(object& one, object& two)
-{
-	if (
-		(one.pos.x - one.size.x <= two.pos.x + two.size.x && one.pos.x + one.size.x >= two.pos.x - two.size.x) &&
-		(one.pos.y - one.size.y <= two.pos.y + two.size.y && one.pos.y + one.size.y >= two.pos.y - two.size.y) &&
-		(one.pos.z - one.size.z <= two.pos.z + two.size.z && one.pos.z + one.size.z >= two.pos.z - two.size.z)
-		) {
-		return true;
-	}
-	return false;
-}
 void TestDriveScene::Update(double dt)
 {
 	if (Application::IsKeyPressed(0x31))
@@ -335,12 +321,7 @@ void TestDriveScene::Update(double dt)
 	//camera.mouse_callback();
 }
 void TestDriveScene::doCollision() {
-	if (CheckCollision(player, cube)) {
-		printf("YES\n");
 
-	}else
-
-	printf("NO\n");
 }
 /******************************************************************************/
 /*!
@@ -431,7 +412,6 @@ void TestDriveScene::Render()
 	PLAYER.Translate = Vector3(movex, movey, movez);
 	////Update the pos vector as well
 	////if object is scaled, update the size vector
-	player.pos = Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z);
 	RenderOBJ(meshList[GEO_CHAR], PLAYER, true, true);
 
 

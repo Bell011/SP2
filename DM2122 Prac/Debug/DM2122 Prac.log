@@ -1,36 +1,10 @@
-﻿  Application.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
-  cirObject.cpp
-  Object.cpp
-  rectObject.cpp
-  SceneText.cpp
-C:\Users\wanti\Documents\GitHub\SP2\glfw\include\GLFW\glfw3.h(104): message : see previous definition of 'APIENTRY'
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(193,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(256,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(271,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(274,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(277,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(280,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(283,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  ShowroomScene.cpp
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(286,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(170,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(401,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(417,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(422,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(427,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(432,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(437,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(442,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(563,41): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(565,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(567,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(569,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(577,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(579,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(583,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(593,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(595,39): warning C4305: 'argument': truncation from 'double' to 'float'
-  Generating Code...
-C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(597,38): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  SceneText.cpp
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(192,15): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(255,17): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(270,18): warning C4244:  '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(273,18): warning C4244:  '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(276,18): warning C4244:  '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(279,18): warning C4244:  '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(282,18): warning C4244:  '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\wanti\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(285,18): warning C4244:  '-=': conversion from 'double' to 'float', possible loss of data
   DM2122 Prac.vcxproj -> C:\Users\wanti\Documents\GitHub\SP2\Debug\DM2122 Prac.exe

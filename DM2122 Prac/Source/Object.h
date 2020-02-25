@@ -16,6 +16,7 @@ public:
 	Vector3 getPosition();
 	void setPosition(Vector3);
 	OBJECT_TYPE getType();
+	void setType(OBJECT_TYPE);
 	virtual bool CheckCollision(Object*)=0;
 };
 #endif

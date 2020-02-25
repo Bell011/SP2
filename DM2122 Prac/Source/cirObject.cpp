@@ -1,6 +1,6 @@
 #include "cirObject.h"
 cirObject::cirObject(Vector3 pos, float r): Object (pos) {
-	OBJECT_TYPE type = CIRC;
+	setType(CIRC);
 	radius = r;
 }
 cirObject::~cirObject(){

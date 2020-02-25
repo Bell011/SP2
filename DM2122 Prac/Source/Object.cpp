@@ -14,3 +14,6 @@ OBJECT_TYPE Object::getType() {
 void Object::setPosition(Vector3 pos) {
 	position =  pos;
 }
+void Object::setType(OBJECT_TYPE ty) {
+	type = ty;
+}

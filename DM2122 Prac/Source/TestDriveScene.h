@@ -91,8 +91,8 @@ private:
 	TRS CUBE;
 	TRS PLAYER;
 	TRS TRACK;
-	object cube;
-	object player;
+	rectObj cube;
+	rectObj player;
 
 
 	float movex;
@@ -109,7 +109,7 @@ private:
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
 
-	bool CheckCollision(object& one, object& two);
+
 	void doCollision();
 public:
 	TestDriveScene();

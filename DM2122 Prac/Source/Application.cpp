@@ -111,7 +111,7 @@ void Application::Run()
 {
 	//Main Loop
 
-	Scene* mainmenu = new SceneText();
+	Scene* mainmenu = new MainMenu();
 	Scene* showroomscene = new ShowroomScene();
 	Scene* gamemenu = new GameMenu();
 	Scene* luckydraw = new SceneLuckyDraw();

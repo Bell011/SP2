@@ -165,10 +165,10 @@ void SceneText::Init()
 	//meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("Dice", "OBJ//mushroom.obj");
 	meshList[GEO_CHAR] = MeshBuilder::GenerateSphere("Dice",Color(0,1,0),18,36,1);
 	//meshList[GEO_CHAR]->textureID = LoadTGA("Image//mushroom.tga");
-	movex = 0;	movey = -0;	movez = 0;
-	PLAYER.Translate = Vector3(0, -0, 0);
+	movex = 0;	movey = 0;	movez = 0;
+
 	//PLAYER.Scale = Vector3(2, 2, 2);
-	player = new cirObject(Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z),1.f);
+	player = new cirObject(Vector3(movez,movey,movex),1.f);
 	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CHAR]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CHAR]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -176,7 +176,7 @@ void SceneText::Init()
 
 	//meshList[GEO_CUBE] = MeshBuilder::GenerateCuboid("Cube", Color(1, 0, 0), 1.f, 1.f, 1.f);
 	meshList[GEO_CUBE] = MeshBuilder::GenerateSphere("Dice", Color(1, 1, 0), 18, 36, 1);
-	CUBE.Translate = Vector3(0, 0, 0);
+	CUBE.Translate = Vector3(2, 0, 0);
 	//CUBE.Scale = Vector3(2, 2, 2);
 	cube = new cirObject(Vector3(2, 0, 0), 1.f);
 	//cube = new rectObject(Vector3(2, 0, 0), Vector3(2, 2, 2), Vector3(2, 2, 2), Vector3(0, 2, 0));
@@ -283,7 +283,9 @@ void SceneText::Update(double dt)
 
 	if (Application::IsKeyPressed(VK_SHIFT))
 		movey -= 5 * dt;
-	player->setPosition(Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z));
+	Vector3 temp = player->getPosition();
+	PLAYER.Translate = Vector3(movex, movey, movez);
+	player->setPosition(Vector3(PLAYER.Translate.x,PLAYER.Translate.y,PLAYER.Translate.z));
 	docollision();
 	camera.mouse_callback();
 	
@@ -384,8 +386,8 @@ void SceneText::Render()
 
 	RenderOBJ(meshList[GEO_CUBE], CUBE,true, true);
 	//Update the translate vector if theres is any transformation
-	PLAYER.Translate = Vector3(movex, movey, movez);
-	
+
+
 	//Update the pos vector as well
 	//if object is scaled, update the size vector
 	
