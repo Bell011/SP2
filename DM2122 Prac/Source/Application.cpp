@@ -10,7 +10,7 @@
 
 #include "Application.h"
 #include "Camera.h"
-#include "SceneText.h"
+#include "selectionMenu.h"
 #include "miniGameTwo.h"
 
 GLFWwindow* m_window;
@@ -105,7 +105,7 @@ void Application::Run()
 {
 	//Main Loop
 
-	Scene* scene1 = new SceneText();
+	Scene* scene1 = new selectionMenu();
 	Scene* scene2 = new miniGameTwo();
 	Scene* scene = scene1;
 	scene1->Init();

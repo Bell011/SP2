@@ -1,12 +1,14 @@
-﻿  miniGameTwo.cpp
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(77,68): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(97,46): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(98,40): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(118,40): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(137,47): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(138,40): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(177,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(181,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(185,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(189,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+﻿  selectionMenu.cpp
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(78,42): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(79,40): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(114,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(118,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(122,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(126,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(186,94): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(187,97): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(188,98): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(190,94): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(191,93): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(192,96): warning C4305: 'argument': truncation from 'double' to 'float'
   DM2122 Prac.vcxproj -> C:\Users\gohbe\Documents\GitHub\SP2\Debug\DM2122 Prac.exe

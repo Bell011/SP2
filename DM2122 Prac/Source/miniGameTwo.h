@@ -20,8 +20,6 @@ class miniGameTwo : public Scene
 		GEO_TEXT,
 		GEO_BG,
 
-		GEO_FRONT,
-
 		GEO_GAMESCREEN,
 
 		GEO_TARGET,
@@ -86,7 +84,6 @@ private:
 	int numberOfBP;
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
-	void RenderSkybox();
 
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);

@@ -59,20 +59,13 @@ void miniGameTwo::Init()
 	//glEnable(GL_DEPTH_TEST);
 	glUseProgram(m_programID);
 
-	//init character
-	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
-
 	meshList[GEO_BG] = MeshBuilder::GenerateQuad("BG", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BG]->textureID = LoadTGA("Image//top.tga");
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
-	meshList[GEO_CHAR] = MeshBuilder::GenerateQuad("char", Color(1, 1, 1), 36.f, 45.f);
-	meshList[GEO_CHAR]->textureID = LoadTGA("Image//chopper.tga");
 
 	meshList[GEO_GAMESCREEN] = MeshBuilder::GenerateQuad("gameScreen", Color(0, 0, 0), 15.f, 10.f);
 
-	//meshList[GEO_TARGET] = MeshBuilder::GenerateCuboid("target", Color(0, 0, 0), 1.f, 1.f, 1.f);
 	meshList[GEO_TARGET] = MeshBuilder::GenerateOBJ("target", "OBJ//target.obj");
 	target.pos = Vector3(TARGET.Translate.x, TARGET.Translate.y, 0.111);
 	meshList[GEO_TARGET]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -85,7 +78,6 @@ void miniGameTwo::Init()
 	meshList[GEO_BLUEPRINT1] = MeshBuilder::GenerateOBJ("BluePrint1", "OBJ//g2bp1.obj");
 	meshList[GEO_BLUEPRINT1]->textureID = LoadTGA("Image//g2bp1.tga");
 	BLUEPRINT1.Translate = Vector3(0, -13, -4.5);
-	//BLUEPRINT1.Scale = Vector3(1, 1, 1);
 	bluePrintInitialPos1 = BLUEPRINT1.Translate;
 	blueprint1.pos = Vector3(BLUEPRINT1.Translate.x, BLUEPRINT1.Translate.y, BLUEPRINT1.Translate.z);
 	meshList[GEO_BLUEPRINT1]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -105,7 +97,6 @@ void miniGameTwo::Init()
 	meshList[GEO_BLUEPRINT2] = MeshBuilder::GenerateOBJ("BluePrint2", "OBJ//g2bp2.obj");
 	meshList[GEO_BLUEPRINT2]->textureID = LoadTGA("Image//g2bp2.tga");
 	BLUEPRINT2.Translate = Vector3(-4.5, -13, -4.5);
-	//BLUEPRINT2.Scale = Vector3(1, 1, 1);
 	bluePrintInitialPos2 = BLUEPRINT2.Translate;
 	blueprint2.pos = Vector3(BLUEPRINT2.Translate.x, BLUEPRINT2.Translate.y, BLUEPRINT2.Translate.z);
 	meshList[GEO_BLUEPRINT2]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -125,7 +116,6 @@ void miniGameTwo::Init()
 	meshList[GEO_BLUEPRINT3] = MeshBuilder::GenerateOBJ("BluePrint3", "OBJ//g2bp3.obj");
 	meshList[GEO_BLUEPRINT3]->textureID = LoadTGA("Image//g2bp3.tga");
 	BLUEPRINT3.Translate = Vector3(4.5, -13, -4.5);
-	//BLUEPRINT3.Scale = Vector3(1, 1, 1);
 	bluePrintInitialPos3 = BLUEPRINT3.Translate;
 	blueprint3.pos = Vector3(BLUEPRINT3.Translate.x, BLUEPRINT3.Translate.y, BLUEPRINT3.Translate.z);
 	meshList[GEO_BLUEPRINT3]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -554,16 +544,6 @@ void miniGameTwo::CalculateFrameRate()
 		fps = (int)framesPerSecond;
 		framesPerSecond = 0;
 	}
-}
-
-void miniGameTwo::RenderSkybox()
-{
-	modelStack.PushMatrix();
-	///scale, translate, rotate 
-	modelStack.Translate(0.f, 0.f, -50.f);
-	modelStack.Scale(100.f, 100.f, 100.f);
-	RenderMesh(meshList[GEO_FRONT], false);
-	modelStack.PopMatrix();
 }
 
 bool miniGameTwo::CheckCollision(object& one, object& two)

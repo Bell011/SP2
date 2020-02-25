@@ -140,6 +140,7 @@
     <ClInclude Include="Source\miniGameTwo.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneText.h" />
+    <ClInclude Include="Source\selectionMenu.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\miniGameTwo.cpp" />
     <ClCompile Include="Source\SceneText.cpp" />
+    <ClCompile Include="Source\selectionMenu.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
