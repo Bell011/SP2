@@ -162,14 +162,15 @@ void SceneText::Init()
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//indoor_Back.tga");
 
-	//meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("Dice", "OBJ//mushroom.obj");
-	meshList[GEO_CHAR] = MeshBuilder::GenerateCuboid("Dice",Color(0,1,0),1,1,1);
-	//meshList[GEO_CHAR]->textureID = LoadTGA("Image//mushroom.tga");
+	meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("Dice", "OBJ//mushroom.obj");
+	//meshList[GEO_CHAR] = MeshBuilder::GenerateCuboid("Dice",Color(0,1,0),1,1,1);
+	meshList[GEO_CHAR]->textureID = LoadTGA("Image//mushroom.tga");
 	movex = 0;	movey = 0;	movez = 0;
-
+	player = new cirObject();
+	player->setPos(Vector3(movex, movey, movez));
+	//c_player.getCoords("OBJ//mushroom.obj", c_player);
+	//((rectObj*)player)->setSize(c_player);
 	//PLAYER.Scale = Vector3(2, 2, 2);
-	//player = new cirObject(Vector3(movez,movey,movex),PLAYER,1.f);
-	player = new rectObject(Vector3(movex, movey, movez), PLAYER, Vector3(0, 0, 1), Vector3(1, 0, 0), Vector3(0, 1, 0));
 	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CHAR]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CHAR]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -178,9 +179,12 @@ void SceneText::Init()
 	//meshList[GEO_CUBE] = MeshBuilder::GenerateCuboid("Cube", Color(1, 0, 0), 1.f, 1.f, 1.f);
 	meshList[GEO_CUBE] = MeshBuilder::GenerateCuboid("Dice", Color(1, 1, 0), 1, 1, 1);
 	CUBE.Translate = Vector3(2, 0, 0);
+	cube = new rectObj();
+	cube->setPos(Vector3(2, 0, 0));
+	((rectObj*)player)->setManualSize(Vector3(0.5,0.5,0.5));
 	//CUBE.Scale = Vector3(2, 2, 2);
 	//cube = new cirObject(Vector3(2, 0, 0), CUBE, 1.f);
-	cube = new rectObject(Vector3(2, 0, 0), CUBE, Vector3(0, 0, 1), Vector3(1, 0, 0), Vector3(0, 1, 0));
+	//cube = new rectObject(Vector3(2, 0, 0), CUBE, Vector3(0, 0, 1), Vector3(1, 0, 0), Vector3(0, 1, 0));
 	meshList[GEO_CUBE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CUBE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CUBE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -285,12 +289,8 @@ void SceneText::Update(double dt)
 	if (Application::IsKeyPressed(VK_SHIFT))
 		movey -= 5 * dt;
 
-
-	if (cube->CheckCollision(player,CUBE,PLAYER)) {
-		printf("yes\n");
-	}
-	else
-		printf("no\n");
+	if (player->checkCollision(cube))
+		std::cout << "Yes\n";
 	camera.mouse_callback();
 	docollision();
 }
@@ -330,8 +330,7 @@ void SceneText::docollision() {
 		//}
 		//else
 		//	printf("no");
-	std::cout << PLAYER.Translate.x<<' '<<PLAYER.Translate.y<< ' ' << PLAYER.Translate.z << std::endl;
-	std::cout << player->getPosition().x<< ' ' << player->getPosition().y<< ' ' << player->getPosition().z<<std::endl;
+	
 
 }
 void SceneText::Render()
@@ -397,6 +396,7 @@ void SceneText::Render()
 	//Update the pos vector as well
 	//if object is scaled, update the size vector
 	PLAYER.Translate = Vector3(movex, movey, movez);
+	player->setPos(Vector3(movex, movey, movez));
 	RenderOBJ(meshList[GEO_CHAR], PLAYER,true, true);
 
 

@@ -435,7 +435,7 @@ void ShowroomScene::Update(double dt)
 	if (Application::IsKeyPressed(VK_SPACE))
 	{
 		movey += 5 * dt;
-
+		
 	}
 	if (Application::IsKeyPressed(VK_SHIFT))
 	{
@@ -536,7 +536,7 @@ void ShowroomScene::Render()
 
 	RenderSkybox();
 
-	player->setPosition((camera.position.x, camera.position.y, camera.position.z));
+	//player->setPosition((camera.position.x, camera.position.y, camera.position.z));
 	//RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
 	////Update the translate vector if theres is any transformation
 	//PLAYER.Translate = Vector3(movex, movey, movez);

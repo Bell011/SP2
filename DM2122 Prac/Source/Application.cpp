@@ -117,14 +117,14 @@ void Application::Run()
 		Scene* showroomscene = new ShowroomScene();
 		Scene* gamemenu = new GameMenu();
 		Scene* luckydraw = new SceneLuckyDraw();
-		Scene* matchbp = new miniGameTwo();
+		//Scene* matchbp = new miniGameTwo();
 		Scene* racing = new SceneRacing();
 		Scene* scene = mainmenu;
 		mainmenu->Init();
 		showroomscene->Init();
 		gamemenu->Init();
 		luckydraw->Init();
-		matchbp->Init();
+	//	matchbp->Init();
 		m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 		while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 		{
@@ -150,9 +150,9 @@ void Application::Run()
 					scene = luckydraw;
 				}
 				else if (IsKeyPressed('2')) {
-					Scene* matchbp = new miniGameTwo();
+					/*Scene* matchbp = new miniGameTwo();
 					matchbp->Init();
-					scene = matchbp;
+					scene = matchbp;*/
 				}
 				if (IsKeyPressed(VK_BACK)) {
 					scene = showroomscene;
@@ -176,8 +176,8 @@ void Application::Run()
 		delete gamemenu;
 		luckydraw->Exit();
 		delete luckydraw;
-		matchbp->Exit();
-		delete matchbp;
+		//matchbp->Exit();
+		//delete matchbp;
 	}
 
 }

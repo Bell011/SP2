@@ -133,6 +133,7 @@
     <ClInclude Include="Source\camerafps.h" />
     <ClInclude Include="Source\cameratpp.h" />
     <ClInclude Include="Source\cirObject.h" />
+    <ClInclude Include="Source\collcorners.h" />
     <ClInclude Include="Source\collision.h" />
     <ClInclude Include="Source\GameMenu.h" />
     <ClInclude Include="Source\Light.h" />
@@ -142,7 +143,6 @@
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
-    <ClInclude Include="Source\miniGameTwo.h" />
     <ClInclude Include="Source\Object.h" />
     <ClInclude Include="Source\rectObject.h" />
     <ClInclude Include="Source\Scene.h" />
@@ -172,7 +172,6 @@
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\SceneRacing.cpp" />
-    <ClCompile Include="Source\miniGameTwo.cpp" />
     <ClCompile Include="Source\Object.cpp" />
     <ClCompile Include="Source\rectObject.cpp" />
     <ClCompile Include="Source\Scene1.cpp" />

@@ -10,6 +10,7 @@
 #include "Object.h"
 #include "cirObject.h"
 #include "rectObject.h"
+#include "collcorners.h"
 
 class SceneText : public Scene
 {
@@ -93,8 +94,11 @@ private:
 	
 	TRS CUBE;
 	TRS PLAYER;
+	corners c_player;
 	Object* cube;
 	Object* player;
+	//Object* cube;
+	//Object* player;
 
 	float movex;
 	float movey;

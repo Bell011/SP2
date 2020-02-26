@@ -91,8 +91,6 @@ private:
 	TRS CUBE;
 	TRS PLAYER;
 	TRS TRACK;
-	AABBobj cube;
-	AABBobj player;
 
 
 	float movex;
