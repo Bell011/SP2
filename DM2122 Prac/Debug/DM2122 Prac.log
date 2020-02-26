@@ -1,1 +1,138 @@
-﻿
+﻿  Application.cpp
+D:\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+C:\Users\weizh\Documents\GitHub\SP2\glfw\include\GLFW\glfw3.h(104): message : see previous definition of 'APIENTRY'
+  Camera.cpp
+  Camera2.cpp
+  camerafps.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\camerafps.cpp(41,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\camerafps.cpp(51,33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\camerafps.cpp(65,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\camerafps.cpp(79,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\camerafps.cpp(106,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\camerafps.cpp(107,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\camerafps.cpp(112,10): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\camerafps.cpp(113,10): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  CarEntity.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\CarEntity.cpp(47,16): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\CarEntity.cpp(77,13): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\CarEntity.cpp(101,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\CarEntity.cpp(102,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\CarEntity.cpp(103,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\CarEntity.cpp(122,32): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\CarEntity.cpp(130,32): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\CarEntity.cpp(135,20): warning C4553: '==': result of expression not used; did you intend '='?
+  cameratpp.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\cameratpp.cpp(50,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\cameratpp.cpp(51,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  cirObject.cpp
+  collision.cpp
+  GameMenu.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\GameMenu.cpp(112,63): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\GameMenu.cpp(112,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  LoadOBJ.cpp
+  LoadTGA.cpp
+  main.cpp
+  MainMenu.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MainMenu.cpp(112,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Mesh.cpp
+  MeshBuilder.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(28,14): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(31,20): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(34,17): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(37,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(40,20): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(43,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(91,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(92,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(151,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(152,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(153,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(625,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(626,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\MeshBuilder.cpp(627,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  SceneRacing.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneRacing.cpp(179,29): warning C4244: 'argument': conversion from 'float' to 'const _Elem', possible loss of data
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneRacing.cpp(184,17): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  miniGameTwo.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(77,68): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(98,46): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(99,40): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(122,40): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(142,47): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(144,40): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(183,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(187,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(191,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\miniGameTwo.cpp(195,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  Object.cpp
+  rectObject.cpp
+  Scene1.cpp
+  Generating Code...
+  Compiling...
+  SceneLuckyDraw.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneLuckyDraw.cpp(122,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneLuckyDraw.cpp(300,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneLuckyDraw.cpp(313,26): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  SceneText.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(186,76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(186,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(186,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(197,66): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(197,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(197,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(209,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(282,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(297,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(300,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(303,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(306,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(309,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\SceneText.cpp(312,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  shader.cpp
+  ShowroomScene.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(148,76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(148,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(148,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(159,66): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(159,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(159,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(173,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(431,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(436,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(441,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(446,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(451,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(456,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(556,41): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(558,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(560,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(562,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(570,43): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(572,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(576,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(586,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(588,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(590,38): warning C4305: 'argument': truncation from 'double' to 'float'
+  TestDriveScene.cpp
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(186,76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(186,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(186,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(197,66): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(197,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(197,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(219,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(290,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(306,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(311,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(316,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(321,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(326,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GitHub\SP2\DM2122 Prac\Source\TestDriveScene.cpp(331,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  Utility.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  DM2122 Prac.vcxproj -> C:\Users\weizh\Documents\GitHub\SP2\Debug\DM2122 Prac.exe
