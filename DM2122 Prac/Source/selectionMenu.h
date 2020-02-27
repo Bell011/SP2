@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include "collision.h"
+#include "carParts.h"
 
 class selectionMenu : public Scene
 {
@@ -21,8 +22,18 @@ class selectionMenu : public Scene
 
 		GEO_MENU,
 		GEO_TARGET,
-		GEO_CHECKBOX,
+
+		GEO_CHECKBOX1,
+		GEO_CHECKBOX2,
+		GEO_CHECKBOX3,
+		GEO_CHECKBOX4,
+		GEO_CHECKBOX5,
+		GEO_CHECKBOX6,
 		
+		GEO_RIGHTBUTTON,
+		GEO_LEFTBUTTON,
+		GEO_NUMBERBUTTON,
+
 		NUM_GEOMETRY,
 	};
 
@@ -42,6 +53,7 @@ private:
 	unsigned m_vertexArrayID;
 	unsigned m_programID;
 	Mesh* meshList[NUM_GEOMETRY];
+	GEOMETRY_TYPE checkBoxType;
 
 	unsigned m_parameters[U_TOTAL];
 
@@ -53,14 +65,45 @@ private:
 	
 
 	TRS TARGET;
-	TRS CHECKBOX;
-	
+	TRS CHECKBOX1;
+	TRS CHECKBOX2;
+	TRS CHECKBOX3;
+	TRS CHECKBOX4;
+	TRS CHECKBOX5;
+	TRS CHECKBOX6;
+	TRS RIGHTBUTTON;
+	TRS LEFTBUTTON;
+	TRS NUMBERBUTTON;
+
 	object target;
-	object checkbox;
+	object checkbox1;
+	object checkbox2;
+	object checkbox3;
+	object checkbox4;
+	object checkbox5;
+	object checkbox6;
+	object rightbutton;
+	object leftbutton;
+	object numberbutton;
 	
-	bool checkBox;
-	bool checked;
-	int amountOfMoney;
+	bool inCheckBox;
+	bool numberBox1;
+	bool numberBox2;
+	bool numberBox3;
+	bool numberBox4;
+	bool numberBox5;
+	bool numberBox6;
+	bool pressedSpace;
+	int numberBox;
+
+	bool nextColour;
+	bool prevColour;
+	bool nextDesign;
+	bool prevDesign;
+	int cfColourNum;
+	int cfDesignNum;
+	
+
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
 
@@ -74,6 +117,7 @@ private:
 	float movez;
 	bool CheckCollision(object& one, object& two);
 	void doCheckBoxCollision();
+	
 
 public:
 	selectionMenu();

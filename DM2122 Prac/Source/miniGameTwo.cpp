@@ -197,10 +197,6 @@ void miniGameTwo::Update(double dt)
 				{
 					pickBluePrint = true;
 				}
-				else
-				{
-					pickBluePrint = false;
-				}
 			}
 			else if (pickBluePrint) // Target is moving with the blueprint
 			{
@@ -209,10 +205,6 @@ void miniGameTwo::Update(double dt)
 				if (space1 || space2 || space3) // So long as any spacing is filled up
 				{
 					matchBluePrint = true;
-				}
-				else
-				{
-					matchBluePrint = false;
 				}
 			}
 		}
