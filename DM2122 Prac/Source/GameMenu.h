@@ -48,6 +48,7 @@ private:
 	void RenderMeshOnScreen(Mesh* mesh, float sizex, float sizey, float x, float y);
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
+	float bouncetime;
 
 public:
 	GameMenu();
@@ -56,7 +57,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
-	virtual bool Change();
 	virtual void Exit();
 };
 

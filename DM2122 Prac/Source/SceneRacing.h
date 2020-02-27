@@ -7,6 +7,8 @@
 #include "Mesh.h"
 #include "Light.h"
 #include <string.h>
+#include <iostream>
+#include "collcorners.h"
 class SceneRacing : public Scene
 {
 	enum GEOMETRY_TYPE
@@ -84,13 +86,15 @@ private:
 
 	float carSpeed;
 	entityCar* carPlayer = new entityCar;
+	corners car;
 	entityCar* Car1 = new entityCar;
 	entityCar* Car2 = new entityCar;
 	entityCar* Car3 = new entityCar;
+	
 	bool isPlaying;
 	float invinTime;
-
-	std::string lives;
+	float bouncetime;
+	int lives;
 
 public:
 	SceneRacing();
@@ -100,7 +104,6 @@ public:
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
-	virtual bool Change();
 };
 
 

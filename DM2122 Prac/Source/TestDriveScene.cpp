@@ -426,11 +426,6 @@ void TestDriveScene::Render()
 
 }
 
-bool TestDriveScene::Change()
-{
-	return false;
-}
-
 
 void TestDriveScene::Exit()
 {

@@ -166,8 +166,10 @@ void SceneText::Init()
 	//meshList[GEO_CHAR] = MeshBuilder::GenerateCuboid("Dice",Color(0,1,0),1,1,1);
 	meshList[GEO_CHAR]->textureID = LoadTGA("Image//mushroom.tga");
 	movex = 0;	movey = 0;	movez = 0;
+	//player = new rectObj();
 	player = new cirObject();
 	player->setPos(Vector3(movex, movey, movez));
+	((cirObject*)player)->setRadius(1.f);
 	//c_player.getCoords("OBJ//mushroom.obj", c_player);
 	//((rectObj*)player)->setSize(c_player);
 	//PLAYER.Scale = Vector3(2, 2, 2);
@@ -181,7 +183,7 @@ void SceneText::Init()
 	CUBE.Translate = Vector3(2, 0, 0);
 	cube = new rectObj();
 	cube->setPos(Vector3(2, 0, 0));
-	((rectObj*)player)->setManualSize(Vector3(0.5,0.5,0.5));
+	((rectObj*)cube)->setManualSize(Vector3(0.5,0.5,0.5));
 	//CUBE.Scale = Vector3(2, 2, 2);
 	//cube = new cirObject(Vector3(2, 0, 0), CUBE, 1.f);
 	//cube = new rectObject(Vector3(2, 0, 0), CUBE, Vector3(0, 0, 1), Vector3(1, 0, 0), Vector3(0, 1, 0));
@@ -189,6 +191,7 @@ void SceneText::Init()
 	meshList[GEO_CUBE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CUBE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CUBE]->material.kShininess = 1.f;
+	
 	meshList[GEO_LIGHTSPHERE] = MeshBuilder::GenerateSphere("lightBall", Color(1.f, 1.f, 1.f), 9, 36, 1.f);
 
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);

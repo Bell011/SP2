@@ -37,7 +37,7 @@ public:
 	Vector3 getPos() {
 		return pos;
 	}
-	virtual bool checkCollision(Object*) = 0;
+	virtual bool checkCollision(Object*)=0;
 };
 #endif
 

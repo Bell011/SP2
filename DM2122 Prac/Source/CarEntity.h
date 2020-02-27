@@ -3,7 +3,7 @@
 
 #include "Utility.h"
 #include "Application.h"
-
+#include "collcorners.h"
 
 class entityCar
 {
@@ -19,14 +19,14 @@ public:
 	~entityCar();
 	void setPos(float x, float y, float z);
 	void setVel(float x, float y, float z);
-	void setSize(float x, float y, float z);
+	void setSize(corners&);
 	void setScore(float score);
-	void setLives(float lives);
+	void setLives(int lives);
 	Vector3 getPos();
 	Vector3 getVel();
 	Vector3 getSize();
 	float getScore();
-	float getLives();
+	int getLives();
 
 	void updateLives(int count);
 

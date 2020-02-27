@@ -76,14 +76,9 @@ void MainMenu::Update(double dt)
 	if (Application::IsKeyPressed(VK_DOWN))
 		cursory = 15;
 	
-	
+	if ((cursory == 15 || cursory == 35) && Application::IsKeyPressed(VK_RETURN))
+		Application::scenechange(1);
 	CalculateFrameRate();
-}
-bool MainMenu::Change()
-{
-	if (cursory == 15 || cursory == 35)
-		return true;
-	return false;
 }
 
 
@@ -110,7 +105,7 @@ void MainMenu::Render()
 	//Render in order from Background to Foreground
 	RenderMeshOnScreen(meshList[GEO_BG], 40,60, 0.5,0.5);
 	RenderMeshOnScreen(meshList[GEO_CURSOR], 0.5, 0.75, 13, cursory);
-	RenderTextOnScreen(meshList[GEO_TEXT], "Press Enter/2", Color(0, 0, 0), 3, 0, 0);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Press Enter", Color(0, 0, 0), 3, 0, 0);
 
 }
 

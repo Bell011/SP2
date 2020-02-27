@@ -21,8 +21,6 @@ public:
 		radius = r;
 	}
 	bool checkCollision(Object* obj) {
-		//obj = new rectObj();
-	
 		float closestx = Math::Max(obj->getPos().x - ((rectObj*)obj)->getSize().x, Math::Min(getPos().x, obj->getPos().x + ((rectObj*)obj)->getSize().x));
 		float closesty = Math::Max(obj->getPos().y - ((rectObj*)obj)->getSize().y, Math::Min(getPos().y, obj->getPos().y + ((rectObj*)obj)->getSize().y));
 		float closestz = Math::Max(obj->getPos().z - ((rectObj*)obj)->getSize().z, Math::Min(getPos().z, obj->getPos().z + ((rectObj*)obj)->getSize().z));
@@ -32,9 +30,11 @@ public:
 		if (distance < Math::Square(getRadius())) {
 			return true;
 		}
-		return false;
 	
-	};
+			return false;
+	
+	}
+
 };
 
 

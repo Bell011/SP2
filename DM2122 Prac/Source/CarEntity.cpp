@@ -30,11 +30,12 @@ void entityCar::setVel(float x, float y, float z)
 	this->carVel.z = z;
 }
 
-void entityCar::setSize(float x, float y, float z)
+void entityCar::setSize(corners& c)
 {
-	this->carSize.x = x;
-	this->carSize.y = y;
-	this->carSize.z = z;
+	
+	this->carSize.x = (c.getMax().x - c.getMin().x) / 2;
+	this->carSize.y = (c.getMax().y - c.getMin().y) / 2;
+	this->carSize.z = (c.getMax().z - c.getMin().z) / 2;
 }
 
 void entityCar::setScore(float score)
@@ -42,7 +43,7 @@ void entityCar::setScore(float score)
 	this->scoreRace = score;
 }
 
-void entityCar::setLives(float lives)
+void entityCar::setLives(int lives)
 {
 	this->lives = lives;
 }
@@ -72,7 +73,7 @@ float entityCar::getScore()
 	return this->scoreRace;
 }
 
-float entityCar::getLives()
+int entityCar::getLives()
 {
 	return this->lives;
 }
@@ -90,10 +91,8 @@ bool entityCar::isCollide(entityCar* enemy, entityCar* player)
 	{
 		return true;
 	}
-	else
-	{
 		return false;
-	}
+	
 }
 void entityCar::updatePos(entityCar* enemy1, entityCar* enemy2, entityCar* enemy3, entityCar* player, double dt)
 {
@@ -132,7 +131,7 @@ void entityCar::updatePos(entityCar* enemy1, entityCar* enemy2, entityCar* enemy
 	}
 	if (player->carPos.x >= 10.0f)
 	{
-		player->carPos.x == 9.0f;
+		player->carPos.x = 9.0f;
 		player->updateLives(-1); 
 	}
 	else if (player->carPos.x <= 0.f)

@@ -37,7 +37,7 @@ void ShowroomScene::Init()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
-	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0,0,1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
@@ -165,16 +165,18 @@ void ShowroomScene::Init()
 
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
-	
+	movex = 0; movey = 0; movez = 1;
 	InitObjects();
+	playerspeed = 5.f;
 	bouncetime = 0.f;
 	switchlights = false;
-
-
+	fps = 0.f;
+	camera.setcameraspeed(playerspeed);
 }
 void ShowroomScene::InitObjects() {
-	//player = new cirObject(Vector3(camera.position.x, camera.position.y, camera.position.z), 5.f);
-
+	PLAYER.Translate = Vector3(0, 0, 1);
+	player = new cirObject(Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z), 7.f);
+	//player = new rectObj(Vector3(7,7,7),Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z));
 	meshList[GEO_ARCADE] = MeshBuilder::GenerateOBJ("Arcade", "OBJ//arcade.obj");
 	meshList[GEO_ARCADE]->textureID = LoadTGA("Image//arcade.tga");
 	meshList[GEO_ARCADE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -184,8 +186,15 @@ void ShowroomScene::InitObjects() {
 	ARCADE.Scale = Vector3(3, 3, 3);
 	ARCADE.Translate = Vector3(45, 0, 0);
 	ARCADE.RotateY = Vector4(180,0,1,0);
-//	arcade = new rectObject(Vector3(45, 0, 0));
-	//arcade = new cirObject(Vector3(45, 0, 0), 10.f);
+	arcade = new rectObj();
+	checkarcade = new rectObj();
+	c_arcade.getCoords("OBJ//arcade.obj", c_arcade);
+	((rectObj*)arcade)->setSize(c_arcade);
+	((rectObj*)arcade)->setManualSize(Vector3(((rectObj*)arcade)->getSize().x * ARCADE.Scale.x, ((rectObj*)arcade)->getSize().y * ARCADE.Scale.y, ((rectObj*)arcade)->getSize().z * ARCADE.Scale.z));
+	((rectObj*)checkarcade)->setManualSize(Vector3(((rectObj*)arcade)->getSize().x *1.1, ((rectObj*)arcade)->getSize().y * 1.1, ((rectObj*)arcade)->getSize().z * 1.1));
+	arcade->setPos(Vector3(45, 0, 0));
+	checkarcade->setPos(Vector3(45, 0, 0));
+
 	meshList[GEO_BENCH] = MeshBuilder::GenerateOBJ("Bench", "OBJ//bench.obj");
 	meshList[GEO_BENCH]->textureID = LoadTGA("Image//bench.tga");
 	meshList[GEO_BENCH]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -194,6 +203,11 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_BENCH]->material.kShininess = 1.f;
 	BENCH.Scale = Vector3(2, 2, 2);
 	BENCH.Translate = Vector3(40, -4, -20);
+	bench = new rectObj();
+	c_bench.getCoords("OBJ//bench.obj", c_bench);
+	((rectObj*)bench)->setSize(c_bench);
+	((rectObj*)bench)->setManualSize(Vector3(((rectObj*)bench)->getSize().x * BENCH.Scale.x, ((rectObj*)bench)->getSize().y * BENCH.Scale.y, ((rectObj*)bench)->getSize().z * BENCH.Scale.z));
+	bench->setPos(Vector3(40, -4, -20));
 
 	meshList[GEO_BSIGN] = MeshBuilder::GenerateOBJ("bigsign", "OBJ//bigsign.obj");
 	meshList[GEO_BSIGN]->textureID = LoadTGA("Image//bigsign.tga");
@@ -212,6 +226,9 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_DOOR]->material.kShininess = 1.f;
 	DOOR.Translate = Vector3(0, 0, -50);
 	DOOR.Scale = Vector3(2, 2, 1);
+	door = new rectObj();
+	((rectObj*)door)->setManualSize(Vector3(24,8,0.5));
+	door->setPos(Vector3(0, 0, -50));
 
 	meshList[GEO_CAR1] = MeshBuilder::GenerateOBJ("car1", "OBJ//car1.obj");
 	meshList[GEO_CAR1]->textureID = LoadTGA("Image//car1blue.tga");
@@ -222,7 +239,9 @@ void ShowroomScene::InitObjects() {
 	CAR1.Scale = Vector3(3, 3, 3);
 	CAR1.Translate = Vector3(42, -1, 30);
 	CAR1.RotateY = Vector4(40, 0, 1, 0);
-
+	car1 = new rectObj();
+	((rectObj*)car1)->setManualSize(Vector3(3 * CAR1.Scale.x, 3 * CAR1.Scale.y, 3 * CAR1.Scale.z));
+	car1->setPos(Vector3(42, -1, 30));
 	meshList[GEO_CAR2] = MeshBuilder::GenerateOBJ("car2", "OBJ//car2.obj");
 	meshList[GEO_CAR2]->textureID = LoadTGA("Image//car2white2.tga");
 	meshList[GEO_CAR2]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -232,7 +251,9 @@ void ShowroomScene::InitObjects() {
 	CAR2.Scale = Vector3(3, 3, 3);
 	CAR2.Translate = Vector3(0, -1, 30);
 	CAR2.RotateY = Vector4(-40, 0, 1, 0);
-
+	car2 = new rectObj();
+	((rectObj*)car2)->setManualSize(Vector3(3 * CAR2.Scale.x, 3 * CAR2.Scale.y, 3 * CAR2.Scale.z));
+	car2->setPos(Vector3(0, -1, 30));
 	meshList[GEO_CAR3] = MeshBuilder::GenerateOBJ("car3", "OBJ//car3.obj");
 	meshList[GEO_CAR3]->textureID = LoadTGA("Image//car3red.tga");
 	meshList[GEO_CAR3]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -242,7 +263,9 @@ void ShowroomScene::InitObjects() {
 	CAR3.Scale = Vector3(3, 3, 3);
 	CAR3.Translate = Vector3(-30, 1.5, 20);
 	CAR3.RotateY = Vector4(160, 0, 1, 0);
-
+	car3 = new rectObj();
+	((rectObj*)car3)->setManualSize(Vector3(3 * CAR3.Scale.x, 3 * CAR3.Scale.y, 3 * CAR3.Scale.z));
+	car3->setPos(Vector3(-30, 1.5, 20));
 	meshList[GEO_CAR4] = MeshBuilder::GenerateOBJ("car4", "OBJ//car4.obj");
 	meshList[GEO_CAR4]->textureID = LoadTGA("Image//car4.tga");
 	meshList[GEO_CAR4]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -260,6 +283,15 @@ void ShowroomScene::InitObjects() {
 	NPC.Translate = Vector3 (15, -2, -45);
 	NPC.RotateY = Vector4(200, 0, 1, 0);
 	NPC.Scale = Vector3(2, 2, 2);
+	npc = new rectObj();
+	checknpc = new rectObj();
+	c_npc.getCoords("OBJ//npc.obj", c_npc);
+	((rectObj*)npc)->setSize(c_npc);
+	((rectObj*)npc)->setManualSize(Vector3(((rectObj*)npc)->getSize().x* NPC.Scale.x, ((rectObj*)npc)->getSize().y* NPC.Scale.y, ((rectObj*)npc)->getSize().z* NPC.Scale.z));
+	((rectObj*)checknpc)->setManualSize(Vector3(((rectObj*)npc)->getSize().x* 1.05, ((rectObj*)npc)->getSize().y* 1.05, ((rectObj*)npc)->getSize().z* NPC.Scale.z * 1.05));
+	npc->setPos(Vector3(15, -2, -45));
+	checknpc->setPos(Vector3(15, -2, -45));
+
 	meshList[GEO_SCREEN] = MeshBuilder::GenerateOBJ("screen", "OBJ//screen.obj");
 	meshList[GEO_SCREEN]->textureID = LoadTGA("Image//screen.tga");
 	meshList[GEO_SCREEN]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -268,6 +300,11 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_SCREEN]->material.kShininess = 1.f;
 	SCREEN.Translate = Vector3(-43, 6, -10);
 	SCREEN.Scale = Vector3(3, 3, 3);
+	screen = new rectObj();
+	c_screen.getCoords("OBJ//screen.obj", c_screen);
+	((rectObj*)screen)->setSize(c_screen);
+	((rectObj*)screen)->setManualSize(Vector3(((rectObj*)screen)->getSize().x* SCREEN.Scale.x, ((rectObj*)screen)->getSize().y* SCREEN.Scale.y, ((rectObj*)screen)->getSize().z* SCREEN.Scale.z));
+	screen->setPos(Vector3(-43,6,-10));
 
 	meshList[GEO_SCREEN1] = MeshBuilder::GenerateOBJ("screen1", "OBJ//screen.obj");
 	meshList[GEO_SCREEN1]->textureID = LoadTGA("Image//screen2.tga");
@@ -278,6 +315,10 @@ void ShowroomScene::InitObjects() {
 	SCREEN1.Translate = Vector3(25, 6, 43);
 	SCREEN1.RotateY = Vector4(90, 0, 1, 0);
 	SCREEN1.Scale = Vector3(3, 3, 3);
+	screen1 = new rectObj();
+	((rectObj*)screen1)->setSize(c_screen);
+	((rectObj*)screen1)->setManualSize(Vector3(((rectObj*)screen1)->getSize().z* SCREEN1.Scale.z, ((rectObj*)screen1)->getSize().y* SCREEN1.Scale.y, ((rectObj*)screen1)->getSize().x* SCREEN1.Scale.x));
+	screen1->setPos(Vector3(25, 6, 43));
 
 	meshList[GEO_SSIGN] = MeshBuilder::GenerateOBJ("smallsign", "OBJ//smallsign.obj");
 	meshList[GEO_SSIGN]->textureID = LoadTGA("Image//smallsign.tga");
@@ -288,13 +329,10 @@ void ShowroomScene::InitObjects() {
 	SSIGN.Translate = Vector3(25, 0, 20);
 	SSIGN.RotateY = Vector4(90, 0, 1, 0);
 	SSIGN.Scale = Vector3(2, 2, 2);
-
-	meshList[GEO_SSIGN1] = MeshBuilder::GenerateOBJ("smallsign1", "OBJ//smallsign.obj");
-	meshList[GEO_SSIGN1]->textureID = LoadTGA("Image//smallsign2.tga");
-	meshList[GEO_SSIGN1]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_SSIGN1]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_SSIGN1]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_SSIGN1]->material.kShininess = 1.f;
+	ssign = new rectObj();
+	((rectObj*)ssign)->setSize(c_ssign);
+	((rectObj*)ssign)->setManualSize(Vector3(((rectObj*)ssign)->getSize().z* SSIGN.Scale.z, ((rectObj*)ssign)->getSize().y* SSIGN.Scale.y, ((rectObj*)ssign)->getSize().x* SSIGN.Scale.x));
+	ssign->setPos(Vector3(25, 0, 20));
 
 	meshList[GEO_STAGE] = MeshBuilder::GenerateOBJ("stage", "OBJ//stage.obj");
 	meshList[GEO_STAGE]->textureID = LoadTGA("Image//stage.tga");
@@ -305,6 +343,9 @@ void ShowroomScene::InitObjects() {
 	STAGE.Translate = Vector3(-22,-4.5,-15);
 	STAGE.Scale = Vector3(3,2.5,3);
 	STAGE.RotateY = Vector4(30, 0, 1, 0);
+	stage = new rectObj();
+	((rectObj*)stage)->setManualSize(Vector3(3.6*STAGE.Scale.x,3.6 * STAGE.Scale.y, 3.6 * STAGE.Scale.z));
+	stage->setPos(Vector3(-22, -4.5, -15));
 
 	meshList[GEO_STRUCTURESMALL] = MeshBuilder::GenerateOBJ("structuresmall", "OBJ//structuresmall.obj");
 	meshList[GEO_STRUCTURESMALL]->textureID = LoadTGA("Image//structure.tga");
@@ -321,6 +362,9 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_STRUCTUREBIG]->material.kShininess = 1.f;
 	STRUCTUREBIG.Translate = Vector3(0, -0.5, -15);
 	STRUCTUREBIG.Scale = Vector3(1.5, 1.5, 1.5);
+	structure = new rectObj();
+	((rectObj*)structure)->setManualSize(Vector3(3.6 * STRUCTUREBIG.Scale.x, 6 * STRUCTUREBIG.Scale.y, 3.6 * STRUCTUREBIG.Scale.z));
+	structure->setPos(Vector3(0,-0.5,-15));
 
 	meshList[GEO_WHEEL1] = MeshBuilder::GenerateOBJ("wheel1", "OBJ//wheel1.obj");
 	meshList[GEO_WHEEL1]->textureID = LoadTGA("Image//wheel1.tga");
@@ -347,111 +391,71 @@ void ShowroomScene::InitObjects() {
 
 void ShowroomScene::Update(double dt)
 {
-	if (Application::IsKeyPressed(0x31))
-	{
-		glDisable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x32))
-	{
-		glEnable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x33))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-	else if (Application::IsKeyPressed(0x34))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	}
-	if (Application::IsKeyPressed('I'))
-		light[0].position.z -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('K'))
-		light[0].position.z += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('J'))
-		light[0].position.x -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('L'))
-		light[0].position.x += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('O'))
-		light[0].position.y -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('P'))
-		light[0].position.y += (float)(LSPEED * dt);
 
-	if (Application::IsKeyPressed('5'))
-	{
-		//to do: switch light type to POINT and pass the information to
-		light[0].type = Light::LIGHT_POINT;
-	}
-	else if (Application::IsKeyPressed('6'))
-	{
-		//to do: switch light type to DIRECTIONAL and pass the
-		light[0].type = Light::LIGHT_DIRECTIONAL;
-	}
-	else if (Application::IsKeyPressed('7'))
-	{
-		//to do: switch light type to SPOT and pass the information to
-		light[0].type = Light::LIGHT_SPOT;
-	}
-	camera.Update(dt);
-	CalculateFrameRate();
-	if (Application::IsKeyPressed('P'))
-	{
-		float currentTime = GetTickCount() * 0.001f;
-		if (currentTime - bouncetime > 0.1f)
-		{
-			bouncetime = currentTime;
-			switchlights = !switchlights;
+	player->setPos(Vector3(camera.position.x,camera.position.y,camera.position.z));
+	camera.position = player->getPos();
+	Vector3 temp = player->getPos();
+	Object* objects[11] = {
+		arcade,bench,npc,screen,screen1,ssign,car1,car2,car3,stage,structure
+	};
 
-			if (switchlights) {
-				light[1].power = 1.f;
-				glUniform1f(m_parameters[U_LIGHT1_POWER], light[1].power);
+	if (Application::IsKeyPressed('A')){
+		Vector3 movement = camera.right;
+		movement.y = 0;
+		movement.Normalize();
+		player->setPos(player->getPos() - (movement * dt * 10));
+		for (int i = 0; i < 11; i++) {
+			if (player->checkCollision(objects[i])) {
+				player->setPos(temp);
 			}
-			else
-			{
-				light[1].power = 0.f;
-				glUniform1f(m_parameters[U_LIGHT1_POWER], light[1].power);
-			}
+			camera.position = player->getPos();
 		}
 	}
-	if (Application::IsKeyPressed(VK_LEFT))
-	{
-		movex -= 5 * dt;
-		
+	if (Application::IsKeyPressed('D')){
+		Vector3 movement = camera.right;
+		movement.y = 0;
+		movement.Normalize();
+		player->setPos(player->getPos() + (movement * dt * 10));
+		for (int i = 0; i < 11; i++) {
+			if (player->checkCollision(objects[i])) {
+				player->setPos(temp);
+			}
+			camera.position = player->getPos();
+		}
 	}
-	if (Application::IsKeyPressed(VK_RIGHT))
-	{
-		movex += 5 * dt;
-
+	if (Application::IsKeyPressed('W')) {
+		Vector3 movement = camera.view;
+		movement.y = 0;
+		movement.Normalize();
+		player->setPos(player->getPos() + (movement * dt * 10));
+		for (int i = 0; i < 11; i++) {
+			if (player->checkCollision(objects[i])) {
+				player->setPos(temp);
+			}
+			camera.position = player->getPos();
+		}
 	}
-	if (Application::IsKeyPressed(VK_UP))
-	{
-		movez -= 5 * dt;
-
+	if (Application::IsKeyPressed('S')) {
+		Vector3 movement = camera.view;
+		movement.y = 0;
+		movement.Normalize();
+		player->setPos(player->getPos() - (movement * dt * 10));
+		for (int i = 0; i < 11; i++) {
+			if (player->checkCollision(objects[i])) {
+				player->setPos(temp);
+			}
+			camera.position = player->getPos();
+		}
 	}
-	if (Application::IsKeyPressed(VK_DOWN))
-	{
-		movez += 5 * dt;
-
-	}
-	if (Application::IsKeyPressed(VK_SPACE))
-	{
-		movey += 5 * dt;
-		
-	}
-	if (Application::IsKeyPressed(VK_SHIFT))
-	{
-		movey -= 5 * dt;
-
-	}
-	doCollision();
+	
+	
+	//SetCursorPos(camera.setCursorX, camera.setCursorY);
 	camera.mouse_callback();
+	//camera.Update(dt);
+	CalculateFrameRate();
 }
-void ShowroomScene::doCollision() {
-	//if (arcade->CheckCollision(player)) {
-	//	printf("YES");
-	//}
-	//else {
-	//	printf("no");
-	//}
+void ShowroomScene::doCollision(double dt) {
+	
 }
 /******************************************************************************/
 /*!
@@ -533,22 +537,10 @@ void ShowroomScene::Render()
 		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
 	}
 
-
 	RenderSkybox();
 
-	//player->setPosition((camera.position.x, camera.position.y, camera.position.z));
-	//RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
-	////Update the translate vector if theres is any transformation
-	//PLAYER.Translate = Vector3(movex, movey, movez);
-	////Update the pos vector as well
-	////if object is scaled, update the size vector
-	//player.pos = Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z);
-	//RenderOBJ(meshList[GEO_CHAR], PLAYER, true, true);
-
 	RenderOBJ(meshList[GEO_ARCADE], ARCADE, true, true);
-	
 	RenderOBJ(meshList[GEO_BENCH], BENCH, true, true);
-
 	RenderOBJ(meshList[GEO_BSIGN], BSIGN, true, true);
 
 	modelStack.PushMatrix();
@@ -603,11 +595,10 @@ void ShowroomScene::Render()
 
 	RenderOBJ(meshList[GEO_SCREEN], SCREEN, true, true);
 	RenderOBJ(meshList[GEO_SCREEN1], SCREEN1, true, true);
-
 	RenderOBJ(meshList[GEO_SSIGN], SSIGN, true, true);
 
 
-	RenderOBJ(meshList[GEO_STAGE],STAGE, false, true);
+	RenderOBJ(meshList[GEO_STAGE], STAGE, false, true);
 	RenderOBJ(meshList[GEO_CAR4], CAR4, true, true);
 	modelStack.PopMatrix();
 
@@ -617,24 +608,35 @@ void ShowroomScene::Render()
 	RenderOBJ(meshList[GEO_STRUCTURESMALL], STRUCTURESMALL, true, true);
 	modelStack.PopMatrix();
 
-	
-
-
-
 	modelStack.PushMatrix();
 	modelStack.Translate(light[1].position.x, light[1].position.y, light[1].position.z);
 	RenderMesh(meshList[GEO_LIGHTSPHERE], false);
 	modelStack.PopMatrix();
 
-	//No transform needed
-	//RenderTextOnScreen(meshList[GEO_TEXT], "Hello World", Color(0, 1, 0), 2, 0, 0);
+
+	if (player->checkCollision(door)) {
+		float currentTime = GetTickCount() * 0.001f;
+		if (currentTime - bouncetime > 3.f)
+		{
+			Application::scenechange(6);
+		}
+	}
+	if (player->checkCollision(checkarcade)) {
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to Play", Color(0, 0, 0), 3.f, 0, 2);
+		if (Application::IsKeyPressed(VK_RETURN)) {
+			Application::scenechange(2);
+		}
+	}
+	if (player->checkCollision(checknpc)) {
+		RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to Buy", Color(0, 0, 0), 3.f, 0, 2);
+		if (Application::IsKeyPressed(VK_RETURN)) {
+			//Application::scenechange();
+		}
+	}
+	RenderTextOnScreen(meshList[GEO_TEXT], "WASD to move,Mouse to pan", Color(0, 0, 0), 3.f, 0, 1);
+	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(fps), Color(0, 0, 0), 3.f, 0, 0);
 
 
-}
-
-bool ShowroomScene::Change()
-{
-	return true;
 }
 
 void ShowroomScene::Exit()
@@ -817,7 +819,6 @@ void ShowroomScene::RenderTextOnScreen(Mesh* mesh, std::string text, Color color
 void ShowroomScene::CalculateFrameRate()
 {
 	static float framesPerSecond = 0.0f;
-	static int fps;
 	static float lastTime = 0.0f;
 	float currentTime = GetTickCount() * 0.001f;
 	++framesPerSecond;

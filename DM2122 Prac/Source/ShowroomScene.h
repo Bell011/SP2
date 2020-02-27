@@ -7,7 +7,6 @@
 #include "Mesh.h"
 #include "Light.h"
 #include "camerafps.h"
-#include "Object.h"
 #include "cirObject.h"
 #include "rectObject.h"
 
@@ -108,8 +107,34 @@ private:
 
 	camerafps camera;
 
+	//bounding sphere
 	Object* player;
+
+	//bounding box
 	Object* arcade;
+	Object* checkarcade;
+	corners c_arcade;
+	Object* bench;
+	corners c_bench;
+	Object* bsign;
+	corners c_bsign;
+	Object* npc;
+	Object* checknpc;
+	corners c_npc;
+	Object* screen;
+	Object* screen1;
+	corners c_screen;
+	Object* ssign;
+	corners c_ssign;
+
+	//manual set bounding box
+	
+	Object* car1;
+	Object* car2;
+	Object* car3;
+	Object* door;
+	Object* stage;
+	Object* structure;
 
 	TRS ARCADE;
 	TRS BENCH;
@@ -120,10 +145,10 @@ private:
 	TRS CAR4;
 	TRS DOOR;
 	TRS NPC;
+	TRS PLAYER;
 	TRS SCREEN;
 	TRS SCREEN1;
 	TRS SSIGN;
-	TRS SSIGN1;
 	TRS STAGE;
 	TRS STRUCTURESMALL;
 	TRS STRUCTUREBIG;
@@ -135,9 +160,10 @@ private:
 	float movey;
 	float movez;
 
+	float playerspeed;
 	int bouncetime;
 	bool switchlights;
-
+	int fps;
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
 	void InitObjects();
@@ -146,7 +172,7 @@ private:
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
 
-	void doCollision();
+	void doCollision(double);
 public:
 	ShowroomScene();
 	~ShowroomScene();
@@ -154,7 +180,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
-	virtual bool Change();
 	virtual void Exit();
 };
 
