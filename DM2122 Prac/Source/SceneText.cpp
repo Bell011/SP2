@@ -223,9 +223,6 @@ bool SceneText:: CheckCollision(object& one, object& two)
 	}
 	return false;
 }
-bool SceneText::Change() {
-	return false;
-}
 void SceneText::Update(double dt)
 {
 	if (Application::IsKeyPressed(0x31))

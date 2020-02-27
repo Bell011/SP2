@@ -42,9 +42,9 @@ void ShowroomScene::Init()
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
 	projectionStack.LoadMatrix(projection);
-	
+
 	m_programID = LoadShaders("Shader//Texture.vertexshader", "Shader//Text.fragmentshader");
-	
+
 	//m_programID = LoadShaders("Shader//Texture.vertexshader", "Shader//Texture.fragmentshader"); 
 
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
@@ -54,13 +54,13 @@ void ShowroomScene::Init()
 	m_parameters[U_MATERIAL_DIFFUSE] = glGetUniformLocation(m_programID, "material.kDiffuse");
 	m_parameters[U_MATERIAL_SPECULAR] = glGetUniformLocation(m_programID, "material.kSpecular");
 	m_parameters[U_MATERIAL_SHININESS] = glGetUniformLocation(m_programID, "material.kShininess");
+
 	m_parameters[U_LIGHT0_POSITION] = glGetUniformLocation(m_programID, "lights[0].position_cameraspace");
 	m_parameters[U_LIGHT0_COLOR] = glGetUniformLocation(m_programID, "lights[0].color");
 	m_parameters[U_LIGHT0_POWER] = glGetUniformLocation(m_programID, "lights[0].power");
 	m_parameters[U_LIGHT0_KC] = glGetUniformLocation(m_programID, "lights[0].kC");
 	m_parameters[U_LIGHT0_KL] = glGetUniformLocation(m_programID, "lights[0].kL");
 	m_parameters[U_LIGHT0_KQ] = glGetUniformLocation(m_programID, "lights[0].kQ");
-
 	m_parameters[U_LIGHTENABLED] = glGetUniformLocation(m_programID, "lightEnabled");
 	m_parameters[U_NUMLIGHTS] = glGetUniformLocation(m_programID, "numLights");
 	m_parameters[U_LIGHT0_TYPE] = glGetUniformLocation(m_programID, "lights[0].type");
@@ -104,7 +104,7 @@ void ShowroomScene::Init()
 	glUniform1f(m_parameters[U_LIGHT0_COSINNER], light[0].cosInner);
 	glUniform1f(m_parameters[U_LIGHT0_EXPONENT], light[0].exponent);
 
-	glUniform1i(m_parameters[U_NUMLIGHTS], 2); 
+	glUniform1i(m_parameters[U_NUMLIGHTS], 2);
 
 	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_LEFT]->textureID = LoadTGA("Image//indoor_Left.tga");
@@ -142,7 +142,7 @@ void ShowroomScene::Init()
 		Eg. Greatest x value = 0.95		Smallest x value = -0.56;
 			length = (0.95 + 0.56) / 2
 
-	PS if i have free time i will make some function/class to read the values from the notepad file 
+	PS if i have free time i will make some function/class to read the values from the notepad file
 	   n stuff and do the math oso..but so far just manually calculate first :)
 	---------------------------------------------------------------------------------------------*/
 	player.size = Vector3(0.94 * PLAYER.Scale.x, 0.865 * PLAYER.Scale.y, 0.95 * PLAYER.Scale.z);
@@ -184,7 +184,7 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_ARCADE]->material.kShininess = 1.f;
 	ARCADE.Scale = Vector3(3, 3, 3);
 	ARCADE.Translate = Vector3(45, 0, 0);
-	ARCADE.RotateY = Vector4(180,0,1,0);
+	ARCADE.RotateY = Vector4(180, 0, 1, 0);
 
 	meshList[GEO_BENCH] = MeshBuilder::GenerateOBJ("Bench", "OBJ//bench.obj");
 	meshList[GEO_BENCH]->textureID = LoadTGA("Image//bench.tga");
@@ -201,10 +201,10 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_BSIGN]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_BSIGN]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_BSIGN]->material.kShininess = 1.f;
-	BSIGN.Translate = Vector3(-10,0,-5);
-	BSIGN.Scale = Vector3(2,3,2);
+	BSIGN.Translate = Vector3(-10, 0, -5);
+	BSIGN.Scale = Vector3(2, 3, 2);
 
-	meshList[GEO_DOOR] = MeshBuilder::GenerateCuboid("door", Color(0, 0, 0), 12,8,1);
+	meshList[GEO_DOOR] = MeshBuilder::GenerateCuboid("door", Color(0, 0, 0), 12, 8, 1);
 	meshList[GEO_DOOR]->textureID = LoadTGA("Image//DOOR.tga");
 	meshList[GEO_DOOR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_DOOR]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
@@ -257,7 +257,7 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_NPC]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_NPC]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_NPC]->material.kShininess = 1.f;
-	NPC.Translate = Vector3 (15, -2, -45);
+	NPC.Translate = Vector3(15, -2, -45);
 	NPC.RotateY = Vector4(200, 0, 1, 0);
 	NPC.Scale = Vector3(2, 2, 2);
 	meshList[GEO_SCREEN] = MeshBuilder::GenerateOBJ("screen", "OBJ//screen.obj");
@@ -302,8 +302,8 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_STAGE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_STAGE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_STAGE]->material.kShininess = 1.f;
-	STAGE.Translate = Vector3(-22,-4.5,-15);
-	STAGE.Scale = Vector3(3,2.5,3);
+	STAGE.Translate = Vector3(-22, -4.5, -15);
+	STAGE.Scale = Vector3(3, 2.5, 3);
 	STAGE.RotateY = Vector4(30, 0, 1, 0);
 
 	meshList[GEO_STRUCTURESMALL] = MeshBuilder::GenerateOBJ("structuresmall", "OBJ//structuresmall.obj");
@@ -344,7 +344,7 @@ void ShowroomScene::InitObjects() {
 	meshList[GEO_WHEEL3]->material.kShininess = 1.f;
 
 }
-bool ShowroomScene:: CheckCollision(object& one, object& two)
+bool ShowroomScene::CheckCollision(object& one, object& two)
 {
 	if (
 		(one.pos.x - one.size.x <= two.pos.x + two.size.x && one.pos.x + one.size.x >= two.pos.x - two.size.x) &&
@@ -385,7 +385,7 @@ void ShowroomScene::Update(double dt)
 	if (Application::IsKeyPressed('O'))
 		light[0].position.y -= (float)(LSPEED * dt);
 	if (Application::IsKeyPressed('P'))
-		light[0].position.y += (float)(LSPEED * dt);
+		light[0].position.y += (float)(LSPEED * dt);*/
 
 	if (Application::IsKeyPressed('5'))
 	{
@@ -401,12 +401,10 @@ void ShowroomScene::Update(double dt)
 	{
 		//to do: switch light type to SPOT and pass the information to
 		light[0].type = Light::LIGHT_SPOT;
-	}*/
-
+	}
 	camera.Update(dt);
 	CalculateFrameRate();
-
-	/*if (Application::IsKeyPressed('P'))
+	if (Application::IsKeyPressed('P'))
 	{
 		float currentTime = GetTickCount() * 0.001f;
 		if (currentTime - bouncetime > 0.1f)
@@ -424,12 +422,11 @@ void ShowroomScene::Update(double dt)
 				glUniform1f(m_parameters[U_LIGHT1_POWER], light[1].power);
 			}
 		}
-	}*/
-	
+	}
 	if (Application::IsKeyPressed(VK_LEFT))
 	{
 		movex -= 5 * dt;
-		
+
 	}
 	if (Application::IsKeyPressed(VK_RIGHT))
 	{
@@ -456,6 +453,7 @@ void ShowroomScene::Update(double dt)
 		movey -= 5 * dt;
 
 	}
+
 	SwitchLightColours();
 	doCollision();
 	camera.mouse_callback();
@@ -464,9 +462,10 @@ void ShowroomScene::doCollision() {
 	if (CheckCollision(player, cube)) {
 		printf("YES\n");
 
-	}else
+	}
+	else
 
-	printf("NO\n");
+		printf("NO\n");
 }
 /******************************************************************************/
 /*!
@@ -539,14 +538,14 @@ void ShowroomScene::Render()
 	//RenderOBJ(meshList[GEO_CHAR], PLAYER, true, true);
 
 	RenderOBJ(meshList[GEO_ARCADE], ARCADE, true, true);
-	
+
 	RenderOBJ(meshList[GEO_BENCH], BENCH, true, true);
 
 	RenderOBJ(meshList[GEO_BSIGN], BSIGN, true, true);
 
 	modelStack.PushMatrix();
 	RenderOBJ(meshList[GEO_DOOR], DOOR, false, true);
-	modelStack.Translate(-6,5, 0);
+	modelStack.Translate(-6, 5, 0);
 	RenderText(meshList[GEO_TEXT], "TEST DRIVING", Color(0, 0, 0));
 	modelStack.PopMatrix();
 
@@ -581,7 +580,7 @@ void ShowroomScene::Render()
 	modelStack.PopMatrix();
 
 	RenderOBJ(meshList[GEO_CAR3], CAR3, false, true);
-	WHEEL1.Translate = Vector3(0.5,-1.5,1.75);
+	WHEEL1.Translate = Vector3(0.5, -1.5, 1.75);
 	RenderOBJ(meshList[GEO_WHEEL1], WHEEL1, false, true);
 	WHEEL1.Translate = Vector3(0, 0, -3.3);
 	RenderOBJ(meshList[GEO_WHEEL1], WHEEL1, false, true);
@@ -600,7 +599,7 @@ void ShowroomScene::Render()
 	RenderOBJ(meshList[GEO_SSIGN], SSIGN, true, true);
 
 
-	RenderOBJ(meshList[GEO_STAGE],STAGE, false, true);
+	RenderOBJ(meshList[GEO_STAGE], STAGE, false, true);
 	RenderOBJ(meshList[GEO_CAR4], CAR4, true, true);
 	modelStack.PopMatrix();
 
@@ -611,21 +610,13 @@ void ShowroomScene::Render()
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-		modelStack.Translate(light[0].position.x, light[0].position.y, light[0].position.z);
-		modelStack.Rotate(90, 1.f, 0.f, 0.f);
-		RenderMesh(meshList[GEO_CEILINGLIGHT], false);
+	modelStack.Translate(light[0].position.x, light[0].position.y, light[0].position.z);
+	modelStack.Rotate(90, 1.f, 0.f, 0.f);
+	RenderMesh(meshList[GEO_CEILINGLIGHT], false);
 	modelStack.PopMatrix();
 
-	
 	//No transform needed
 	//RenderTextOnScreen(meshList[GEO_TEXT], "Hello World", Color(0, 1, 0), 2, 0, 0);
-
-
-}
-
-bool ShowroomScene::Change()
-{
-	return true;
 }
 
 void ShowroomScene::Exit()
@@ -655,7 +646,7 @@ void ShowroomScene::RenderMesh(Mesh* mesh, bool enableLight)
 
 	if (enableLight)
 	{
-		glUniform1i(m_parameters[U_LIGHTENABLED], 2);
+		glUniform1i(m_parameters[U_LIGHTENABLED], 1);
 		modelView_inverse_transpose = modelView.GetInverse().GetTranspose();
 		glUniformMatrix4fv(m_parameters[U_MODELVIEW_INVERSE_TRANSPOSE], 1, GL_FALSE, &modelView_inverse_transpose.a[0]);
 
@@ -670,67 +661,68 @@ void ShowroomScene::RenderMesh(Mesh* mesh, bool enableLight)
 		glUniform1i(m_parameters[U_LIGHTENABLED], 0);
 	}
 
-	if(mesh->textureID > 0){ 
+	if (mesh->textureID > 0) {
 		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-		glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);} 
-	else { 
+		glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+	}
+	else {
 		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 0);
-	} 
+	}
 	mesh->Render(); //this line should only be called once in the whole function
 
-	if(mesh->textureID > 0) glBindTexture(GL_TEXTURE_2D, 0);
+	if (mesh->textureID > 0) glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void ShowroomScene::RenderSkybox()
 {
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(-50.f, 45.f, 0.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(90.f, 0.f, 1.f, 0.f);
-		RenderMesh(meshList[GEO_LEFT], false);
+	///scale, translate, rotate 
+	modelStack.Translate(-50.f, 45.f, 0.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(90.f, 0.f, 1.f, 0.f);
+	RenderMesh(meshList[GEO_LEFT], false);
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(50.f, 45.f, 0.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(-90.f, 0.f, 1.f, 0.f);
-		RenderMesh(meshList[GEO_RIGHT], false);
+	///scale, translate, rotate 
+	modelStack.Translate(50.f, 45.f, 0.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(-90.f, 0.f, 1.f, 0.f);
+	RenderMesh(meshList[GEO_RIGHT], false);
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(0.f, 95.f, 0.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(90.f, 1.f, 0.f, 0.f);
-		modelStack.PushMatrix();
-			modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
-			RenderMesh(meshList[GEO_TOP], false);
-		modelStack.PopMatrix();
+	///scale, translate, rotate 
+	modelStack.Translate(0.f, 95.f, 0.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(90.f, 1.f, 0.f, 0.f);
+	modelStack.PushMatrix();
+	modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
+	RenderMesh(meshList[GEO_TOP], false);
+	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(0.f, -5.f, 0.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(-90.f, 1.f, 0.f, 0.f);
-		modelStack.PushMatrix();
-		modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
-		RenderMesh(meshList[GEO_BOTTOM], false);
-		modelStack.PopMatrix();
-		modelStack.PopMatrix();
+	///scale, translate, rotate 
+	modelStack.Translate(0.f, -5.f, 0.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(-90.f, 1.f, 0.f, 0.f);
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(0.f, 45.f, -50.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		RenderMesh(meshList[GEO_FRONT], false);
+	modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
+	RenderMesh(meshList[GEO_BOTTOM], false);
+	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
-		///scale, translate, rotate 
-		modelStack.Translate(0.f, 45.f, 50.f);
-		modelStack.Scale(100.f, 100.f, 100.f);
-		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-		RenderMesh(meshList[GEO_BACK], false);
+	///scale, translate, rotate 
+	modelStack.Translate(0.f, 45.f, -50.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	RenderMesh(meshList[GEO_FRONT], false);
+	modelStack.PopMatrix();
+	modelStack.PushMatrix();
+	///scale, translate, rotate 
+	modelStack.Translate(0.f, 45.f, 50.f);
+	modelStack.Scale(100.f, 100.f, 100.f);
+	modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
+	RenderMesh(meshList[GEO_BACK], false);
 	modelStack.PopMatrix();
 }
 
@@ -820,6 +812,7 @@ void ShowroomScene::CalculateFrameRate()
 		framesPerSecond = 0;
 	}
 }
+
 
 void ShowroomScene::InitSpotlights()
 {

@@ -38,7 +38,7 @@ void TestDriveScene::Init()
 
 	
 
-	camera.Init(Vector3(player.pos.x, player.pos.y, player.pos.z-10), Vector3(player.pos.x,player.pos.y,player.pos.z), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 20, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
@@ -280,7 +280,6 @@ void TestDriveScene::Update(double dt)
 		light[0].type = Light::LIGHT_SPOT;
 	}
 	camera.Update(dt);
-	SetCursorPos(camera.setCursorX, camera.setCursorY);
 	CalculateFrameRate();
 	if (Application::IsKeyPressed('P'))
 	{
@@ -301,38 +300,32 @@ void TestDriveScene::Update(double dt)
 			}
 		}
 	}
-	if (Application::IsKeyPressed(VK_LEFT))
-	{
-		movex -= 5 * dt;
-		
-	}
-	if (Application::IsKeyPressed(VK_RIGHT))
-	{
-		movex += 5 * dt;
-
-	}
-	if (Application::IsKeyPressed(VK_UP))
+	if (Application::IsKeyPressed('W'))
 	{
 		movez -= 5 * dt;
+		if (Application::IsKeyPressed('A'))
+		{
+			movex -= 5 * dt;
 
+		}
+		if (Application::IsKeyPressed('D'))
+		{
+			movex += 5 * dt;
+
+		}
 	}
-	if (Application::IsKeyPressed(VK_DOWN))
+	if (Application::IsKeyPressed('S'))
 	{
 		movez += 5 * dt;
 
 	}
-	if (Application::IsKeyPressed(VK_SPACE))
+	if (Application::IsKeyPressed(VK_SPACE)) //brake
 	{
 		movey += 5 * dt;
 
 	}
-	if (Application::IsKeyPressed(VK_SHIFT))
-	{
-		movey -= 5 * dt;
-
-	}
 	doCollision();
-	//camera.mouse_callback();
+	camera.mouse_callback();
 }
 void TestDriveScene::doCollision() {
 	if (CheckCollision(player, cube)) {
@@ -376,7 +369,7 @@ void TestDriveScene::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	viewStack.LoadIdentity();
-	viewStack.LookAt(camera.position.x, camera.position.y, camera.position.z, camera.target.x, camera.target.y, camera.target.z, camera.up.x, camera.up.y, camera.up.z);
+	viewStack.LookAt(camera.position.x, camera.position.y+30, camera.position.z+10, camera.target.x, camera.target.y, camera.target.z-5, camera.up.x, camera.up.y, camera.up.z);
 	modelStack.LoadIdentity();
 
 	// passing the light direction if it is a direction light	
@@ -445,12 +438,6 @@ void TestDriveScene::Render()
 
 
 }
-
-bool TestDriveScene::Change()
-{
-	return false;
-}
-
 
 void TestDriveScene::Exit()
 {

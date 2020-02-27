@@ -1,7 +1,5 @@
 
 .vs/DM2122 Prac/v15/.suo
-.vs/DM2122 Prac/v16/.suo
-
 *.db
 *.opendb
 *.ipch
@@ -9,13 +7,4 @@
 *.db-shm
 *.db-wal
 x64/Debug/Common.pdb
-Common/Debug/Common.idb
-*.log
-*.pdb
-*.tlog
-*.tlog
-*.tlog
-*.lastbuildstate
-*.tlog
 .vs/DM2122 Prac/v16/.suo
-

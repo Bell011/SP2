@@ -6,7 +6,6 @@
 #include "Camera2.h"
 #include "Mesh.h"
 #include "Light.h"
-#include "camerafps.h"
 
 
 
@@ -66,7 +65,7 @@ private:
 	MS modelStack, viewStack, projectionStack;
 	Light light[1];
 
-	camerafps camera;
+	Camera2 camera;
 	
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void AnimateWheel(double dt);
@@ -80,7 +79,7 @@ private:
 	float fAnimationDuration;
 	float fRotateAngle;
 	bool bSpinWheel;
-	int iRNG;
+	const int iRNG = rand() % 12;
 
 public:
 	SceneLuckyDraw();
@@ -89,7 +88,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
-	virtual bool Change();
 	virtual void Exit();
 };
 

@@ -156,13 +156,13 @@ private:
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
 
-	bool CheckCollision(object& one, object& two);
-	void doCollision();
-
+	void InitHeadlights();
 	void InitSpotlights();
 	void RenderSpotlights();
 	void SwitchLightColours();
 
+	bool CheckCollision(object& one, object& two);
+	void doCollision();
 public:
 	ShowroomScene();
 	~ShowroomScene();
@@ -170,7 +170,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
-	virtual bool Change();
 	virtual void Exit();
 };
 

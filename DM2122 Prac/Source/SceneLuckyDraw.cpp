@@ -119,9 +119,6 @@ void SceneLuckyDraw::Init()
 	bSpinWheel = true;
     bSpinAnimation = false;
 	fAnimationDuration = fRotateAngle = 0.0f;
-	srand(time(NULL));
-	iRNG = rand() % 12;
-	
 }
 
 void SceneLuckyDraw::Update(double dt)
@@ -170,7 +167,7 @@ void SceneLuckyDraw::Update(double dt)
 		//to do: switch light type to SPOT and pass the information to
 		light[0].type = Light::LIGHT_SPOT;
 	}
-	
+
 	AnimateWheel(dt);
 	camera.Update(dt);
 	CalculateFrameRate();
@@ -220,15 +217,7 @@ void SceneLuckyDraw::Render()
 	modelStack.Translate(light[0].position.x, light[0].position.y, light[0].position.z);
 	RenderMesh(meshList[GEO_LIGHTSPHERE], false);
 	modelStack.PopMatrix();
-	
 }
-
-bool SceneLuckyDraw::Change()
-{
-	return false;
-}
-
-
 
 void SceneLuckyDraw::Exit()
 {
@@ -294,15 +283,16 @@ void SceneLuckyDraw::AnimateWheel(double dt)
 		fRotateAngle = 0.0f;
 		bSpinWheel = false;
 	}
+	
 
-	if (fAnimationDuration > 5.0)
+	if (fAnimationDuration > 5.0) // deccelerate 
 	{
 		fRotateAngle = (15 + (30 * iRNG)); // stop at slice
-
+		
 	}
 	else if (fAnimationDuration > 4.0)
 	{
-		fRotateAngle -= ((float)(fAnimationDuration)) / 2; // deccelerate ?
+		fRotateAngle -= ((float)(fAnimationDuration))/2;
 	}
 	else
 	{
@@ -333,10 +323,8 @@ void SceneLuckyDraw::RenderWheel()
 
 void SceneLuckyDraw::RenderPrizes()
 {
-	
 	if (bSpinAnimation)
 	{
-		
 		if (fAnimationDuration > 5.0)
 		{
 			std::string prizes[12] = { "ENGINE", "600", "HEADLIGHTS", "1000", "WINDOWS",

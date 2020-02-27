@@ -6,7 +6,7 @@
 #include "Camera2.h"
 #include "Mesh.h"
 #include "Light.h"
-#include "cameratpp.h"
+#include "camerafps.h"
 #include "collision.h"
 
 class TestDriveScene : public Scene
@@ -86,7 +86,7 @@ private:
 	MS modelStack, viewStack, projectionStack;
 	Light light[2];
 
-	cameratpp camera;
+	Camera2 camera;
 	
 	TRS CUBE;
 	TRS PLAYER;
@@ -118,7 +118,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
-	virtual bool Change();
 	virtual void Exit();
 };
 
