@@ -715,7 +715,7 @@ void ShowroomScene::RenderSkybox()
 	modelStack.Rotate(-90.f, 1.f, 0.f, 0.f);
 	modelStack.PushMatrix();
 	modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
-	RenderMesh(meshList[GEO_BOTTOM], false);
+	RenderMesh(meshList[GEO_BOTTOM], true);
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
@@ -929,7 +929,6 @@ void ShowroomScene::InitHeadlights()
 	for (int i = 2; i < 8; i++)
 	{
 		light[i].type = Light::LIGHT_SPOT;
-		light[i].color.Set(0.5f, 0.5f, 0.5f);
 		light[i].power = 1;
 		light[i].kC = 1.f;
 		light[i].kL = 0.01f;
@@ -937,17 +936,22 @@ void ShowroomScene::InitHeadlights()
 		light[i].cosCutoff = cos(Math::DegreeToRadian(20));
 		light[i].cosInner = cos(Math::DegreeToRadian(5));
 		light[i].exponent = 3.f;
-		light[i].spotDirection.Set(0.f, 0.2f, 1.f);
 	}
 	
 	light[2].position.Set(32, -0.5, 26.5);
+	light[2].spotDirection.Set(0.7f, 0.3f, 1.f);
 	light[3].position.Set(36, -0.5, 23);
+	light[3].spotDirection.Set(0.6f, 0.3f, 1.f);
 
 	light[4].position.Set(3.5, -1.8, 21);
+	light[4].spotDirection.Set(-0.8f, 0.3f, 1.f);
 	light[5].position.Set(9.5, -1.8, 26);
+	light[5].spotDirection.Set(-0.8f, 0.3f, 1.f);
 
 	light[6].position.Set(-29.5, 0.3, 11.5);
+	light[6].spotDirection.Set(-0.45f, 0.3f, 1.f);
 	light[7].position.Set(-22.5, 0.3, 14);
+	light[7].spotDirection.Set(-0.35f, 0.3f, 1.f);
 
 	m_parameters[U_LIGHT2_POSITION] = glGetUniformLocation(m_programID, "lights[2].position_cameraspace");
 	m_parameters[U_LIGHT2_COLOR] = glGetUniformLocation(m_programID, "lights[2].color");
