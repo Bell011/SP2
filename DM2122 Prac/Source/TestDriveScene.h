@@ -8,6 +8,7 @@
 #include "Light.h"
 #include "camerafps.h"
 #include "collcorners.h"
+#include <iostream>
 
 struct car {
 	Vector3 pos;
@@ -108,7 +109,7 @@ private:
 	float movex;
 	float movey;
 	float movez;
-
+	float speed = 10.f;
 	int bouncetime;
 	bool switchlights;
 

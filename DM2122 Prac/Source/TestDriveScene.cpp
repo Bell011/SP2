@@ -36,7 +36,7 @@ void TestDriveScene::Init()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	camera.Init(Vector3(0,0,10), Vector3(0,1,0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0,10,10), Vector3(0,1,0), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
@@ -160,15 +160,15 @@ void TestDriveScene::Init()
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//outdoor_Back.tga");
 
-	meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("Dice", "OBJ//mushroom.obj");
-	meshList[GEO_CHAR]->textureID = LoadTGA("Image//mushroom.tga");
+	meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("Dice", "OBJ//g3car.obj");
+	meshList[GEO_CHAR]->textureID = LoadTGA("Image//g3car.tga");
 	movex = 0;	movey = -0;	movez = 0;
-	PLAYER.Translate = Vector3(0, -0, 0);
+	PLAYER.Translate = Vector3(0, -0, 1);
 	PLAYER.Scale = Vector3(2, 2, 2);
-	player.pos = Vector3(0, 0, 0);
+	player.pos = Vector3(0, 0, 1);
 	cplayer.getCoords("OBJ//mushroom.obj", cplayer);
 	player.setSize(cplayer);
-	
+	PLAYER.RotateY = Vector4(90, 0, 1, 0);
 	
 
 	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -207,44 +207,34 @@ void TestDriveScene::Init()
 
 void TestDriveScene::Update(double dt)
 {
-	player.pos=Vector3(camera.position.x, camera.position.y, camera.position.z);
-	PLAYER.Translate = Vector3(player.pos);
-	Vector3 temp = player.pos;
-
-	if (Application::IsKeyPressed('A')) {
-		Vector3 movement = camera.right;
-		movement.y = 0;
-		movement.Normalize();
-		player.pos = Vector3(player.pos - (movement * dt * 10));
-		PLAYER.Translate = Vector3(player.pos);
-			camera.position = player.pos;
-		
-	}
-	if (Application::IsKeyPressed('D')) {
-		Vector3 movement = camera.right;
-		movement.y = 0;
-		movement.Normalize();
-		player.pos=Vector3(player.pos + (movement * dt * 10));
-		PLAYER.Translate = Vector3(player.pos);
-			camera.position = player.pos;
-		
-	}
+	speed = 0.5;
+	camera.view = PLAYER.Translate;
+	//camera.position = PLAYER.Translate;
+	//camera.position.y = PLAYER.Translate.y +10;
+	//camera.position.x = PLAYER.Translate.x - 10;
 	if (Application::IsKeyPressed('W')) {
-		Vector3 movement = camera.view;
-		movement.y = 0;
-		movement.Normalize();
-		player.pos = Vector3(player.pos + (movement * dt * 10)); PLAYER.Translate = Vector3(player.pos);
-		camera.position = player.pos;
+		//PLAYER.RotateY = Vector4(90, 0, 1, 0);
+		if (PLAYER.RotateY.y < 90) {
+			PLAYER.RotateY.y++;
+			PLAYER.Translate -= Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+			if (PLAYER.RotateY.y >= 90)
+				PLAYER.RotateY.y = 90;
+		}
 		
 	}
 	if (Application::IsKeyPressed('S')) {
-		Vector3 movement = camera.view;
-		movement.y = 0;
-		movement.Normalize();
-		player.pos=  Vector3(player.pos - (movement * dt * 10)); PLAYER.Translate = Vector3(player.pos);
-		camera.position = player.pos;
-		
+		PLAYER.RotateY = Vector4(90, 0, 1, 0);
+		PLAYER.Translate += Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
 	}
+	if (Application::IsKeyPressed('A')) {
+		PLAYER.RotateY = Vector4(180, 0, 1, 0);
+		PLAYER.Translate += Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+	}
+	if (Application::IsKeyPressed('D')) {
+		PLAYER.RotateY = Vector4(180, 0, 1, 0);
+		PLAYER.Translate -= Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+	}
+
 
 	CalculateFrameRate();
 	
@@ -339,7 +329,6 @@ void TestDriveScene::Render()
 
 	//RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
 	////Update the translate vector if theres is any transformation
-	PLAYER.Translate = Vector3(movex, movey, movez);
 	////Update the pos vector as well
 	////if object is scaled, update the size vector
 	RenderOBJ(meshList[GEO_CHAR], PLAYER, true, true);
