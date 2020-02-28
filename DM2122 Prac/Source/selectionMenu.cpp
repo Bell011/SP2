@@ -69,23 +69,26 @@ void selectionMenu::Init()
 	meshList[GEO_TARGET]->textureID = LoadTGA("Image//targetTexture.tga");
 	movex = 0; movey = -10; movez = 0;
 	
-	meshList[GEO_CHECKBOX1] = MeshBuilder::GenerateQuad("checkBox1", Color(0, 0, 0), 0.4f, 0.4f);
-	CHECKBOX1.Translate = Vector3(1.5, -8.4,0);
+	meshList[GEO_CHECKBOX1] = MeshBuilder::GenerateQuad("checkBox1", Color(0, 0, 0), 0.4f, 0.4f); // Suspension
+	CHECKBOX1.Translate = Vector3(1.5, -7.7,0);
 
 	meshList[GEO_CHECKBOX2] = MeshBuilder::GenerateQuad("checkBox2", Color(0, 0, 0), 0.4f, 0.4f);
-	CHECKBOX2.Translate = Vector3(1.5, -9.1, 0);
+	CHECKBOX2.Translate = Vector3(1.5, -8.4, 0);
 
 	meshList[GEO_CHECKBOX3] = MeshBuilder::GenerateQuad("checkBox3", Color(0, 0, 0), 0.4f, 0.4f);
-	CHECKBOX3.Translate = Vector3(1.5, -9.8, 0);
+	CHECKBOX3.Translate = Vector3(1.5, -9.1, 0);
 
 	meshList[GEO_CHECKBOX4] = MeshBuilder::GenerateQuad("checkBox4", Color(0, 0, 0), 0.4f, 0.4f);
-	CHECKBOX4.Translate = Vector3(1.5, -10.5, 0);
+	CHECKBOX4.Translate = Vector3(1.5, -9.8, 0);
 
 	meshList[GEO_CHECKBOX5] = MeshBuilder::GenerateQuad("checkBox5", Color(0, 0, 0), 0.4f, 0.4f);
-	CHECKBOX5.Translate = Vector3(1.5, -11.2, 0);
+	CHECKBOX5.Translate = Vector3(1.5, -10.5, 0);
 
 	meshList[GEO_CHECKBOX6] = MeshBuilder::GenerateQuad("checkBox6", Color(0, 0, 0), 0.4f, 0.4f);
-	CHECKBOX6.Translate = Vector3(1.5, -11.9, 0);
+	CHECKBOX6.Translate = Vector3(1.5, -11.2, 0);
+
+	meshList[GEO_CHECKBOX7] = MeshBuilder::GenerateQuad("checkBox7", Color(0, 0, 0), 0.4f, 0.4f);
+	CHECKBOX7.Translate = Vector3(1.5, -11.9, 0);
 
 	meshList[GEO_CFDESIGN1] = MeshBuilder::GenerateQuad("cfdesign1", Color(0, 0, 0),1.f, 1.f);
 	meshList[GEO_CFDESIGN1]->textureID = LoadTGA("Image//cfDesignNum1.tga");
@@ -122,9 +125,30 @@ void selectionMenu::Init()
 	CFCOLOUR4.Translate = Vector3(3.7, -9.5, 0);
 	CFCOLOUR4.Scale = Vector3(2, 1.3, 1);
 	
+	meshList[GEO_WHEELDESIGN1] = MeshBuilder::GenerateQuad("wheeldesign1", Color(0, 0, 0), 1.f, 1.f);
+	meshList[GEO_WHEELDESIGN1]->textureID = LoadTGA("Image//wheelDesignNum1.tga");
+	WHEELDESIGN1.Translate = Vector3(3.7, -10.5, 0);
+	WHEELDESIGN1.Scale = Vector3(2, 1.3, 1);
 
-	//meshList[GEO_CARPART] = MeshBuilder::GenerateQuad("carpart", Color(0, 0, 0), 1.f, 1.f);
-	//CARPART.Translate = Vector3(1.5, -11.9, 0);
+	meshList[GEO_WHEELDESIGN2] = MeshBuilder::GenerateQuad("wheeldesign2", Color(0, 0, 0), 1.f, 1.f);
+	meshList[GEO_WHEELDESIGN2]->textureID = LoadTGA("Image//wheelDesignNum2.tga");
+	WHEELDESIGN2.Translate = Vector3(3.7, -10.5, 0);
+	WHEELDESIGN2.Scale = Vector3(2, 1.3, 1);
+
+	meshList[GEO_WHEELDESIGN3] = MeshBuilder::GenerateQuad("wheeldesign3", Color(0, 0, 0), 1.f, 1.f);
+	meshList[GEO_WHEELDESIGN3]->textureID = LoadTGA("Image//wheelDesignNum3.tga");
+	WHEELDESIGN3.Translate = Vector3(3.7, -10.5, 0);
+	WHEELDESIGN3.Scale = Vector3(2, 1.3, 1);
+
+	meshList[GEO_WINDOWCOLOUR1] = MeshBuilder::GenerateQuad("windowcolour1", Color(0, 0, 0), 1.f, 1.f);
+	meshList[GEO_WINDOWCOLOUR1]->textureID = LoadTGA("Image//windowColourNum1.tga");
+	WINDOWCOLOUR1.Translate = Vector3(3.7, -10.5, 0);
+	WINDOWCOLOUR1.Scale = Vector3(2, 1.3, 1);
+
+	meshList[GEO_WINDOWCOLOUR2] = MeshBuilder::GenerateQuad("windowcolour2", Color(0, 0, 0), 1.f, 1.f);
+	meshList[GEO_WINDOWCOLOUR2]->textureID = LoadTGA("Image//windowColourNum2.tga");
+	WINDOWCOLOUR2.Translate = Vector3(3.7, -10.5, 0);
+	WINDOWCOLOUR2.Scale = Vector3(2, 1.3, 1);
 
 	inCheckBox = false;
 	pressedSpace = false;
@@ -133,6 +157,7 @@ void selectionMenu::Init()
 	cfColourNum = cfDesignNum = wheelDesignNum = windowColourNum = 0;
 	nextButton = prevButton = false;
 	nextColour = prevColour = nextDesign = prevDesign = false;
+	numOfParts = 0;
 }
 
 void selectionMenu::Update(double dt)
@@ -213,14 +238,13 @@ void selectionMenu::Render()
 	viewStack.LookAt(camera.position.x, camera.position.y, camera.position.z, camera.target.x, camera.target.y, camera.target.z, camera.up.x, camera.up.y, camera.up.z);
 	modelStack.LoadIdentity();
 
-	//Render in order from Background to Foreground
 	RenderMeshOnScreen(meshList[GEO_MENU], 40, 60, 0.5, 0.5);
 	
 	RenderTextOnScreen(meshList[GEO_TEXT], "INVENTORY", Color(0, 0, 0), 4, 5, 14);
 	RenderTextOnScreen(meshList[GEO_TEXT], "CUSTOMISE YOUR CAR TO", Color(0, 0, 0), 2.5, 5, 21);
 	RenderTextOnScreen(meshList[GEO_TEXT], "TEST DRIVE", Color(0, 0, 0), 2.5, 10, 20);
-
 	// Parts that do not need any customization
+	RenderTextOnScreen(meshList[GEO_TEXT], " NO. OF SUSPENSION PARTS: 1", Color(0, 0, 0), 1.7, 0, 27); // need 1 to be counted
 	RenderTextOnScreen(meshList[GEO_TEXT], " NO. OF ENGINE PARTS: 1", Color(0, 0, 0), 1.7, 0, 24); // need 1 to be counted
 	RenderTextOnScreen(meshList[GEO_TEXT], " NO. OF HEADLIGHT PARTS: 2", Color(0, 0, 0), 1.7, 0, 21); // need 2 to be counted
 	RenderTextOnScreen(meshList[GEO_TEXT], " NO. OF BRAKELIGHT PARTS: 2", Color(0, 0, 0), 1.7, 0, 18); // need 2 to be counted
@@ -229,9 +253,16 @@ void selectionMenu::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT], " NO. OF WHEEL PARTS: 4", Color(0, 0, 0), 1.7, 0, 12); // need 4 to be counted
 	RenderTextOnScreen(meshList[GEO_TEXT], " NO. OF CARFRAME PARTS: 1", Color(0, 0, 0), 1.7, 0, 9); // need 1 to be counted
 
-
-	RenderTextOnScreen(meshList[GEO_TEXT], " 0/6 CAR PARTS SELECTED", Color(0, 0, 0), 2.5, 3, 2);
 	RenderTextOnScreen(meshList[GEO_TEXT], " PRESS 'SPACE' TO SELECT", Color(0, 0, 0), 3, 1, 0);
+
+	if (numOfParts == 7)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "PRESS HERE TO TEST DRIVE!", Color(0, 0, 0), 3, 1, 1.5);
+	}
+	else
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(numOfParts) + " /7 CAR PARTS SELECTED", Color(0, 0, 0), 2.5, 5, 2);
+	}
 
 	TARGET.Translate = Vector3(movex, movey, movez);
 	target.pos = Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z);
@@ -249,11 +280,13 @@ void selectionMenu::Render()
 					meshList[GEO_CHECKBOX1]->textureID = LoadTGA("Image//enoughPartsTexture.tga");
 					RenderOBJ(meshList[GEO_CHECKBOX1], CHECKBOX1, true, true);
 					numberBox1 = true;
+					numOfParts++;
 				}
 				else if (numberBox1)
 				{
 					meshList[GEO_CHECKBOX1] = MeshBuilder::GenerateQuad("checkBox1", Color(0, 0, 0), 0.4f, 0.4f);
 					numberBox1 = false;
+					numOfParts--;
 				}
 			}
 			if (numberBox == 2)
@@ -263,11 +296,13 @@ void selectionMenu::Render()
 					meshList[GEO_CHECKBOX2]->textureID = LoadTGA("Image//enoughPartsTexture.tga");
 					RenderOBJ(meshList[GEO_CHECKBOX2], CHECKBOX2, true, true);
 					numberBox2 = true;
+					numOfParts++;
 				}
 				else if (numberBox2)
 				{
 					meshList[GEO_CHECKBOX2] = MeshBuilder::GenerateQuad("checkBox2", Color(0, 0, 0), 0.4f, 0.4f);
 					numberBox2 = false;
+					numOfParts--;
 				}
 			}
 			if (numberBox == 3)
@@ -277,12 +312,15 @@ void selectionMenu::Render()
 					meshList[GEO_CHECKBOX3]->textureID = LoadTGA("Image//enoughPartsTexture.tga");
 					RenderOBJ(meshList[GEO_CHECKBOX3], CHECKBOX3, true, true);
 					numberBox3 = true;
+					numOfParts++;
 				}
 				else if (numberBox3)
 				{
 					meshList[GEO_CHECKBOX3] = MeshBuilder::GenerateQuad("checkBox3", Color(0, 0, 0), 0.4f, 0.4f);
 					numberBox3 = false;
-				}				}
+					numOfParts--;
+				}
+			}
 			if (numberBox == 4)
 			{
 				if (!numberBox4)
@@ -290,11 +328,13 @@ void selectionMenu::Render()
 					meshList[GEO_CHECKBOX4]->textureID = LoadTGA("Image//enoughPartsTexture.tga");
 					RenderOBJ(meshList[GEO_CHECKBOX4], CHECKBOX4, true, true);
 					numberBox4 = true;
+					numOfParts++;
 				}
 				else if (numberBox4)
 				{
 					meshList[GEO_CHECKBOX4] = MeshBuilder::GenerateQuad("checkBox4", Color(0, 0, 0), 0.4f, 0.4f);
 					numberBox4 = false;
+					numOfParts--;
 				}
 			}
 			if (numberBox == 5)
@@ -304,11 +344,13 @@ void selectionMenu::Render()
 					meshList[GEO_CHECKBOX5]->textureID = LoadTGA("Image//enoughPartsTexture.tga");
 					RenderOBJ(meshList[GEO_CHECKBOX5], CHECKBOX5, true, true);
 					numberBox5 = true;
+					numOfParts++;
 				}
 				else if (numberBox5)
 				{
 					meshList[GEO_CHECKBOX5] = MeshBuilder::GenerateQuad("checkBox5", Color(0, 0, 0), 0.4f, 0.4f);
 					numberBox5 = false;
+					numOfParts--;
 				}
 			}
 			if (numberBox == 6) 
@@ -318,23 +360,32 @@ void selectionMenu::Render()
 					meshList[GEO_CHECKBOX6]->textureID = LoadTGA("Image//enoughPartsTexture.tga");
 					RenderOBJ(meshList[GEO_CHECKBOX6], CHECKBOX6, true, true);
 					numberBox6 = true;
+					numOfParts++;
 				}
 				else if (numberBox6)
 				{
 					meshList[GEO_CHECKBOX6] = MeshBuilder::GenerateQuad("checkBox6", Color(0, 0, 0), 0.4f, 0.4f);
 					numberBox6 = false;
+					numOfParts--;
+				}
+			}
+			if (numberBox == 7)
+			{
+				if (!numberBox7)
+				{
+					meshList[GEO_CHECKBOX7]->textureID = LoadTGA("Image//enoughPartsTexture.tga");
+					RenderOBJ(meshList[GEO_CHECKBOX7], CHECKBOX7, true, true);
+					numberBox7 = true;
+					numOfParts++;
+				}
+				else if (numberBox7)
+				{
+					meshList[GEO_CHECKBOX7] = MeshBuilder::GenerateQuad("checkBox7", Color(0, 0, 0), 0.4f, 0.4f);
+					numberBox7 = false;
+					numOfParts--;
 				}
 			}
 			inCheckBox = false;
-		}
-		else if (!inCheckBox) // no collision, remains the same
-		{
-			RenderOBJ(meshList[GEO_CHECKBOX1], CHECKBOX1, true, true);
-			RenderOBJ(meshList[GEO_CHECKBOX2], CHECKBOX2, true, true);
-			RenderOBJ(meshList[GEO_CHECKBOX3], CHECKBOX3, true, true);
-			RenderOBJ(meshList[GEO_CHECKBOX4], CHECKBOX4, true, true);
-			RenderOBJ(meshList[GEO_CHECKBOX5], CHECKBOX5, true, true);
-			RenderOBJ(meshList[GEO_CHECKBOX6], CHECKBOX6, true, true);
 		}
 		pressedSpace = false;
 	}
@@ -346,13 +397,14 @@ void selectionMenu::Render()
 		RenderOBJ(meshList[GEO_CHECKBOX4], CHECKBOX4, true, true);
 		RenderOBJ(meshList[GEO_CHECKBOX5], CHECKBOX5, true, true);
 		RenderOBJ(meshList[GEO_CHECKBOX6], CHECKBOX6, true, true);
+		RenderOBJ(meshList[GEO_CHECKBOX7], CHECKBOX7, true, true);
 	}
 	// For the choosing of designs and colours of the car parts 
-	if (numberBox == 4 && numberBox4)
+	if (numberBox == 5 && numberBox5)
 	{
 		//Window
 		RenderTextOnScreen(meshList[GEO_TEXT], " CHOOSE YOUR", Color(0, 0, 0), 2, 27, 20);
-		RenderTextOnScreen(meshList[GEO_TEXT], "DESIGN:", Color(0, 0, 0), 2, 30, 19);
+		RenderTextOnScreen(meshList[GEO_TEXT], "COLOUR:", Color(0, 0, 0), 2, 30, 19);
 		RenderTextOnScreen(meshList[GEO_TEXT], "<", Color(0, 0, 0), 3, 20.5, 11);
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(windowColourNum), Color(0, 0, 0), 3, 22, 11);
 		RenderTextOnScreen(meshList[GEO_TEXT], ">", Color(0, 0, 0), 3, 23.5, 11);
@@ -377,8 +429,17 @@ void selectionMenu::Render()
 			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(windowColourNum), Color(0, 0, 0), 4, 16.5, 8.1);
 			prevButton = false;
 		}
+		// To show the texture of the window colour
+		if (windowColourNum == 1)
+		{
+			RenderOBJ(meshList[GEO_WINDOWCOLOUR1], WINDOWCOLOUR1, true, true);
+		}
+		else if (windowColourNum == 2)
+		{
+			RenderOBJ(meshList[GEO_WINDOWCOLOUR2], WINDOWCOLOUR2, true, true);
+		}
 	}
-	else if (numberBox == 5 && numberBox5) 
+	else if (numberBox == 6 && numberBox6) 
 	{
 		// Wheels design
 		RenderTextOnScreen(meshList[GEO_TEXT], " CHOOSE YOUR", Color(0, 0, 0), 2, 27, 20); 
@@ -407,8 +468,21 @@ void selectionMenu::Render()
 			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(wheelDesignNum), Color(0, 0, 0), 4, 16.5, 8.1);
 			prevButton = false;
 		}
+		// To show the texture of the wheel design
+		if (wheelDesignNum == 1)
+		{
+			RenderOBJ(meshList[GEO_WHEELDESIGN1], WHEELDESIGN1, true, true);
+		}
+		else if (wheelDesignNum == 2)
+		{
+			RenderOBJ(meshList[GEO_WHEELDESIGN2], WHEELDESIGN2, true, true);
+		}
+		else if (wheelDesignNum == 3)
+		{
+			RenderOBJ(meshList[GEO_WHEELDESIGN3], WHEELDESIGN3, true, true);
+		}
 	}
-	else if (numberBox == 6 && numberBox6) 
+	else if (numberBox == 7 && numberBox7) 
 	{
 		// Choose carframe colours
 		RenderTextOnScreen(meshList[GEO_TEXT], " CHOOSE YOUR", Color(0, 0, 0), 2, 27, 22.5); 
@@ -426,8 +500,6 @@ void selectionMenu::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], ">", Color(0, 0, 0), 3, 23.5, 6.5);
 		RenderTextOnScreen(meshList[GEO_TEXT], "NEXT", Color(0, 0, 0), 1.5, 49, 13.5);
 		RenderTextOnScreen(meshList[GEO_TEXT], "PREV", Color(0, 0, 0), 1.5, 36, 13.5);
-
-		
 
 		if (nextColour)
 		{
@@ -497,7 +569,6 @@ void selectionMenu::Render()
 			RenderOBJ(meshList[GEO_CFCOLOUR4], CFCOLOUR4, true, true);
 		}
 	}
-	
 }
 
 /******************************************************************************/
@@ -664,53 +735,50 @@ void selectionMenu::CalculateFrameRate()
 
 bool selectionMenu::CheckCollision(object& one)
 {
-	if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -8.595 && one.pos.y <= -8.168)) // Checkbox1
+	if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -7.915 && one.pos.y <= -7.408)) // Checkbox1
 	{
 		numberBox = 1;
 		inCheckBox = true;
 		return true;
 	}
-	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -9.268 && one.pos.y <= -8.928)) // Checkbox2
+	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -8.595 && one.pos.y <= -8.168)) // Checkbox2
 	{
 		numberBox = 2;
 		inCheckBox = true;
 		return true;
 	}
-	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -10.033 && one.pos.y <= -9.609)) // Checkbox3
+	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -9.268 && one.pos.y <= -8.928)) // Checkbox3
 	{
 		numberBox = 3;
 		inCheckBox = true;
 		return true;
 	}
-	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -10.670 && one.pos.y <= -10.328)) // Checkbox4
+	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -10.033 && one.pos.y <= -9.609)) // Checkbox4
 	{
 		numberBox = 4;
 		inCheckBox = true;
 		return true;
 	}
-	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -11.431 && one.pos.y <= -11.012)) // Checkbox5
+	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -10.670 && one.pos.y <= -10.328)) // Checkbox5
 	{
 		numberBox = 5;
 		inCheckBox = true;
 		return true;
 	}
-	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -12.111 && one.pos.y <= -11.685)) // Checkbox6
+	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -11.431 && one.pos.y <= -11.012)) // Checkbox6
 	{
 		numberBox = 6;
 		inCheckBox = true;
 		return true;
 	}
+	else if ((one.pos.x >= 1.312 && one.pos.x <= 1.734) && (one.pos.y >= -12.111 && one.pos.y <= -11.685)) // Checkbox7
+	{
+		numberBox = 7;
+		inCheckBox = true;
+		return true;
+	}
 
 	// Check whether collided with prev and next buttons for windows
-	else if (numberBox4 && (one.pos.x >= 1.882 && one.pos.x <= 2.733) && (one.pos.y >= -9.491 && one.pos.y <= -9.236))
-	{
-		prevButton = true;
-	}
-	else if (numberBox4 && (one.pos.x >= 4.607 && one.pos.x <= 5.374) && (one.pos.y >= -9.491 && one.pos.y <= -9.236))
-	{
-		nextButton = true;
-	}
-	// Check whether collided with prev and next buttons for wheels
 	else if (numberBox5 && (one.pos.x >= 1.882 && one.pos.x <= 2.733) && (one.pos.y >= -9.491 && one.pos.y <= -9.236))
 	{
 		prevButton = true;
@@ -719,24 +787,32 @@ bool selectionMenu::CheckCollision(object& one)
 	{
 		nextButton = true;
 	}
+	// Check whether collided with prev and next buttons for wheels
+	else if (numberBox6 && (one.pos.x >= 1.882 && one.pos.x <= 2.733) && (one.pos.y >= -9.491 && one.pos.y <= -9.236))
+	{
+		prevButton = true;
+	}
+	else if (numberBox6 && (one.pos.x >= 4.607 && one.pos.x <= 5.374) && (one.pos.y >= -9.491 && one.pos.y <= -9.236))
+	{
+		nextButton = true;
+	}
 	// Check whether collided with prev and next buttons for carframe
-	else if (numberBox6 && (one.pos.x >= 1.882 && one.pos.x <= 2.733) && (one.pos.y >= -8.702 && one.pos.y <= -8.447)) 
+	else if (numberBox7 && (one.pos.x >= 1.882 && one.pos.x <= 2.733) && (one.pos.y >= -8.702 && one.pos.y <= -8.447)) 
 	{
 		prevColour = true;
 	}
-	else if (numberBox6 && (one.pos.x >= 4.607 && one.pos.x <= 5.374) && (one.pos.y >= -8.702 && one.pos.y <= -8.447))
+	else if (numberBox7 && (one.pos.x >= 4.607 && one.pos.x <= 5.374) && (one.pos.y >= -8.702 && one.pos.y <= -8.447))
 	{
 		nextColour = true;
 	}
-	else if (numberBox6 && (one.pos.x >= 1.882 && one.pos.x <= 2.733) && (one.pos.y >= -11.347 && one.pos.y <= -11.091)) 
+	else if (numberBox7 && (one.pos.x >= 1.882 && one.pos.x <= 2.733) && (one.pos.y >= -11.347 && one.pos.y <= -11.091)) 
 	{
 		prevDesign = true;
 	}
-	else if (numberBox6 && (one.pos.x >= 4.607 && one.pos.x <= 5.374) && (one.pos.y >= -11.347 && one.pos.y <= -11.091))
+	else if (numberBox7 && (one.pos.x >= 4.607 && one.pos.x <= 5.374) && (one.pos.y >= -11.347 && one.pos.y <= -11.091))
 	{
 		nextDesign = true;
 	}
-
 	return false;
 }
 
