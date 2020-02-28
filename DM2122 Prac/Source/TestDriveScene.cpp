@@ -975,7 +975,7 @@ void TestDriveScene::DrivingMovement(double dt)
 {
 	//std::cout << dt;
 	//std::cout << fSpeed;
-	std::cout << fRotate;
+	//std::cout << fRotate;
 
 	// max speed
 	if (fSpeed > 0.3)

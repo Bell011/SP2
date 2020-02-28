@@ -133,9 +133,9 @@ void Application::Run()
 		{
 			if (mainmenu->Change()) {
 				if (IsKeyPressed(VK_RETURN)) {
-					Scene* showroomscene = new ShowroomScene();
-					showroomscene->Init();
-					scene = showroomscene;
+					Scene* mainmenu = new SceneText();
+					mainmenu->Init();
+					scene = mainmenu;
 				}
 				
 			}
@@ -158,6 +158,9 @@ void Application::Run()
 					scene = matchbp;
 				}
 				if (IsKeyPressed(VK_BACK)) {
+					Scene* showroomscene = new ShowroomScene();
+					showroomscene->Init();
+					scene = showroomscene;
 					scene = showroomscene;
 				}
 

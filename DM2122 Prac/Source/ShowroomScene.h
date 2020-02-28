@@ -56,7 +56,6 @@ class ShowroomScene : public Scene
 		GEO_WHEEL3,
 
 		GEO_CEILINGLIGHT,
-		GEO_SPOTLIGHTCOVER,
 		GEO_SPOTLIGHT,
 		GEO_HEADLIGHTS,
 		GEO_TEXT,
@@ -99,7 +98,7 @@ class ShowroomScene : public Scene
 		U_LIGHT3_KC,
 		U_LIGHT3_KL,
 		U_LIGHT3_KQ,
-		/*U_LIGHT4_POSITION,
+		U_LIGHT4_POSITION,
 		U_LIGHT4_COLOR,
 		U_LIGHT4_POWER,
 		U_LIGHT4_KC,
@@ -123,20 +122,7 @@ class ShowroomScene : public Scene
 		U_LIGHT7_KC,
 		U_LIGHT7_KL,
 		U_LIGHT7_KQ,
-		U_LIGHT8_POSITION,
-		U_LIGHT8_COLOR,
-		U_LIGHT8_POWER,
-		U_LIGHT8_KC,
-		U_LIGHT8_KL,
-		U_LIGHT8_KQ,
-		U_LIGHT9_POSITION,
-		U_LIGHT9_COLOR,
-		U_LIGHT9_POWER,
-		U_LIGHT9_KC,
-		U_LIGHT9_KL,
-		U_LIGHT9_KQ,*/
 		
-
 		U_LIGHTENABLED,
 		//add these enum in UNIFORM_TYPE before U_TOTAL
 		U_LIGHT0_TYPE,
@@ -161,7 +147,7 @@ class ShowroomScene : public Scene
 		U_LIGHT3_COSCUTOFF,
 		U_LIGHT3_COSINNER,
 		U_LIGHT3_EXPONENT,
-		/*U_LIGHT4_TYPE,
+		U_LIGHT4_TYPE,
 		U_LIGHT4_SPOTDIRECTION,
 		U_LIGHT4_COSCUTOFF,
 		U_LIGHT4_COSINNER,
@@ -181,17 +167,6 @@ class ShowroomScene : public Scene
 		U_LIGHT7_COSCUTOFF,
 		U_LIGHT7_COSINNER,
 		U_LIGHT7_EXPONENT,
-		U_LIGHT8_TYPE,
-		U_LIGHT8_SPOTDIRECTION,
-		U_LIGHT8_COSCUTOFF,
-		U_LIGHT8_COSINNER,
-		U_LIGHT8_EXPONENT,
-		U_LIGHT9_TYPE,
-		U_LIGHT9_SPOTDIRECTION,
-		U_LIGHT9_COSCUTOFF,
-		U_LIGHT9_COSINNER,
-		U_LIGHT9_EXPONENT,
-	*/
 		
 		U_NUMLIGHTS,
 		// add these enum for texture
@@ -211,7 +186,7 @@ private:
 	unsigned m_parameters[U_TOTAL];
 
 	MS modelStack, viewStack, projectionStack;
-	Light light[4];
+	Light light[8];
 
 	camerafps camera;
 	
