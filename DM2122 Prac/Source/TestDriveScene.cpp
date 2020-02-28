@@ -141,7 +141,7 @@ void TestDriveScene::Init()
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	
-	bouncetime = fVelocity = fRotate = 0.f;
+	bouncetime = fSpeed = fRotate = 0.f;
 	switchlights = bCheckBrake = bTurningLeft = bTurningRight = false;
 
 	InitLamppost();
@@ -210,7 +210,7 @@ void TestDriveScene::Update(double dt)
 	
 	//camera.Update(dt);
 	camera.UpdateMovement(Vector3(player.pos.x, player.pos.y + 6, player.pos.z + 15), Vector3(player.pos.x, player.pos.y, player.pos.z));
-	camera.UpdateTurningMovement(bTurningLeft, bTurningRight, dt);
+	//camera.UpdateTurningMovement(bTurningLeft, bTurningRight, dt);
 	//SetCursorPos(camera.setCursorX, camera.setCursorY);
 	CalculateFrameRate();
 	/*if (Application::IsKeyPressed('P'))
@@ -974,12 +974,12 @@ void TestDriveScene::UpdateBrakelights()
 void TestDriveScene::DrivingMovement(double dt)
 {
 	//std::cout << dt;
-	//std::cout << fVelocity;
-	//std::cout << fRotate;
+	//std::cout << fSpeed;
+	std::cout << fRotate;
 
-	// max velocity
-	if (fVelocity > 0.3)
-		fVelocity = 0.3;	
+	// max speed
+	if (fSpeed > 0.3)
+		fSpeed = 0.3;
 
 	if (Application::IsKeyPressed('W') && !(Application::IsKeyPressed(VK_SPACE))) 
 	{	// forward
@@ -987,91 +987,104 @@ void TestDriveScene::DrivingMovement(double dt)
 		{	// steer left while moving forward
 			bTurningLeft = true;
 			fRotate += 0.2;
-			movex -= fVelocity / 3.0;
-			movez -= fVelocity / 3.0;
+			movex -= fSpeed / 3.0;
+			movez -= fSpeed / 3.0;
 		}
 		if (Application::IsKeyPressed('D'))
 		{	// steer right while moving forward
 			bTurningRight = true;
 			fRotate -= 0.2;
-			movex += fVelocity / 3.0;
-			movez -= fVelocity / 3.0;
+			movex += fSpeed / 3.0;
+			movez -= fSpeed / 3.0;
 		}
 
 		if (fRotate > 0)
 		{
-			movex -= fVelocity / 3.0;
-			movez -= fVelocity / 3.0;
+			movex -= fSpeed / 3.0;
+			movez -= fSpeed / 3.0;
 		}
 		else if (fRotate < 0)
 		{
-			movex += fVelocity / 3.0;
-			movez -= fVelocity / 3.0;
+			movex += fSpeed / 3.0;
+			movez -= fSpeed / 3.0;
 		}
 		else
 		{
-			movez -= fVelocity;
+			movez -= fSpeed;
 		}
-		fVelocity += dt / 3.0;
+
+		fSpeed += dt / 3.0;
 	}
 
-	if (fVelocity > 0.0 && !(Application::IsKeyPressed('S')) && !(Application::IsKeyPressed('W')))
+	// slide only works with forward
+	/*if (fSpeed > 0.0 && !(Application::IsKeyPressed('S')) && !(Application::IsKeyPressed('W')))
 	{
-		movez -= fVelocity;
-		fVelocity -= dt / 3.0;
+		movez -= fSpeed;
+		fSpeed -= dt / 3.0;
 	}
-	else if (fVelocity < 0.0)
-		fVelocity = 0;
+	else if (fSpeed < 0.0)
+		fSpeed = 0;
+	
+	if (Application::IsKeyPressed('A') && fSpeed != 0)
+	{
+		bTurningLeft = true;
+		
+		fRotate += 2;
+		movex -= fSpeed / 3.0;
+		movez -= fSpeed / 3.0;
+	}
+	if (Application::IsKeyPressed('D') && fSpeed != 0)
+	{
+		bTurningRight = true;
+		fRotate -= 2;
+		movex += fSpeed / 3.0;
+		movez -= fSpeed / 3.0;
+	}*/
+	
 
 	if (Application::IsKeyPressed('S') && !(Application::IsKeyPressed(VK_SPACE)))
 	{	// backward
 		if (Application::IsKeyPressed('A'))
 		{	// steer left while moving backward
 			bTurningLeft = true;
-			fRotate--;
-			movex -= 1 * dt;
+			fRotate -= 0.2;
+			movex -= fSpeed / 3.0;
+			movez += fSpeed / 3.0;
 		}
 		if (Application::IsKeyPressed('D'))
 		{	// steer right while moving backward
 			bTurningRight = true;
-			fRotate++;
-			movex += 1 * dt;
+			fRotate += 0.2;
+			movex += fSpeed / 3.0;
+			movez += fSpeed / 3.0;
 		}
-		movez += fVelocity;
-		fVelocity += dt / 3.0;
-	}
-	/*if (fVelocity > 0.0 && !(Application::IsKeyPressed('W')))
-	{
-		movez += fVelocity;
-		fVelocity -= dt / 3.0;
-	}
-	else if (fVelocity < 0.0)
-		fVelocity = 0;*/
 
-	if (Application::IsKeyPressed('A') && fVelocity != 0)
-	{
-		bTurningLeft = true;
-		
-		fRotate += 2;
-		movex -= fVelocity / 3.0;
-		movez -= fVelocity / 3.0;
+		if (fRotate > 0)
+		{
+			movex += fSpeed / 3.0;
+			movez += fSpeed / 3.0;
+		}
+		else if (fRotate < 0)
+		{
+			movex -= fSpeed / 3.0;
+			movez += fSpeed / 3.0;
+		}
+		else
+		{
+			movez += fSpeed;
+		}
+
+		fSpeed += dt / 3.0;
 	}
-	if (Application::IsKeyPressed('D') && fVelocity != 0)
-	{
-		bTurningRight = true;
-		fRotate -= 2;
-		movex += fVelocity / 3.0;
-		movez -= fVelocity / 3.0;
-	}
+	
 
 	if (Application::IsKeyPressed(VK_SPACE)) //brake
 	{
 		bCheckBrake = true;
 		
-		if (fVelocity > 0.0)
-			fVelocity -= dt / 2.0;
+		if (fSpeed > 0.0)
+			fSpeed -= dt / 2.0;
 	}
 	else
 		bCheckBrake = false;
-
 }

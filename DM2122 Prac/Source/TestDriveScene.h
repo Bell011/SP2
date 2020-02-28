@@ -164,7 +164,7 @@ private:
 	float movey;
 	float movez;
 	bool bCheckBrake;
-	float fVelocity;
+	float fSpeed;
 	float fRotate;
 	int bouncetime;
 	bool switchlights;

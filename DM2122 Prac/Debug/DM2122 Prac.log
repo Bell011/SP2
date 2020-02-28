@@ -1,4 +1,41 @@
-﻿  cameratpp.cpp
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\cameratpp.cpp(94,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\cameratpp.cpp(95,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+﻿  TestDriveScene.cpp
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(113,76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(113,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(113,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(124,66): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(124,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(124,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(144,22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(237,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(238,51): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(238,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(786,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(788,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(916,50): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(916,30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(928,104): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(982,15): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(989,18): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(990,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(991,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(996,18): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(997,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(998,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1003,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1004,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1008,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1009,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1016,21): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1050,18): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1051,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1052,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1057,18): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1058,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1059,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1064,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1065,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1069,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1070,25): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1077,21): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\TestDriveScene.cpp(1086,22): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
   DM2122 Prac.vcxproj -> C:\Users\weizh\Documents\GDT Sem2\SP\Debug\DM2122 Prac.exe
