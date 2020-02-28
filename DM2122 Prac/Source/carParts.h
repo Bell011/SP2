@@ -13,7 +13,7 @@
 
 class carParts
 {
-private:
+public:
 	enum car_wheel {
 		WHEEL1,
 		WHEEL2,

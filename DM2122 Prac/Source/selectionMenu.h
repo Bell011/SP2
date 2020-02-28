@@ -29,10 +29,19 @@ class selectionMenu : public Scene
 		GEO_CHECKBOX4,
 		GEO_CHECKBOX5,
 		GEO_CHECKBOX6,
+
+		GEO_CFDESIGN1,
+		GEO_CFDESIGN2,
+		GEO_CFDESIGN3,
+		GEO_CFCOLOUR1,
+		GEO_CFCOLOUR2,
+		GEO_CFCOLOUR3,
+		GEO_CFCOLOUR4,
+
+		GEO_CARPART,
 		
-		GEO_RIGHTBUTTON,
-		GEO_LEFTBUTTON,
-		GEO_NUMBERBUTTON,
+		//GEO_RIGHTBUTTON,
+		//GEO_LEFTBUTTON,
 
 		NUM_GEOMETRY,
 	};
@@ -71,20 +80,16 @@ private:
 	TRS CHECKBOX4;
 	TRS CHECKBOX5;
 	TRS CHECKBOX6;
-	TRS RIGHTBUTTON;
-	TRS LEFTBUTTON;
-	TRS NUMBERBUTTON;
+	TRS CARFRAME;
+	TRS CFDESIGN1;
+	TRS CFDESIGN2;
+	TRS CFDESIGN3;
+	TRS CFCOLOUR1;
+	TRS CFCOLOUR2;
+	TRS CFCOLOUR3;
+	TRS CFCOLOUR4;
 
 	object target;
-	object checkbox1;
-	object checkbox2;
-	object checkbox3;
-	object checkbox4;
-	object checkbox5;
-	object checkbox6;
-	object rightbutton;
-	object leftbutton;
-	object numberbutton;
 	
 	bool inCheckBox;
 	bool numberBox1;
@@ -100,9 +105,12 @@ private:
 	bool prevColour;
 	bool nextDesign;
 	bool prevDesign;
+	bool nextButton;
+	bool prevButton;
 	int cfColourNum;
 	int cfDesignNum;
-	
+	int wheelDesignNum;
+	int windowColourNum;
 
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
@@ -115,7 +123,7 @@ private:
 	float movex;
 	float movey;
 	float movez;
-	bool CheckCollision(object& one, object& two);
+	bool CheckCollision(object& one);
 	void doCheckBoxCollision();
 	
 
