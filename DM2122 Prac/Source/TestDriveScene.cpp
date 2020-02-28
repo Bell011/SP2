@@ -36,8 +36,6 @@ void TestDriveScene::Init()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	
-
 	camera.Init(Vector3(0,0,10), Vector3(0,1,0), Vector3(0, 1, 0));
 
 	Mtx44 projection;
@@ -167,22 +165,11 @@ void TestDriveScene::Init()
 	movex = 0;	movey = -0;	movez = 0;
 	PLAYER.Translate = Vector3(0, -0, 0);
 	PLAYER.Scale = Vector3(2, 2, 2);
-	//player.size = Vector3(length/2*CUBE.Scale.x, height/2* CUBE.Scale.y, width/2 * CUBE.Scale.z);
-	/*-----------------------------------------------------------------------------------------------
-	HOW TO GET LENGTH,  WIDTH, HEIGHT OF OBJECT:
-	1. OPEN THE OBJ FILE USING NOTEPAD
-	2. U WIlL SEE ROWS OF THESE:
-		v 1.656677 3.053495 0.519560
-		v 1.719025 2.998324 0.653901
-		v 1.720906 3.284813 0.462875
-	3. Each column represents x, y, z coord respectively
-	4. Add the 2 extreme values in each column and divide by 2 to get length, height and width
-		Eg. Greatest x value = 0.95		Smallest x value = -0.56;
-			length = (0.95 + 0.56) / 2
-
-	PS if i have free time i will make some function/class to read the values from the notepad file 
-	   n stuff and do the math oso..but so far just manually calculate first :)
-	---------------------------------------------------------------------------------------------*/
+	player.pos = Vector3(0, 0, 0);
+	cplayer.getCoords("OBJ//mushroom.obj", cplayer);
+	player.setSize(cplayer);
+	
+	
 
 	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CHAR]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
@@ -192,7 +179,6 @@ void TestDriveScene::Init()
 	meshList[GEO_CUBE] = MeshBuilder::GenerateCuboid("Cube", Color(1, 0, 0), 1.f, 1.f, 1.f);
 	CUBE.Translate = Vector3(2, 0, 0);
 	CUBE.Scale = Vector3(2, 2, 2);
-	//cube.size = Vector3(length/2*CUBE.Scale.x, height/2* CUBE.Scale.y, width/2 * CUBE.Scale.z);
 	meshList[GEO_CUBE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CUBE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CUBE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -221,104 +207,48 @@ void TestDriveScene::Init()
 
 void TestDriveScene::Update(double dt)
 {
-	if (Application::IsKeyPressed(0x31))
-	{
-		glDisable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x32))
-	{
-		glEnable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x33))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-	else if (Application::IsKeyPressed(0x34))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	}
-	if (Application::IsKeyPressed('I'))
-		light[0].position.z -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('K'))
-		light[0].position.z += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('J'))
-		light[0].position.x -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('L'))
-		light[0].position.x += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('O'))
-		light[0].position.y -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('P'))
-		light[0].position.y += (float)(LSPEED * dt);
+	player.pos=Vector3(camera.position.x, camera.position.y, camera.position.z);
+	PLAYER.Translate = Vector3(player.pos);
+	Vector3 temp = player.pos;
 
-	if (Application::IsKeyPressed('5'))
-	{
-		//to do: switch light type to POINT and pass the information to
-		light[0].type = Light::LIGHT_POINT;
-	}
-	else if (Application::IsKeyPressed('6'))
-	{
-		//to do: switch light type to DIRECTIONAL and pass the
-		light[0].type = Light::LIGHT_DIRECTIONAL;
-	}
-	else if (Application::IsKeyPressed('7'))
-	{
-		//to do: switch light type to SPOT and pass the information to
-		light[0].type = Light::LIGHT_SPOT;
-	}
-	camera.Update(dt);
-	SetCursorPos(camera.setCursorX, camera.setCursorY);
-	CalculateFrameRate();
-	if (Application::IsKeyPressed('P'))
-	{
-		float currentTime = GetTickCount() * 0.001f;
-		if (currentTime - bouncetime > 0.1f)
-		{
-			bouncetime = currentTime;
-			switchlights = !switchlights;
-
-			if (switchlights) {
-				light[1].power = 1.f;
-				glUniform1f(m_parameters[U_LIGHT1_POWER], light[1].power);
-			}
-			else
-			{
-				light[1].power = 0.f;
-				glUniform1f(m_parameters[U_LIGHT1_POWER], light[1].power);
-			}
-		}
-	}
-	if (Application::IsKeyPressed(VK_LEFT))
-	{
-		movex -= 5 * dt;
+	if (Application::IsKeyPressed('A')) {
+		Vector3 movement = camera.right;
+		movement.y = 0;
+		movement.Normalize();
+		player.pos = Vector3(player.pos - (movement * dt * 10));
+		PLAYER.Translate = Vector3(player.pos);
+			camera.position = player.pos;
 		
 	}
-	if (Application::IsKeyPressed(VK_RIGHT))
-	{
-		movex += 5 * dt;
-
+	if (Application::IsKeyPressed('D')) {
+		Vector3 movement = camera.right;
+		movement.y = 0;
+		movement.Normalize();
+		player.pos=Vector3(player.pos + (movement * dt * 10));
+		PLAYER.Translate = Vector3(player.pos);
+			camera.position = player.pos;
+		
 	}
-	if (Application::IsKeyPressed(VK_UP))
-	{
-		movez -= 5 * dt;
-
+	if (Application::IsKeyPressed('W')) {
+		Vector3 movement = camera.view;
+		movement.y = 0;
+		movement.Normalize();
+		player.pos = Vector3(player.pos + (movement * dt * 10)); PLAYER.Translate = Vector3(player.pos);
+		camera.position = player.pos;
+		
 	}
-	if (Application::IsKeyPressed(VK_DOWN))
-	{
-		movez += 5 * dt;
-
+	if (Application::IsKeyPressed('S')) {
+		Vector3 movement = camera.view;
+		movement.y = 0;
+		movement.Normalize();
+		player.pos=  Vector3(player.pos - (movement * dt * 10)); PLAYER.Translate = Vector3(player.pos);
+		camera.position = player.pos;
+		
 	}
-	if (Application::IsKeyPressed(VK_SPACE))
-	{
-		movey += 5 * dt;
 
-	}
-	if (Application::IsKeyPressed(VK_SHIFT))
-	{
-		movey -= 5 * dt;
-
-	}
-	doCollision();
-	//camera.mouse_callback();
+	CalculateFrameRate();
+	
+	camera.mouse_callback();
 }
 void TestDriveScene::doCollision() {
 

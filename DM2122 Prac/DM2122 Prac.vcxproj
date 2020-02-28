@@ -129,7 +129,7 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera2.h" />
-    <ClInclude Include="Source\CarEntity.h" />
+    <ClInclude Include="Source\g3CarEntity.h" />
     <ClInclude Include="Source\camerafps.h" />
     <ClInclude Include="Source\cameratpp.h" />
     <ClInclude Include="Source\cirObject.h" />
@@ -160,7 +160,7 @@
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\camerafps.cpp" />
-    <ClCompile Include="Source\CarEntity.cpp" />
+    <ClCompile Include="Source\g3CarEntity.cpp" />
     <ClCompile Include="Source\cameratpp.cpp" />
     <ClCompile Include="Source\cirObject.cpp" />
     <ClCompile Include="Source\GameMenu.cpp" />

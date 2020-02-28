@@ -1,7 +1,7 @@
 #ifndef _SCENE_RACING_H
 #define _SCENE_RACING_H
 #include "Scene.h"
-#include "CarEntity.h"
+#include "g3CarEntity.h"
 #include <MatrixStack.h>
 #include "Camera2.h"
 #include "Mesh.h"
@@ -85,11 +85,11 @@ private:
 	void CalculateFrameRate();
 
 	float carSpeed;
-	entityCar* carPlayer = new entityCar;
+	g3CarEntity* carPlayer = new g3CarEntity;
 	corners car;
-	entityCar* Car1 = new entityCar;
-	entityCar* Car2 = new entityCar;
-	entityCar* Car3 = new entityCar;
+	g3CarEntity* Car1 = new g3CarEntity;
+	g3CarEntity* Car2 = new g3CarEntity;
+	g3CarEntity* Car3 = new g3CarEntity;
 	
 	bool isPlaying;
 	float invinTime;

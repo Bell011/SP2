@@ -107,9 +107,9 @@ private:
 
 	camerafps camera;
 
+	/*To store bounding boxes*/
 	//bounding sphere
 	Object* player;
-
 	//bounding box
 	Object* arcade;
 	Object* checkarcade;
@@ -126,9 +126,7 @@ private:
 	corners c_screen;
 	Object* ssign;
 	corners c_ssign;
-
 	//manual set bounding box
-	
 	Object* car1;
 	Object* car2;
 	Object* car3;
@@ -136,6 +134,7 @@ private:
 	Object* stage;
 	Object* structure;
 
+	/*To store transformation of objects*/
 	TRS ARCADE;
 	TRS BENCH;
 	TRS BSIGN;
@@ -156,14 +155,10 @@ private:
 	TRS WHEEL2;;
 	TRS WHEEL3;
 
-	float movex;
-	float movey;
-	float movez;
-
-	float playerspeed;
 	int bouncetime;
-	bool switchlights;
+
 	int fps;
+
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
 	void InitObjects();
@@ -171,8 +166,6 @@ private:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
-
-	void doCollision(double);
 public:
 	ShowroomScene();
 	~ShowroomScene();

@@ -165,14 +165,20 @@ void ShowroomScene::Init()
 
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
-	movex = 0; movey = 0; movez = 1;
 	InitObjects();
-	playerspeed = 5.f;
 	bouncetime = 0.f;
-	switchlights = false;
 	fps = 0.f;
-	camera.setcameraspeed(playerspeed);
 }
+/*=============================================================================*/
+/*!
+\brief
+	Init all the objects
+
+\details
+	
+	
+*/
+/*=============================================================================*/
 void ShowroomScene::InitObjects() {
 	PLAYER.Translate = Vector3(0, 0, 1);
 	player = new cirObject(Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z), 7.f);
@@ -454,24 +460,18 @@ void ShowroomScene::Update(double dt)
 	//camera.Update(dt);
 	CalculateFrameRate();
 }
-void ShowroomScene::doCollision(double dt) {
-	
-}
-/******************************************************************************/
+/*=============================================================================*/
 /*!
 \brief
 	Alternate method to do TRS/render objects
 
-\param	mesh
-	mesh to render
-\param	TRS
-	class to set TRS (set in init func)
-\param end
-	check whether to pop model
-\param	enableLight
-	set Light as true/false
+\param	
+	mesh: mesh to render
+	TRS: class to set TRS (set in init func)
+	end: check whether to pop matrixstack
+	enableLight: set Light as true/false
 */
-/******************************************************************************/
+/*=============================================================================*/
 void ShowroomScene::RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight)
 {
 	modelStack.PushMatrix();

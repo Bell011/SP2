@@ -1,11 +1,11 @@
-#include "CarEntity.h"
+#include "g3CarEntity.h"
 
-entityCar::entityCar()
+g3CarEntity::g3CarEntity()
 {
 
 }
 
-entityCar::~entityCar()
+g3CarEntity::~g3CarEntity()
 {
 
 }
@@ -16,21 +16,21 @@ SETS
 
 *////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void entityCar::setPos(float x, float y, float z)
+void g3CarEntity::setPos(float x, float y, float z)
 {
 	carPos.x = x;
 	carPos.y = y;
 	carPos.z = z;
 }
 
-void entityCar::setVel(float x, float y, float z)
+void g3CarEntity::setVel(float x, float y, float z)
 {
 	this->carVel.x = x;
 	this->carVel.y = y;
 	this->carVel.z = z;
 }
 
-void entityCar::setSize(corners& c)
+void g3CarEntity::setSize(corners& c)
 {
 	
 	this->carSize.x = (c.getMax().x - c.getMin().x) / 2;
@@ -38,12 +38,12 @@ void entityCar::setSize(corners& c)
 	this->carSize.z = (c.getMax().z - c.getMin().z) / 2;
 }
 
-void entityCar::setScore(float score)
+void g3CarEntity::setScore(float score)
 {
 	this->scoreRace = score;
 }
 
-void entityCar::setLives(int lives)
+void g3CarEntity::setLives(int lives)
 {
 	this->lives = lives;
 }
@@ -53,27 +53,27 @@ GETS
 
 *////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Vector3 entityCar::getPos()
+Vector3 g3CarEntity::getPos()
 {
 	return this->carPos;
 }
 
-Vector3 entityCar::getVel()
+Vector3 g3CarEntity::getVel()
 {
 	return this->carVel;
 }
 
-Vector3 entityCar::getSize()
+Vector3 g3CarEntity::getSize()
 {
 	return this->carSize;
 }
 
-float entityCar::getScore()
+float g3CarEntity::getScore()
 {
 	return this->scoreRace;
 }
 
-int entityCar::getLives()
+int g3CarEntity::getLives()
 {
 	return this->lives;
 }
@@ -84,7 +84,7 @@ FUNCTIONS
 
 *////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool entityCar::isCollide(entityCar* enemy, entityCar* player)
+bool g3CarEntity::isCollide(g3CarEntity* enemy, g3CarEntity* player)
 {
 	if ((enemy->carPos.x - enemy->carSize.x <= player->carPos.x + player->carPos.x && enemy->carPos.x + enemy->carSize.x >= player->carPos.x - player->carSize.x) &&
 		(enemy->carPos.z - enemy->carSize.z <= player->carPos.z + player->carSize.z && enemy->carPos.z + enemy->carSize.z >= player->carPos.z - player->carSize.z))
@@ -94,7 +94,7 @@ bool entityCar::isCollide(entityCar* enemy, entityCar* player)
 		return false;
 	
 }
-void entityCar::updatePos(entityCar* enemy1, entityCar* enemy2, entityCar* enemy3, entityCar* player, double dt)
+void g3CarEntity::updatePos(g3CarEntity* enemy1, g3CarEntity* enemy2, g3CarEntity* enemy3, g3CarEntity* player, double dt)
 {
 	
 	enemy1->carPos += enemy1->carVel * dt;
@@ -142,7 +142,7 @@ void entityCar::updatePos(entityCar* enemy1, entityCar* enemy2, entityCar* enemy
 
 }
 
-void entityCar::updateLives(int count)
+void g3CarEntity::updateLives(int count)
 {
 	lives += count;
 }

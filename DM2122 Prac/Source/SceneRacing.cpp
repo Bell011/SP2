@@ -184,7 +184,7 @@ void SceneRacing::Update(double dt)
 	invinTime -= dt;
 	if (isPlaying)
 	{
-		entityCar::updatePos(Car1, Car2, Car3, carPlayer, dt);
+		g3CarEntity::updatePos(Car1, Car2, Car3, carPlayer, dt);
 	}
 	if (carPlayer->getLives() <= 0)
 	{

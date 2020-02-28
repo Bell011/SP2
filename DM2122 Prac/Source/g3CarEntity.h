@@ -1,11 +1,11 @@
-#ifndef _CAR_ENTITY_H
-#define _CAR_ENTITY_H
+#ifndef _G3_CAR_ENTITY_H
+#define _G3_CAR_ENTITY_H
 
 #include "Utility.h"
 #include "Application.h"
 #include "collcorners.h"
 
-class entityCar
+class g3CarEntity
 {
 private:
 	Vector3 carPos;
@@ -15,8 +15,8 @@ private:
 	int lives;
 	float scoreRace;
 public:
-	entityCar();
-	~entityCar();
+	g3CarEntity();
+	~g3CarEntity();
 	void setPos(float x, float y, float z);
 	void setVel(float x, float y, float z);
 	void setSize(corners&);
@@ -30,8 +30,8 @@ public:
 
 	void updateLives(int count);
 
-	bool isCollide(entityCar* enemy, entityCar* player);
-	static void updatePos(entityCar* enemy1, entityCar* enemy2, entityCar* enemy3, entityCar* player,double dt);
+	bool isCollide(g3CarEntity* enemy, g3CarEntity* player);
+	static void updatePos(g3CarEntity* enemy1, g3CarEntity* enemy2, g3CarEntity* enemy3, g3CarEntity* player,double dt);
 
 };
 
