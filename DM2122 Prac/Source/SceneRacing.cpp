@@ -132,21 +132,21 @@ void SceneRacing::Init()
 	meshList[GEO_CHAR] = MeshBuilder::GenerateQuad("char", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_CHAR]->textureID = LoadTGA("Image//char.tga");
 
-	meshList[GEO_CAR1] = MeshBuilder::GenerateOBJ("Car1", "Obj//car1.obj");
-	meshList[GEO_CAR1]->textureID = LoadTGA("Image//car1black.tga");
+	meshList[GEO_CAR1] = MeshBuilder::GenerateOBJ("Car1", "Obj//g3car.obj");
+	meshList[GEO_CAR1]->textureID = LoadTGA("Image//g3carenemy.tga");
 
-	meshList[GEO_CAR2] = MeshBuilder::GenerateOBJ("Car2", "Obj//car2.obj");
-	meshList[GEO_CAR2]->textureID = LoadTGA("Image//car2red.tga");
+	meshList[GEO_CAR2] = MeshBuilder::GenerateOBJ("Car2", "Obj//g3car.obj");
+	meshList[GEO_CAR2]->textureID = LoadTGA("Image//g3car.tga");
 
-	meshList[GEO_CAR3] = MeshBuilder::GenerateOBJ("Car1", "Obj//car1.obj");
-	meshList[GEO_CAR3]->textureID = LoadTGA("Image//car1black.tga");
+	meshList[GEO_CAR3] = MeshBuilder::GenerateOBJ("Car1","Obj//g3car.obj");
+	meshList[GEO_CAR3]->textureID = LoadTGA("Image//g3carenemy.tga");
 
-	meshList[GEO_CAR4] = MeshBuilder::GenerateOBJ("Car1", "Obj//car1.obj");
-	meshList[GEO_CAR4]->textureID = LoadTGA("Image//car1black.tga");
+	meshList[GEO_CAR4] = MeshBuilder::GenerateOBJ("Car1", "Obj//g3car.obj");
+	meshList[GEO_CAR4]->textureID = LoadTGA("Image//g3carenemy.tga");
 
 	meshList[GEO_MAP] = MeshBuilder::GenerateQuad("Map", Color(1, 1, 1), 1, 1);
 	//meshList[GEO_MAP]->textureID = LoadTGA("Image//map.tga");
-
+	car.getCoords("Obj//g3car.obj", car);
 	meshList[GEO_LIGHTSPHERE] = MeshBuilder::GenerateSphere("lightBall", Color(1.f, 1.f, 1.f), 9, 36, 1.f);
 
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
@@ -158,24 +158,24 @@ void SceneRacing::Init()
 
 	Car1->setPos(0, 0, 50);
 	Car1->setVel(0, 0, carSpeed);
-	Car1->setSize(5, 5, 5);
+	Car1->setSize(car);
 
 	Car2->setPos(5, 0, 55);
 	Car2->setVel(0, 0, carSpeed);
-	Car2->setSize(5, 5, 5);
+	Car2->setSize(car);
 
 	Car3->setPos(10, 0, 65);
 	Car3->setVel(0, 0, carSpeed);
-	Car3->setSize(5, 5, 5);
+	Car3->setSize(car);
 
 
 	carPlayer->setPos(5, 0, 0);
 	carPlayer->setVel(0, 0, 0);
-	carPlayer->setSize(5, 5, 5);
+	carPlayer->setSize(car);
 	carPlayer->setLives(3);
 
 	invinTime = 0.f;
-
+	
 	lives = carPlayer->getLives();
 }
 
@@ -184,56 +184,15 @@ void SceneRacing::Update(double dt)
 	invinTime -= dt;
 	if (isPlaying)
 	{
-		entityCar::updatePos(Car1, Car2, Car3, carPlayer, dt);
+		g3CarEntity::updatePos(Car1, Car2, Car3, carPlayer, dt);
 	}
 	if (carPlayer->getLives() <= 0)
 	{
 		isPlaying = false;
 	}
-	if (Application::IsKeyPressed(0x31))
-	{
-		glDisable(GL_CULL_FACE);
+	if (Application::IsKeyPressed(VK_BACK)) {
+	Application::scenechange(2);
 	}
-	else if (Application::IsKeyPressed(0x32))
-	{
-		glEnable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x33))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-	else if (Application::IsKeyPressed(0x34))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	}
-	if (Application::IsKeyPressed('I'))
-		light[0].position.z -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('K'))
-		light[0].position.z += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('J'))
-		light[0].position.x -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('L'))
-		light[0].position.x += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('O'))
-		light[0].position.y -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('P'))
-		light[0].position.y += (float)(LSPEED * dt);
-
-	/*if (Application::IsKeyPressed('Q'))
-	{
-		//to do: switch light type to POINT and pass the information to
-		light[0].type = Light::LIGHT_POINT;
-	}
-	else if (Application::IsKeyPressed('W'))
-	{
-		//to do: switch light type to DIRECTIONAL and pass the
-		light[0].type = Light::LIGHT_DIRECTIONAL;
-	}
-	else if (Application::IsKeyPressed('E'))
-	{
-		//to do: switch light type to SPOT and pass the information to
-		light[0].type = Light::LIGHT_SPOT;
-	}*/
 
 	if (invinTime <= 0.f)
 	{
@@ -241,6 +200,7 @@ void SceneRacing::Update(double dt)
 		{
 			Car1->setPos(0, 0, 50);
 			carPlayer->updateLives(-1);
+			lives = carPlayer->getLives();
 			invinTime = 2.f;
 		}
 
@@ -248,6 +208,7 @@ void SceneRacing::Update(double dt)
 		{
 			Car2->setPos(5, 0, 55);
 			carPlayer->updateLives(-1);
+			lives = carPlayer->getLives();
 			invinTime = 2.f;
 		}
 
@@ -255,10 +216,13 @@ void SceneRacing::Update(double dt)
 		{
 			Car3->setPos(10, 0, 50);
 			carPlayer->updateLives(-1);
+			lives = carPlayer->getLives();
 			invinTime = 2.f;
 		}
 	}
-
+	modelStack.PushMatrix();
+	RenderTextOnScreen(meshList[GEO_TEXT], "Lives: " + std::to_string(lives), Color(1, 1, 1), 3, 8, 15);
+	modelStack.PopMatrix();
 	camera.Update(dt);
 	CalculateFrameRate();
 }
@@ -311,7 +275,7 @@ void SceneRacing::Render()
 	if (isPlaying == true)
 	{
 		modelStack.PushMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Lives: " + lives, Color(1, 1, 1), 3, 8, 15);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Lives: " + std::to_string(lives), Color(1, 1, 1), 3, 8, 15);
 		modelStack.PopMatrix();
 	}
 }
@@ -376,25 +340,25 @@ void SceneRacing::RenderCars()
 {
 	modelStack.PushMatrix();
 	modelStack.Translate(Car1->getPos().x, Car1->getPos().y, Car1->getPos().z);
-	modelStack.Scale(1, 1, 1);
+	modelStack.Scale(1.5, 1.5, 1.5);
 	RenderMesh(meshList[GEO_CAR1], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(carPlayer->getPos().x, carPlayer->getPos().y, carPlayer->getPos().z);
-	modelStack.Scale(1, 1, 1);
+	modelStack.Scale(1.5, 1.5, 1.5);
 	RenderMesh(meshList[GEO_CAR2], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(Car2->getPos().x, Car2->getPos().y, Car2->getPos().z);
-	modelStack.Scale(1, 1, 1);
+	modelStack.Scale(1.5, 1.5, 1.5);
 	RenderMesh(meshList[GEO_CAR3], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(Car3->getPos().x, Car3->getPos().y, Car3->getPos().z);
-	modelStack.Scale(1, 1, 1);
+	modelStack.Scale(1.5,1.5,1.5);
 	RenderMesh(meshList[GEO_CAR4], false);
 	modelStack.PopMatrix();
 }
@@ -539,9 +503,3 @@ void SceneRacing::CalculateFrameRate()
 	}
 }
 
-
-
-bool SceneRacing::Change()
-{
-	return true;
-}

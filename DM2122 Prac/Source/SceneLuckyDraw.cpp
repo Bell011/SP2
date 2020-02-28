@@ -126,49 +126,8 @@ void SceneLuckyDraw::Init()
 
 void SceneLuckyDraw::Update(double dt)
 {
-	if (Application::IsKeyPressed(0x31))
-	{
-		glDisable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x32))
-	{
-		glEnable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x33))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-	else if (Application::IsKeyPressed(0x34))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	}
-	if (Application::IsKeyPressed('I'))
-		light[0].position.z -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('K'))
-		light[0].position.z += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('J'))
-		light[0].position.x -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('L'))
-		light[0].position.x += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('O'))
-		light[0].position.y -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('P'))
-		light[0].position.y += (float)(LSPEED * dt);
-
-	if (Application::IsKeyPressed('Q'))
-	{
-		//to do: switch light type to POINT and pass the information to
-		light[0].type = Light::LIGHT_POINT;
-	}
-	else if (Application::IsKeyPressed('W'))
-	{
-		//to do: switch light type to DIRECTIONAL and pass the
-		light[0].type = Light::LIGHT_DIRECTIONAL;
-	}
-	else if (Application::IsKeyPressed('E'))
-	{
-		//to do: switch light type to SPOT and pass the information to
-		light[0].type = Light::LIGHT_SPOT;
+	if (Application::IsKeyPressed(VK_BACK)) {
+		Application::scenechange(2);
 	}
 	
 	AnimateWheel(dt);
@@ -222,12 +181,6 @@ void SceneLuckyDraw::Render()
 	modelStack.PopMatrix();
 	
 }
-
-bool SceneLuckyDraw::Change()
-{
-	return false;
-}
-
 
 
 void SceneLuckyDraw::Exit()

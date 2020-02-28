@@ -55,7 +55,6 @@ public:
 
 	virtual void Init();
 	virtual void Update(double dt);
-	virtual bool Change();
 	virtual void Render();
 	virtual void Exit();
 };

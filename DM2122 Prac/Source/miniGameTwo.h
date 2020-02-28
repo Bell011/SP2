@@ -9,7 +9,9 @@
 #include "camerafps.h"
 #include <iostream>
 #include <string>
-#include "collision.h"
+#include "Object.h"
+#include "cirObject.h"
+#include "rectObject.h"
 
 class miniGameTwo : public Scene
 {
@@ -61,9 +63,9 @@ private:
 	TRS BLUEPRINT1;
 	TRS BLUEPRINT2;
 	TRS BLUEPRINT3;
-	object blueprint1;
-	object blueprint2;
-	object blueprint3;
+	Object* blueprint1;
+	Object* blueprint2;
+	Object* blueprint3;
 	Vector3 bluePrintInitialPos1;
 	Vector3 bluePrintInitialPos2;
 	Vector3 bluePrintInitialPos3;
@@ -72,10 +74,10 @@ private:
 	TRS SPACING2;
 	TRS SPACING3;
 	TRS TARGET;
-	object spacing1;
-	object spacing2;
-	object spacing3;
-	object target;
+	Object* spacing1;
+	Object* spacing2;
+	Object* spacing3;
+	Object* target;
 
 	bool bp1, bp2, bp3;
 	bool space1, space2, space3;
@@ -96,7 +98,7 @@ private:
 	float movex;
 	float movey;
 	float movez;
-	bool CheckCollision(object& one, object& two);
+	bool CheckCollision(Object* one, Object* two);
 	void doPickUpCollision();
 	void doMatchingCollision();
 
@@ -106,7 +108,6 @@ public:
 
 	virtual void Init();
 	virtual void Update(double dt);
-	virtual bool Change();
 	virtual void Render();
 	virtual void Exit();
 };

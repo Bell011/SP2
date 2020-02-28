@@ -7,7 +7,8 @@
 #include "Mesh.h"
 #include "Light.h"
 #include "camerafps.h"
-#include "collision.h"
+#include "cirObject.h"
+#include "rectObject.h"
 
 class ShowroomScene : public Scene
 {
@@ -105,12 +106,35 @@ private:
 	Light light[2];
 
 	camerafps camera;
-	
-	TRS CUBE;
-	TRS PLAYER;
-	object cube;
-	object player;
 
+	/*To store bounding boxes*/
+	//bounding sphere
+	Object* player;
+	//bounding box
+	Object* arcade;
+	Object* checkarcade;
+	corners c_arcade;
+	Object* bench;
+	corners c_bench;
+	Object* bsign;
+	corners c_bsign;
+	Object* npc;
+	Object* checknpc;
+	corners c_npc;
+	Object* screen;
+	Object* screen1;
+	corners c_screen;
+	Object* ssign;
+	corners c_ssign;
+	//manual set bounding box
+	Object* car1;
+	Object* car2;
+	Object* car3;
+	Object* door;
+	Object* stage;
+	Object* structure;
+
+	/*To store transformation of objects*/
 	TRS ARCADE;
 	TRS BENCH;
 	TRS BSIGN;
@@ -120,10 +144,10 @@ private:
 	TRS CAR4;
 	TRS DOOR;
 	TRS NPC;
+	TRS PLAYER;
 	TRS SCREEN;
 	TRS SCREEN1;
 	TRS SSIGN;
-	TRS SSIGN1;
 	TRS STAGE;
 	TRS STRUCTURESMALL;
 	TRS STRUCTUREBIG;
@@ -131,12 +155,9 @@ private:
 	TRS WHEEL2;;
 	TRS WHEEL3;
 
-	float movex;
-	float movey;
-	float movez;
-
 	int bouncetime;
-	bool switchlights;
+
+	int fps;
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
@@ -145,9 +166,6 @@ private:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
-
-	bool CheckCollision(object& one, object& two);
-	void doCollision();
 public:
 	ShowroomScene();
 	~ShowroomScene();
@@ -155,7 +173,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
-	virtual bool Change();
 	virtual void Exit();
 };
 
