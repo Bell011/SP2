@@ -7,16 +7,23 @@
 //Include the standard C++ headers
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "Application.h"
 #include "Camera.h"
-#include "selectionMenu.h"
+#include "ShowroomScene.h"
+#include "MainMenu.h"
+#include "GameMenu.h"
+#include "SceneLuckyDraw.h"
+#include "SceneRacing.h"
 #include "miniGameTwo.h"
+#include "TestDriveScene.h"
+#include "selectionMenu.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 
+Scene* Application::scene;
+Scene* Application::scenes[NUM_SCENE];
 //Define an error callback
 static void error_callback(int error, const char* description)
 {
@@ -39,8 +46,8 @@ void resize_callback(GLFWwindow* window, int w, int h)
 
 bool Application::IsKeyPressed(unsigned short key)
 {
-	
-    return ((GetAsyncKeyState(key) & 0x8001) != 0);
+
+	return ((GetAsyncKeyState(key) & 0x8001) != 0);
 }
 
 Application::Application()
@@ -72,11 +79,10 @@ void Application::Init()
 
 	//Create a window and create its OpenGL context
 	m_window = glfwCreateWindow(800, 600, "Test Window", NULL, NULL);
-	//glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	//If the window couldn't be created
 	if (!m_window)
 	{
-		fprintf( stderr, "Failed to open GLFW window.\n" );
+		fprintf(stderr, "Failed to open GLFW window.\n");
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
@@ -91,48 +97,51 @@ void Application::Init()
 	GLenum err = glewInit();
 
 	//If GLEW hasn't initialized
-	if (err != GLEW_OK) 
+	if (err != GLEW_OK)
 	{
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		//return -1;
 	}
 
 	glfwSetWindowSizeCallback(m_window, resize_callback);
-
 }
-
+void Application::scenechange(int no) {
+	scene = scenes[no];
+}
 void Application::Run()
 {
 	//Main Loop
+	scenes[MAINMENU] = new MainMenu();
+	scenes[SHOWROOM] = new ShowroomScene();
+	scenes[GAMEMENU] = new GameMenu();
+	scenes[GAME1] = new SceneLuckyDraw();
+	scenes[GAME2] = new miniGameTwo();
+	scenes[GAME3] = new SceneRacing();
+	scenes[TESTDRIVE] = new TestDriveScene();
+	scenes[SELECTIONMENU] = new selectionMenu();
 
-	Scene* scene1 = new selectionMenu();
-	Scene* scene2 = new miniGameTwo();
-	Scene* scene = scene1;
-	scene1->Init();
-	scene2->Init();
+	for (int i = 0; i < NUM_SCENE; i++) {
+		if (scenes[i] != nullptr) {
+			scenes[i]->Init();
+		}
+	}
+	scene = scenes[MAINMENU];
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
-		if (IsKeyPressed('9')) {
-			scene = scene1;
-		}
-		else if (IsKeyPressed('0')) {
-			scene = scene2;
-		}
+
 		scene->Update(m_timer.getElapsedTime());
 		scene->Render();
 		//Swap buffers
 		glfwSwapBuffers(m_window);
 		//Get and organize events, like keyboard and mouse input, window resizing, etc...
 		glfwPollEvents();
-        m_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.   
+		m_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.   
 
 	} //Check if the ESC key had been pressed or if the window had been closed
-	scene1->Exit();
-	delete scene1;
-	scene2->Exit();
-	delete scene2;
+	scene->Exit();
+	delete scene;
 
 }
 

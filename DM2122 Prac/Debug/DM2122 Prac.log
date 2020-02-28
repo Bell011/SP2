@@ -1,47 +1,29 @@
-﻿  selectionMenu.cpp
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(73,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(76,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(79,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(82,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(88,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(91,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(95,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(96,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(100,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(101,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(105,45): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(106,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(110,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(111,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(115,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(116,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(120,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(121,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(125,44): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(126,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(130,48): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(131,40): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(135,48): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(136,40): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(140,48): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(141,40): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(145,49): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(146,41): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(150,49): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(151,41): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(185,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(189,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(193,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(197,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(247,98): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(248,94): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(249,97): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(250,98): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(252,94): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(253,93): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(254,95): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(420,104): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(429,104): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(459,103): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\selectionMenu.cpp(468,103): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  ShowroomScene.cpp
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(169,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(170,8): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(200,159): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(200,120): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(200,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(297,163): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(297,112): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(297,75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(353,89): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(353,68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(353,47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(372,105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(372,51): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(412,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(424,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(436,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(448,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(555,41): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(557,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(559,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(561,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(569,43): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(571,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(575,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(585,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(587,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(589,38): warning C4305: 'argument': truncation from 'double' to 'float'
   DM2122 Prac.vcxproj -> C:\Users\gohbe\Documents\GitHub\SP2\Debug\DM2122 Prac.exe

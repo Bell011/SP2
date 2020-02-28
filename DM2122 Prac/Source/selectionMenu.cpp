@@ -150,13 +150,16 @@ void selectionMenu::Init()
 	WINDOWCOLOUR2.Translate = Vector3(3.7, -10.5, 0);
 	WINDOWCOLOUR2.Scale = Vector3(2, 1.3, 1);
 
+	// For the checkboxes
 	inCheckBox = false;
+	numberBox1 = numberBox2 = numberBox3 = numberBox4 = numberBox5 = numberBox6 = false;
 	pressedSpace = false;
 	numberBox = 0;
-	numberBox1 = numberBox2 = numberBox3 = numberBox4 = numberBox5 = numberBox6 = false;
+	// For the selection of colours and designs
 	cfColourNum = cfDesignNum = wheelDesignNum = windowColourNum = 0;
 	nextButton = prevButton = false;
 	nextColour = prevColour = nextDesign = prevDesign = false;
+	// To see how many parts are selected
 	numOfParts = 0;
 }
 
