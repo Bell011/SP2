@@ -1,1 +1,4 @@
-﻿  DM2122 Prac.vcxproj -> C:\Users\weizh\Desktop\SP2 spotlight\Debug\DM2122 Prac.exe
+﻿  cameratpp.cpp
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\cameratpp.cpp(94,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\cameratpp.cpp(95,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  DM2122 Prac.vcxproj -> C:\Users\weizh\Documents\GDT Sem2\SP\Debug\DM2122 Prac.exe

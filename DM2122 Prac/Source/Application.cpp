@@ -7,7 +7,6 @@
 //Include the standard C++ headers
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "Application.h"
 #include "Camera.h"
 #include "SceneText.h"
@@ -16,6 +15,9 @@
 #include "TestDriveScene.h"
 #include "miniGameTwo.h"
 #include "SceneLuckyDraw.h"
+#include "SceneRacing.h"
+#include "MainMenu.h"
+#include "GameMenu.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -108,48 +110,80 @@ void Application::Run()
 {
 	//Main Loop
 
-	Scene* scene1 = new TestDriveScene();
-	Scene* scene2 = new SceneLuckyDraw();
-	Scene* scene3 = new ShowroomScene();
-	Scene* scene = scene2;
-	scene1->Init();
-	scene2->Init();
-	scene3->Init();
-
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
-		if (IsKeyPressed('8')) {
-			Scene* scene1 = new TestDriveScene();
-			scene1->Init();
-			scene = scene1;
-		}
-		else if (IsKeyPressed('9')) {
-			Scene* scene2 = new SceneLuckyDraw();
-			scene2->Init();
-			scene = scene2;
-		
-		}
-		else if (IsKeyPressed('0')) {
+		Scene* mainmenu = new SceneText();
+		Scene* showroomscene = new ShowroomScene();
+		Scene* gamemenu = new GameMenu();
+		Scene* luckydraw = new SceneLuckyDraw();
+		Scene* matchbp = new miniGameTwo();
+		Scene* racing = new SceneRacing();
+		Scene* testdrive = new TestDriveScene();
+		Scene* scene = testdrive;
+		mainmenu->Init();
+		showroomscene->Init();
+		gamemenu->Init();
+		luckydraw->Init();
+		matchbp->Init();
+		testdrive->Init();
 
-			scene = scene3;
+		m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
+		while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
+		{
+			if (mainmenu->Change()) {
+				if (IsKeyPressed(VK_RETURN)) {
+					Scene* showroomscene = new ShowroomScene();
+					showroomscene->Init();
+					scene = showroomscene;
+				}
+				
+			}
+			if (showroomscene->Change()) {
+				if (IsKeyPressed(VK_SHIFT)) {
+					Scene* gamemenu = new GameMenu();
+					gamemenu->Init();
+					scene = gamemenu;
+				}
+			}
+			if (gamemenu->Change()) {
+				if (IsKeyPressed('1')) {
+					Scene* luckydraw = new SceneLuckyDraw();
+					luckydraw->Init();
+					scene = luckydraw;
+				}
+				else if (IsKeyPressed('2')) {
+					Scene* matchbp = new miniGameTwo();
+					matchbp->Init();
+					scene = matchbp;
+				}
+				if (IsKeyPressed(VK_BACK)) {
+					scene = showroomscene;
+				}
 
-		}
-		scene->Update(m_timer.getElapsedTime());
-		scene->Render();
-		//Swap buffers
-		glfwSwapBuffers(m_window);
-		//Get and organize events, like keyboard and mouse input, window resizing, etc...
-		glfwPollEvents();
-        m_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.   
+			}
+			scene->Update(m_timer.getElapsedTime());
+			scene->Render();
+			//Swap buffers
+			glfwSwapBuffers(m_window);
+			//Get and organize events, like keyboard and mouse input, window resizing, etc...
+			glfwPollEvents();
+			m_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.   
 
-	} //Check if the ESC key had been pressed or if the window had been closed
-	scene1->Exit();
-	delete scene1;
-	scene2->Exit();
-	delete scene2;
-	scene3->Exit();
-	delete scene3;
+		} //Check if the ESC key had been pressed or if the window had been closed
+		mainmenu->Exit();
+		delete mainmenu;
+		showroomscene->Exit();
+		delete showroomscene;
+		gamemenu->Exit();
+		delete gamemenu;
+		luckydraw->Exit();
+		delete luckydraw;
+		matchbp->Exit();
+		delete matchbp;
+		testdrive->Exit();
+		delete testdrive;
+	}
 
 }
 

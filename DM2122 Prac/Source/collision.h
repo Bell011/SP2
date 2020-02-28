@@ -11,5 +11,21 @@ struct object {
 	}
 };
 
+class Collision {
+private:
+	Vector3 front;
+	Vector3 right;
+	Vector3 up;
+
+public:
+	Collision(Vector3, Vector3, Vector3);
+	~Collision();
+	Vector3 getFront();
+	Vector3 getRight();
+	Vector3 getUp();
+	
+
+};
+
 
 #endif

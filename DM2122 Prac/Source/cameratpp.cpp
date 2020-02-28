@@ -16,6 +16,7 @@ void cameratpp::Init(const Vector3& pos, const Vector3& target, const Vector3& u
 	this->position = defaultPosition = pos;
 	this->target = defaultTarget = target;
 	view = target - position;
+	Vector3 view = (target - position).Normalized();
 	Vector3 right = view.Cross(up);
 	right.y = 0;
 	right.Normalize();
@@ -28,6 +29,49 @@ void cameratpp::Init(const Vector3& pos, const Vector3& target, const Vector3& u
 
 void cameratpp::Update(double dt)
 {
+	static const float CAMERA_SPEED = 50.f;
+	if (Application::IsKeyPressed(VK_LEFT))
+	{
+		float yaw = (float)(-CAMERA_SPEED * dt);
+		Mtx44 rotation;
+		rotation.SetToRotation(yaw, 0, 1, 0);
+		position = rotation * position;
+		up = rotation * up;
+	}
+	if (Application::IsKeyPressed(VK_RIGHT))
+	{
+		float yaw = (float)(CAMERA_SPEED * dt);
+		Mtx44 rotation;
+		rotation.SetToRotation(yaw, 0, 1, 0);
+		position = rotation * position;
+		up = rotation * up;
+	}
+
+	if (Application::IsKeyPressed(VK_UP))
+	{
+		float pitch = (float)(-CAMERA_SPEED * dt);
+		Vector3 view = (target - position).Normalized();
+		Vector3 right = view.Cross(up);
+		right.y = 0;
+		right.Normalize();
+		up = right.Cross(view).Normalized();
+		Mtx44 rotation;
+		rotation.SetToRotation(pitch, right.x, right.y, right.z);
+		position = rotation * position;
+	}
+	if (Application::IsKeyPressed(VK_DOWN))
+	{
+		float pitch = (float)(CAMERA_SPEED * dt);
+		Vector3 view = (target - position).Normalized();
+		Vector3 right = view.Cross(up);
+		right.y = 0;
+		right.Normalize();
+		up = right.Cross(view).Normalized();
+		Mtx44 rotation;
+		rotation.SetToRotation(pitch, right.x, right.y, right.z);
+		position = rotation * position;
+	}
+	
 	mouse_callback();
 	position = target - view;
 }
@@ -70,4 +114,32 @@ void cameratpp::mouse_callback()
 	right.Normalize();
 	up = right.Cross(view).Normalized();
 
+}
+
+void cameratpp::UpdateMovement(const Vector3& pos, const Vector3& target)
+{
+	this->position = defaultPosition = pos;
+	this->target = defaultTarget = target;
+//	static const float CAMERA_SPEED = 50.f;
+}
+
+void  cameratpp::UpdateTurningMovement(bool bLeft, bool bRight, double dt)
+{
+	static const float CAMERA_SPEED = 25.f;
+	if (bLeft)
+	{
+		float yaw = (float)(-CAMERA_SPEED * dt);
+		Mtx44 rotation;
+		rotation.SetToRotation(yaw, 1, 0, 0);
+		position = rotation * position;
+		//up = rotation * up;
+	}
+	if (bRight)
+	{
+		float yaw = (float)(CAMERA_SPEED * dt);
+		Mtx44 rotation;
+		rotation.SetToRotation(yaw, 0, 0, 1);
+		position = rotation * position;
+		//up = rotation * up;
+	}
 }
