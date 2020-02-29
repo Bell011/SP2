@@ -7,7 +7,6 @@
 #include "Mesh.h"
 #include "Light.h"
 #include "camerafps.h"
-#include "camerafps.h"
 #include "cirObject.h"
 #include "rectObject.h"
 
@@ -252,6 +251,7 @@ private:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
+
 	void InitSpotlights();
 	void RenderSpotlights();
 	void SwitchLightColours();
