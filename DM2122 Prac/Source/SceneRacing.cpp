@@ -174,12 +174,12 @@ void SceneRacing::Init()
 
 	carPlayer->setPos(5, 0, 0);
 	carPlayer->setVel(0, 0, 0);
-	carPlayer->setSize(5, 5, 3);
+	carPlayer->setSize(car);
 	carPlayer->setLives(3);
 
 	//invinTime = 0.f;
 
-	lives = std::to_string(carPlayer->getLives());
+	//lives = std::to_string(carPlayer->getLives());
 	carPlayer->setSize(car);
 	carPlayer->setLives(3);
 
@@ -233,7 +233,6 @@ void SceneRacing::Update(double dt)
 			carPlayer->updateLives(-1);
 			invinTime = 2.f;
 		}
-	}
 	camera.Update(dt);
 	CalculateFrameRate();
 }
@@ -547,3 +546,9 @@ void SceneRacing::CalculateFrameRate()
 	}
 }
 
+
+
+void SceneRacing::Change()
+{
+
+}
