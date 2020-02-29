@@ -1,12 +1,14 @@
 #ifndef _SCENE_RACING_H
 #define _SCENE_RACING_H
 #include "Scene.h"
-#include "CarEntity.h"
+#include "g3CarEntity.h"
 #include <MatrixStack.h>
 #include "Camera2.h"
 #include "Mesh.h"
 #include "Light.h"
 #include <string.h>
+#include <iostream>
+#include "collcorners.h"
 class SceneRacing : public Scene
 {
 	enum GEOMETRY_TYPE
@@ -86,14 +88,16 @@ private:
 	void CalculateFrameRate();
 
 	float carSpeed;
-	entityCar* carPlayer = new entityCar;
-	entityCar* Car1 = new entityCar;
-	entityCar* Car2 = new entityCar;
-	entityCar* Car3 = new entityCar;
+	g3CarEntity* carPlayer = new g3CarEntity;
+	corners car;
+	g3CarEntity* Car1 = new g3CarEntity;
+	g3CarEntity* Car2 = new g3CarEntity;
+	g3CarEntity* Car3 = new g3CarEntity;
+	
 	bool isPlaying;
 	float invinTime;
-
-	std::string lives;
+	float bouncetime;
+	int lives;
 
 public:
 	SceneRacing();
@@ -103,7 +107,6 @@ public:
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
-	virtual bool Change();
 };
 
 

@@ -7,8 +7,20 @@
 #include "Mesh.h"
 #include "Light.h"
 #include "cameratpp.h"
-#include "collision.h"
+#include "collcorners.h"
+#include <iostream>
 
+struct car {
+	Vector3 pos;
+	Vector3 size;
+
+	void setSize(corners& c)
+	{
+		this->size.x = (c.getMax().x - c.getMin().x) / 2;
+		this->size.y = (c.getMax().y - c.getMin().y) / 2;
+		this->size.z = (c.getMax().z - c.getMin().z) / 2;
+	}
+};
 class TestDriveScene : public Scene
 {
 	enum GEOMETRY_TYPE
@@ -91,14 +103,14 @@ private:
 	TRS CUBE;
 	TRS PLAYER;
 	TRS TRACK;
-	object cube;
-	object player;
-
+	car player;
+	corners cplayer;
 
 	float movex;
 	float movey;
 	float movez;
-
+	float speed = 0.f;
+	float turnangle = 0.f;
 	int bouncetime;
 	bool switchlights;
 
@@ -109,8 +121,8 @@ private:
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
 
-	bool CheckCollision(object& one, object& two);
-	void doCollision();
+
+	bool checkCollision();
 public:
 	TestDriveScene();
 	~TestDriveScene();
@@ -118,7 +130,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
-	virtual bool Change();
 	virtual void Exit();
 };
 
