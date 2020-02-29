@@ -241,8 +241,14 @@ private:
 	TRS HEADLIGHTS;
 
 	int bouncetime;
-
 	int fps;
+
+	// Animation for the stage
+	bool stageMoving;
+	bool stageUp;
+	bool stageDown;
+	double stageTrans;
+	double stageRAngle;
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
@@ -251,7 +257,7 @@ private:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
-
+	void animateStage(double dt);
 	void InitSpotlights();
 	void RenderSpotlights();
 	void SwitchLightColours();
