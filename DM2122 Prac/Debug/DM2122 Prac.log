@@ -1,32 +1,4 @@
-﻿  ShowroomScene.cpp
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(150,76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(150,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(150,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(161,66): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(161,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(161,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(176,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(414,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(430,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(435,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(440,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(445,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(450,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(455,18): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(558,41): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(560,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(562,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(564,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(572,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(574,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(578,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(588,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(590,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(592,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(946,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(948,37): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(951,40): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(953,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(1255,40): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\weizh\Documents\GDT Sem2\SP\DM2122 Prac\Source\ShowroomScene.cpp(1262,38): warning C4305: 'argument': truncation from 'double' to 'float'
-  DM2122 Prac.vcxproj -> C:\Users\weizh\Documents\GDT Sem2\SP\Debug\DM2122 Prac.exe
+﻿  TestDriveScene.cpp
+C:\Users\weizh\Downloads\SP2-master (2)\SP2-master\DM2122 Prac\Source\TestDriveScene.cpp(130,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\weizh\Downloads\SP2-master (2)\SP2-master\DM2122 Prac\Source\TestDriveScene.cpp(141,16): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  DM2122 Prac.vcxproj -> C:\Users\weizh\Downloads\SP2-master (2)\SP2-master\Debug\DM2122 Prac.exe

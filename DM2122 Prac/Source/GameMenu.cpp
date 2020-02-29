@@ -65,8 +65,7 @@ void GameMenu::Init()
 	meshList[GEO_BG]->textureID = LoadTGA("Image//gamemenu.tga");
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
-	meshList[GEO_CURSOR] = MeshBuilder::GenerateQuad("arrow", Color(1, 1, 1), 10.f, 10.f);
-	meshList[GEO_CURSOR]->textureID = LoadTGA("Image//arrow.tga");
+	bouncetime = 0.f;
 }
 
 void GameMenu::Update(double dt)
@@ -85,6 +84,22 @@ void GameMenu::Update(double dt)
 	}
 
 
+	if (Application::IsKeyPressed('1')) {
+		Application::scenechange(3);
+	}
+	else if (Application::IsKeyPressed('2')) {
+		Application::scenechange(4);
+	}
+	else if (Application::IsKeyPressed('3')) {
+		Application::scenechange(5);
+	}
+	if (Application::IsKeyPressed(VK_BACK)) {
+		float currentTime = GetTickCount() * 0.001f;
+		if (currentTime - bouncetime > 0.5f)
+		{
+			Application::scenechange(1);
+		}
+	}
 	CalculateFrameRate();
 }
 void GameMenu::RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight)
@@ -109,16 +124,10 @@ void GameMenu::Render()
 	modelStack.LoadIdentity();
 	//Render in order from Background to Foreground
 	RenderMeshOnScreen(meshList[GEO_BG], 40, 60, 0.5, 0.5);
-	RenderMeshOnScreen(meshList[GEO_CURSOR], 0.5, 0.75, cursorx, cursory);
-	RenderTextOnScreen(meshList[GEO_TEXT], "Press 1/2/3", Color(0, 0, 0), 3, 0, 0);
+	
+	RenderTextOnScreen(meshList[GEO_TEXT], "Press BACKSPACE to leave", Color(0, 0, 0), 3, 0, 1);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Press 1/2/3 to play", Color(0, 0, 0), 3, 0, 0);
 
-}
-
-bool GameMenu::Change()
-{
-	if ((cursorx == 5 && cursory == 31) || (cursorx == 48 && cursory == 31) || (cursorx == 5 && cursory == 47))
-		return true;
-	return false;
 }
 
 

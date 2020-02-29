@@ -28,11 +28,12 @@ void camerafps::Init(const Vector3& pos, const Vector3& target, const Vector3& u
 	firstMouse = true;
 	lastX = 800.0f / 2.0;
 	lastY = 600.0f / 2.0;
+	CAMERA_SPEED = 10.f;
 }
 
 void camerafps::Update(double dt)
 {
-	static const float CAMERA_SPEED = 10.f;
+	
 	if (Application::IsKeyPressed('A'))
 	{
 		//float yaw = (float)(-CAMERA_SPEED * dt);

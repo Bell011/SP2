@@ -89,7 +89,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
-	virtual bool Change();
 	virtual void Exit();
 };
 

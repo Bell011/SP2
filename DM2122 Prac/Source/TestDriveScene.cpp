@@ -35,8 +35,9 @@ void TestDriveScene::Init()
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	camera.Init(Vector3(player.pos.x, player.pos.y +10, player.pos.z+15), Vector3(player.pos.x,player.pos.y,player.pos.z), Vector3(0, 1, 0));
+	player.pos = Vector3(0, 0, 1);
+	//camera.Init(Vector3(0.f, 1.f, -10.f), player.pos, Vector3(0, 1, 0));
+	camera.Init(Vector3(0.f, 100.f, 0.f), Vector3(0, 0, 1), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
@@ -64,11 +65,12 @@ void TestDriveScene::Init()
 	m_parameters[U_TEXT_ENABLED] = glGetUniformLocation(m_programID, "textEnabled");
 	m_parameters[U_TEXT_COLOR] = glGetUniformLocation(m_programID, "textColor");
 
+
 	glUseProgram(m_programID);
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
 
-	glUniform1i(m_parameters[U_NUMLIGHTS], 7); 
+	glUniform1i(m_parameters[U_NUMLIGHTS], 6); 
 
 	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_LEFT]->textureID = LoadTGA("Image//outdoor_Left.tga");
@@ -88,30 +90,17 @@ void TestDriveScene::Init()
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//outdoor_Back.tga");
 
-	meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("car4", "OBJ//car4.obj");
-	meshList[GEO_CHAR]->textureID = LoadTGA("Image//car4.tga");
-	movex = 0;	movey = 0;	movez = 0;
-	PLAYER.Translate = Vector3(0, 0, 0);
-	//PLAYER.Scale = Vector3(2, 2, 2);
-	PLAYER.RotateZ = Vector4(180, 0, 1, 0);
-	//player.size = Vector3(length/2*CUBE.Scale.x, height/2* CUBE.Scale.y, width/2 * CUBE.Scale.z);
-	/*-----------------------------------------------------------------------------------------------
-	HOW TO GET LENGTH,  WIDTH, HEIGHT OF OBJECT:
-	1. OPEN THE OBJ FILE USING NOTEPAD
-	2. U WIlL SEE ROWS OF THESE:
-		v 1.656677 3.053495 0.519560
-		v 1.719025 2.998324 0.653901
-		v 1.720906 3.284813 0.462875
-	3. Each column represents x, y, z coord respectively
-	4. Add the 2 extreme values in each column and divide by 2 to get length, height and width
-		Eg. Greatest x value = 0.95		Smallest x value = -0.56;
-			length = (0.95 + 0.56) / 2
+	meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("Dice", "OBJ//g3car.obj");
+	meshList[GEO_CHAR]->textureID = LoadTGA("Image//g3car.tga");
+	movex = 0;	movey = -0;	movez = 0;
+	PLAYER.Translate = Vector3(0, -0, 1);
+	PLAYER.Scale = Vector3(2, 2, 2);
+	
+	cplayer.getCoords("OBJ//mushroom.obj", cplayer);
+	player.setSize(cplayer);
+	PLAYER.RotateY = Vector4(0, 0, 1, 0);
+	
 
-	PS if i have free time i will make some function/class to read the values from the notepad file 
-	   n stuff and do the math oso..but so far just manually calculate first :)
-	---------------------------------------------------------------------------------------------*/
-	player.size = Vector3(0.94 * PLAYER.Scale.x, 0.865 * PLAYER.Scale.y, 0.95 * PLAYER.Scale.z);
-	player.pos = Vector3(CUBE.Translate.x, CUBE.Translate.y, CUBE.Translate.z);
 	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CHAR]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CHAR]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -120,9 +109,6 @@ void TestDriveScene::Init()
 	meshList[GEO_CUBE] = MeshBuilder::GenerateCuboid("Cube", Color(1, 0, 0), 1.f, 1.f, 1.f);
 	CUBE.Translate = Vector3(2, 0, 0);
 	CUBE.Scale = Vector3(2, 2, 2);
-	//cube.size = Vector3(length/2*CUBE.Scale.x, height/2* CUBE.Scale.y, width/2 * CUBE.Scale.z);
-	cube.size = Vector3(0.5 * CUBE.Scale.x, 0.5 * CUBE.Scale.y, 0.5 * CUBE.Scale.z);
-	cube.pos = Vector3(CUBE.Translate.x, CUBE.Translate.y, CUBE.Translate.z);
 	meshList[GEO_CUBE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_CUBE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
 	meshList[GEO_CUBE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
@@ -141,118 +127,57 @@ void TestDriveScene::Init()
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	
-	bouncetime = fSpeed = fRotate = 0.f;
-	switchlights = bCheckBrake = bTurningLeft = bTurningRight = false;
+	bouncetime = 0.f;
+	switchlights = false;
 
-	InitLamppost();
-	InitHeadlights();
-	InitBrakelights();
-}
-
-bool TestDriveScene:: CheckCollision(object& one, object& two)
-{
-	if (
-		(one.pos.x - one.size.x <= two.pos.x + two.size.x && one.pos.x + one.size.x >= two.pos.x - two.size.x) &&
-		(one.pos.y - one.size.y <= two.pos.y + two.size.y && one.pos.y + one.size.y >= two.pos.y - two.size.y) &&
-		(one.pos.z - one.size.z <= two.pos.z + two.size.z && one.pos.z + one.size.z >= two.pos.z - two.size.z)
-		) {
-		return true;
-	}
-	return false;
+	InitFloatingLights();
+	InitDaylight();
+	InitHeadlight();
 }
 
 void TestDriveScene::Update(double dt)
 {
-	if (Application::IsKeyPressed(0x31))
-	{
-		glDisable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x32))
-	{
-		glEnable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x33))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-	else if (Application::IsKeyPressed(0x34))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	}
-	/*if (Application::IsKeyPressed('I'))
-		light[0].position.z -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('K'))
-		light[0].position.z += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('J'))
-		light[0].position.x -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('L'))
-		light[0].position.x += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('O'))
-		light[0].position.y -= (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('P'))
-		light[0].position.y += (float)(LSPEED * dt);
+	if(speed<0.5)
+	speed +=dt*0.1;
+	Vector3 movement = Vector3(speed * cos(Math::DegreeToRadian(180 - PLAYER.RotateY.degree)), 0, speed * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
 
-	if (Application::IsKeyPressed('5'))
-	{
-		//to do: switch light type to POINT and pass the information to
-		light[0].type = Light::LIGHT_POINT;
+	PLAYER.Translate = player.pos;
+	//camera.target = player.pos;
+	//camera.position = (camera.target - camera.view)/*.Normalized()*/;
+	std::cout << speed;
+
+	if (Application::IsKeyPressed('W')) {
+		player.pos -= movement;
 	}
-	else if (Application::IsKeyPressed('6'))
-	{
-		//to do: switch light type to DIRECTIONAL and pass the
-		light[0].type = Light::LIGHT_DIRECTIONAL;
+	if (Application::IsKeyPressed('S')) {
+		player.pos += movement;
 	}
-	else if (Application::IsKeyPressed('7'))
-	{
-		//to do: switch light type to SPOT and pass the information to
-		light[0].type = Light::LIGHT_SPOT;
-	}*/
+	if (Application::IsKeyPressed('A')) {
+			turnangle += 5;
+		PLAYER.RotateY.degree = turnangle;
+		light[5].spotDirection -= player.pos;
+	}
+	if (Application::IsKeyPressed('D')) {
+			turnangle -= 5;
+		PLAYER.RotateY.degree = turnangle;
+		light[5].spotDirection += player.pos;
+	}
 	
-	//camera.Update(dt);
-	camera.UpdateMovement(Vector3(player.pos.x, player.pos.y + 6, player.pos.z + 15), Vector3(player.pos.x, player.pos.y, player.pos.z));
-	//camera.UpdateTurningMovement(bTurningLeft, bTurningRight, dt);
-	//SetCursorPos(camera.setCursorX, camera.setCursorY);
+	light[5].position.Set(player.getX(), 0, player.getY());
+
+	
+
+	glUniform3fv(m_parameters[U_LIGHT5_SPOTDIRECTION], 1, &light[5].spotDirection.x);
+
 	CalculateFrameRate();
-	/*if (Application::IsKeyPressed('P'))
-	{
-		float currentTime = GetTickCount() * 0.001f;
-		if (currentTime - bouncetime > 0.1f)
-		{
-			bouncetime = currentTime;
-			switchlights = !switchlights;
-
-			if (switchlights) {
-				light[1].power = 1.f;
-				glUniform1f(m_parameters[U_LIGHT1_POWER], light[1].power);
-			}
-			else
-			{
-				light[1].power = 0.f;
-				glUniform1f(m_parameters[U_LIGHT1_POWER], light[1].power);
-			}
-		}
-	}*/
-	
-	light[4].position.Set(movex + 2, movey, movez - 5);
-	light[5].position.Set(movex - 1.3, movey, movez - 5);
-	light[6].position.Set(movex + 0.2 , movey, movez + 2.5);
-
-	DrivingMovement(dt);
+	camera.Update(dt);
+//	camera.mouse_callback();
 	DayTimeNightTime();
-	UpdateBrakelights();
-	doCollision();
-	//camera.mouse_callback();
 }
+bool TestDriveScene::checkCollision() {
+	return false;
 
-void TestDriveScene::doCollision() {
-	if (CheckCollision(player, cube)) {
-		printf("YES\n");
-
-	}else
-
-	printf("NO\n");
 }
-
 /******************************************************************************/
 /*!
 \brief
@@ -281,7 +206,6 @@ void TestDriveScene::RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight)
 		modelStack.PopMatrix();
 	}
 }
-
 void TestDriveScene::Render()
 {
 	//Clear color & depth buffer every frame
@@ -291,31 +215,20 @@ void TestDriveScene::Render()
 	viewStack.LookAt(camera.position.x, camera.position.y, camera.position.z, camera.target.x, camera.target.y, camera.target.z, camera.up.x, camera.up.y, camera.up.z);
 	modelStack.LoadIdentity();
 
-	RenderLamppost();
-	RenderHeadlights();
-	RenderBrakelights();
 	RenderSkybox();
-	RenderOBJ(meshList[GEO_TRACK], TRACK, true, true);
+	RenderFloatingLights();
+	RenderDaylight();
+	RenderHeadlight();
+//	RenderOBJ(meshList[GEO_TRACK], TRACK, true, true);
 
 	//RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
 	////Update the translate vector if theres is any transformation
-	PLAYER.Translate = Vector3(movex, movey, movez);
-	PLAYER.RotateY = Vector4(fRotate,0,1, 0);
 	////Update the pos vector as well
 	////if object is scaled, update the size vector
-	player.pos = Vector3(PLAYER.Translate.x, PLAYER.Translate.y, PLAYER.Translate.z);
 	RenderOBJ(meshList[GEO_CHAR], PLAYER, true, true);
 
 	//No transform needed
-	RenderTextOnScreen(meshList[GEO_TEXT], "W = forward", Color(0, 0, 0), 2, 0, 29);
-	RenderTextOnScreen(meshList[GEO_TEXT], "S = backward", Color(0, 0, 0), 2, 0, 27);
-	RenderTextOnScreen(meshList[GEO_TEXT], "A / D = steer", Color(0, 0, 0), 2, 0, 25);
-	RenderTextOnScreen(meshList[GEO_TEXT], "SPACE = brake", Color(0, 0, 0), 2, 0, 23);
-}
-
-bool TestDriveScene::Change()
-{
-	return false;
+	RenderTextOnScreen(meshList[GEO_TEXT], "Hello World", Color(0, 1, 0), 2, 0, 0);
 }
 
 void TestDriveScene::Exit()
@@ -380,14 +293,14 @@ void TestDriveScene::RenderSkybox()
 		modelStack.Translate(-50.f, 45.f, 0.f);
 		modelStack.Scale(100.f, 100.f, 100.f);
 		modelStack.Rotate(90.f, 0.f, 1.f, 0.f);
-		RenderMesh(meshList[GEO_LEFT], false);
+		RenderMesh(meshList[GEO_LEFT], true);
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
 		///scale, translate, rotate 
 		modelStack.Translate(50.f, 45.f, 0.f);
 		modelStack.Scale(100.f, 100.f, 100.f);
 		modelStack.Rotate(-90.f, 0.f, 1.f, 0.f);
-		RenderMesh(meshList[GEO_RIGHT], false);
+		RenderMesh(meshList[GEO_RIGHT], true);
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
 		///scale, translate, rotate 
@@ -397,7 +310,7 @@ void TestDriveScene::RenderSkybox()
 		modelStack.PushMatrix();
 			modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
 			modelStack.Rotate(-90.f, 0.f,0.f, 1.f);
-			RenderMesh(meshList[GEO_TOP], false);
+			RenderMesh(meshList[GEO_TOP], true);
 		modelStack.PopMatrix();
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
@@ -407,21 +320,21 @@ void TestDriveScene::RenderSkybox()
 		modelStack.Rotate(-90.f, 1.f, 0.f, 0.f);
 		modelStack.PushMatrix();
 		modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
-		RenderMesh(meshList[GEO_BOTTOM], false);
+		RenderMesh(meshList[GEO_BOTTOM], true);
 		modelStack.PopMatrix();
 		modelStack.PopMatrix();
 	modelStack.PushMatrix();
 		///scale, translate, rotate 
 		modelStack.Translate(0.f, 45.f, -50.f);
 		modelStack.Scale(100.f, 100.f, 100.f);
-		RenderMesh(meshList[GEO_FRONT], false);
+		RenderMesh(meshList[GEO_FRONT], true);
 	modelStack.PopMatrix();
 	modelStack.PushMatrix();
 		///scale, translate, rotate 
 		modelStack.Translate(0.f, 45.f, 50.f);
 		modelStack.Scale(100.f, 100.f, 100.f);
 		modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-		RenderMesh(meshList[GEO_BACK], false);
+		RenderMesh(meshList[GEO_BACK], true);
 	modelStack.PopMatrix();
 }
 
@@ -512,7 +425,7 @@ void TestDriveScene::CalculateFrameRate()
 	}
 }
 
-void TestDriveScene::InitLamppost()
+void TestDriveScene::InitFloatingLights()
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -527,9 +440,9 @@ void TestDriveScene::InitLamppost()
 		light[i].exponent = 3.f;
 		light[i].spotDirection.Set(0.f, 1.f, 0.f);
 		if (i < 2) // left
-			light[i].position.Set(-20.f, 11.f, (15.f - (i * 30.f)));
+			light[i].position.Set(-25.f, 30.f, (15.f - (i * 30.f)));
 		else // right
-			light[i].position.Set(20.f, 11.f, (15.f - ((i - 2) * 30.f)));
+			light[i].position.Set(25.f, 30.f, (15.f - ((i - 2) * 30.f)));
 	}
 	m_parameters[U_LIGHT0_POSITION] = glGetUniformLocation(m_programID, "lights[0].position_cameraspace");
 	m_parameters[U_LIGHT0_COLOR] = glGetUniformLocation(m_programID, "lights[0].color");
@@ -581,7 +494,7 @@ void TestDriveScene::InitLamppost()
 	m_parameters[U_LIGHT2_KC] = glGetUniformLocation(m_programID, "lights[2].kC");
 	m_parameters[U_LIGHT2_KL] = glGetUniformLocation(m_programID, "lights[2].kL");
 	m_parameters[U_LIGHT2_KQ] = glGetUniformLocation(m_programID, "lights[2].kQ");
-	m_parameters[U_LIGHT2_TYPE] = glGetUniformLocation(m_programID, "lights[1].type");
+	m_parameters[U_LIGHT2_TYPE] = glGetUniformLocation(m_programID, "lights[2].type");
 	m_parameters[U_LIGHT2_SPOTDIRECTION] = glGetUniformLocation(m_programID, "lights[2].spotDirection");
 	m_parameters[U_LIGHT2_COSCUTOFF] = glGetUniformLocation(m_programID, "lights[2].cosCutoff");
 	m_parameters[U_LIGHT2_COSINNER] = glGetUniformLocation(m_programID, "lights[2].cosInner");
@@ -619,17 +532,14 @@ void TestDriveScene::InitLamppost()
 	glUniform1f(m_parameters[U_LIGHT3_COSINNER], light[3].cosInner);
 	glUniform1f(m_parameters[U_LIGHT3_EXPONENT], light[3].exponent);
 
-	meshList[GEO_LAMPPOST] = MeshBuilder::GenerateOBJ("lamppost", "OBJ//lamppost.obj");
-	meshList[GEO_LAMPPOST]->textureID = LoadTGA("Image//lamppost.tga");
-	meshList[GEO_LAMPPOST]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_LAMPPOST]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_LAMPPOST]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_LAMPPOST]->material.kShininess = 1.f;
-
-	meshList[GEO_LIGHTCUBE] = MeshBuilder::GenerateCuboid("lightCube", Color(1.f, 1.f, 1.f), 1, 1, 1);
+	meshList[GEO_LIGHTCUBE] = MeshBuilder::GenerateCuboid("lightCube", Color(0.f, 0.5f, 0.5f), 1, 1, 1);
+	meshList[GEO_LIGHTCUBE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
+	meshList[GEO_LIGHTCUBE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_LIGHTCUBE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_LIGHTCUBE]->material.kShininess = 1.f;
 }
 
-void TestDriveScene::RenderLamppost()
+void TestDriveScene::RenderFloatingLights()
 {
 	// passing the light direction if it is a direction light	
 	if (light[0].type == Light::LIGHT_DIRECTIONAL)
@@ -644,7 +554,7 @@ void TestDriveScene::RenderLamppost()
 		Position lightPosition_cameraspace = viewStack.Top() * light[0].position;
 		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
 		Vector3 spotDirection_cameraspace = viewStack.Top() * light[0].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT0_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);	
+		glUniform3fv(m_parameters[U_LIGHT0_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
 	}
 	else
 	{
@@ -715,78 +625,51 @@ void TestDriveScene::RenderLamppost()
 		Position lightPosition_cameraspace = viewStack.Top() * light[3].position;
 		glUniform3fv(m_parameters[U_LIGHT3_POSITION], 1, &lightPosition_cameraspace.x);
 	}
-	
+
 	for (int i = 0; i < 4; i++)
 	{
-		if (i < 2) // left
-		{
-			modelStack.PushMatrix();
-			///scale, translate, rotate 
-				modelStack.Translate(-21.f, 0.f, (15.f - (i * 30.f)));
-				modelStack.Scale(3.f, 3.f, 3.f);
-				RenderMesh(meshList[GEO_LAMPPOST], true);
-			modelStack.PopMatrix();
-		}
-		else // right
-		{
-			modelStack.PushMatrix();
-			///scale, translate, rotate 
-				modelStack.Translate(21.f, 0.f, (15.f - ((i- 2) * 30.f)));
-				modelStack.Scale(3.f, 3.f, 3.f);
-				modelStack.Rotate(180.f, 0.f, 1.f, 0.f);
-				RenderMesh(meshList[GEO_LAMPPOST], true);
-			modelStack.PopMatrix();
-		}
 		modelStack.PushMatrix();
 			modelStack.Translate(light[i].position.x, light[i].position.y, light[i].position.z);
-			RenderMesh(meshList[GEO_LIGHTCUBE], false);
+			RenderMesh(meshList[GEO_LIGHTCUBE], true);
 		modelStack.PopMatrix();
 	}
 }
 
 void TestDriveScene::DayTimeNightTime()
 {
-	/*if (Application::IsKeyPressed('L'))
+	//if (Application::IsKeyPressed('E'))
+	//{
+	//	light[5].power = 2.f;	// headlight
+	//	light[4].power = 0.f;	// night light
+	//	for (int i = 0; i < 4; i++) // floating lights
+	//		light[i].power = 1.f;
+	//}
+	//else
+	if (Application::IsKeyPressed('E'))
 	{
-		if (switchlights) // night
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				light[i].power = 1.f;
-				glUniform1f(m_parameters[U_LIGHT1_POWER], light[i].power);
-			}
-		}
-		else // day
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				light[i].power = 0.f;
-				glUniform1f(m_parameters[U_LIGHT1_POWER], light[i].power);
-			}
-		}
-	}*/
+		light[5].power = 0.f;	// headlight
+		light[4].power = 1.f;	// day light
+		for (int i = 0; i < 4; i++) // floating lights
+			light[i].power = 0.f;
+	}
+	else
+	{
+		light[5].power = 2.f;	// headlight
+		light[4].power = 0.f;	// night light
+		for (int i = 0; i < 4; i++) // floating lights
+			light[i].power = 0.f;
+	}
 	
+	glUniform1f(m_parameters[U_LIGHT0_POWER], light[0].power);
+	glUniform1f(m_parameters[U_LIGHT1_POWER], light[1].power);
+	glUniform1f(m_parameters[U_LIGHT2_POWER], light[2].power);
+	glUniform1f(m_parameters[U_LIGHT3_POWER], light[3].power);
+	glUniform1f(m_parameters[U_LIGHT4_POWER], light[4].power);
+	glUniform1f(m_parameters[U_LIGHT5_POWER], light[5].power);
 }
 
-void TestDriveScene::InitHeadlights()
+void TestDriveScene::InitDaylight()
 {
-	for (int i = 4; i < 6; i++)
-	{
-		light[i].type = Light::LIGHT_SPOT;
-		light[i].color.Set(0.5f, 0.5f, 0.5f);
-		light[i].power = 1;
-		light[i].kC = 1.f;
-		light[i].kL = 0.01f;
-		light[i].kQ = 0.001f;
-		light[i].cosCutoff = cos(Math::DegreeToRadian(20));
-		light[i].cosInner = cos(Math::DegreeToRadian(5));
-		light[i].exponent = 3.f;
-		light[i].spotDirection.Set(0.f, 0.5f, 1.f);
-		if (i == 4) // left
-			light[i].position.Set(movex +2.5, movey, movez-5);
-		else // right
-			light[i].position.Set(movex -2.5, movey, movez-5);
-	}
 	m_parameters[U_LIGHT4_POSITION] = glGetUniformLocation(m_programID, "lights[4].position_cameraspace");
 	m_parameters[U_LIGHT4_COLOR] = glGetUniformLocation(m_programID, "lights[4].color");
 	m_parameters[U_LIGHT4_POWER] = glGetUniformLocation(m_programID, "lights[4].power");
@@ -798,6 +681,17 @@ void TestDriveScene::InitHeadlights()
 	m_parameters[U_LIGHT4_COSCUTOFF] = glGetUniformLocation(m_programID, "lights[4].cosCutoff");
 	m_parameters[U_LIGHT4_COSINNER] = glGetUniformLocation(m_programID, "lights[4].cosInner");
 	m_parameters[U_LIGHT4_EXPONENT] = glGetUniformLocation(m_programID, "lights[4].exponent");
+	light[4].type = Light::LIGHT_DIRECTIONAL;
+	light[4].position.Set(0, 90, 0);
+	light[4].color.Set(0.53f, 0.53f, 0.5f);
+	light[4].power = 1;
+	light[4].kC = 1.f;
+	light[4].kL = 0.01f;
+	light[4].kQ = 0.001f;
+	light[4].cosCutoff = cos(Math::DegreeToRadian(20));
+	light[4].cosInner = cos(Math::DegreeToRadian(5));
+	light[4].exponent = 3.f;
+	light[4].spotDirection.Set(0.f, 1.f, 0.f);
 	glUniform1i(m_parameters[U_LIGHT4_TYPE], light[4].type);
 	glUniform3fv(m_parameters[U_LIGHT4_COLOR], 1, &light[4].color.r);
 	glUniform1f(m_parameters[U_LIGHT4_POWER], light[4].power);
@@ -808,7 +702,34 @@ void TestDriveScene::InitHeadlights()
 	glUniform1f(m_parameters[U_LIGHT4_COSCUTOFF], light[4].cosCutoff);
 	glUniform1f(m_parameters[U_LIGHT4_COSINNER], light[4].cosInner);
 	glUniform1f(m_parameters[U_LIGHT4_EXPONENT], light[4].exponent);
+}
 
+void TestDriveScene::RenderDaylight()
+{
+	if (light[4].type == Light::LIGHT_DIRECTIONAL)
+	{
+		Vector3 lightDir(light[4].position.x, light[4].position.y, light[4].position.z);
+		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+		glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightDirection_cameraspace.x);
+	}
+	// if it is spot light, pass in position and direction
+	else if (light[4].type == Light::LIGHT_SPOT)
+	{
+		Position lightPosition_cameraspace = viewStack.Top() * light[4].position;
+		glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightPosition_cameraspace.x);
+		Vector3 spotDirection_cameraspace = viewStack.Top() * light[4].spotDirection;
+		glUniform3fv(m_parameters[U_LIGHT4_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
+	}
+	else
+	{
+		// default is point light (only position since point light is 360 degrees)
+		Position lightPosition_cameraspace = viewStack.Top() * light[4].position;
+		glUniform3fv(m_parameters[U_LIGHT4_POSITION], 1, &lightPosition_cameraspace.x);
+	}
+}
+
+void TestDriveScene::InitHeadlight()
+{
 	m_parameters[U_LIGHT5_POSITION] = glGetUniformLocation(m_programID, "lights[5].position_cameraspace");
 	m_parameters[U_LIGHT5_COLOR] = glGetUniformLocation(m_programID, "lights[5].color");
 	m_parameters[U_LIGHT5_POWER] = glGetUniformLocation(m_programID, "lights[5].power");
@@ -820,6 +741,17 @@ void TestDriveScene::InitHeadlights()
 	m_parameters[U_LIGHT5_COSCUTOFF] = glGetUniformLocation(m_programID, "lights[5].cosCutoff");
 	m_parameters[U_LIGHT5_COSINNER] = glGetUniformLocation(m_programID, "lights[5].cosInner");
 	m_parameters[U_LIGHT5_EXPONENT] = glGetUniformLocation(m_programID, "lights[5].exponent");
+	light[5].type = Light::LIGHT_SPOT;
+	light[5].position.Set(0, 0, 0);
+	light[5].color.Set(0.5f, 0.5f, 0.5f);
+	light[5].power = 2;
+	light[5].kC = 1.f;
+	light[5].kL = 0.01f;
+	light[5].kQ = 0.001f;
+	light[5].cosCutoff = cos(Math::DegreeToRadian(20));
+	light[5].cosInner = cos(Math::DegreeToRadian(5));
+	light[5].exponent = 3.f;
+	light[5].spotDirection.Set(-1.f, 0.0f, -0.f);
 	glUniform1i(m_parameters[U_LIGHT5_TYPE], light[5].type);
 	glUniform3fv(m_parameters[U_LIGHT5_COLOR], 1, &light[5].color.r);
 	glUniform1f(m_parameters[U_LIGHT5_POWER], light[5].power);
@@ -830,11 +762,9 @@ void TestDriveScene::InitHeadlights()
 	glUniform1f(m_parameters[U_LIGHT5_COSCUTOFF], light[5].cosCutoff);
 	glUniform1f(m_parameters[U_LIGHT5_COSINNER], light[5].cosInner);
 	glUniform1f(m_parameters[U_LIGHT5_EXPONENT], light[5].exponent);
-
-	meshList[GEO_HEADLIGHTS] = MeshBuilder::GenerateOBJ("headlights1", "OBJ//headlights1.obj");
 }
 
-void TestDriveScene::RenderHeadlights()
+void TestDriveScene::RenderHeadlight()
 {
 	if (light[4].type == Light::LIGHT_DIRECTIONAL)
 	{
@@ -877,214 +807,5 @@ void TestDriveScene::RenderHeadlights()
 		Position lightPosition_cameraspace = viewStack.Top() * light[5].position;
 		glUniform3fv(m_parameters[U_LIGHT5_POSITION], 1, &lightPosition_cameraspace.x);
 	}
-	
-	modelStack.PushMatrix();
-		modelStack.Translate(light[4].position.x, light[4].position.y, light[4].position.z);
-		RenderMesh(meshList[GEO_HEADLIGHTS], false);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-		modelStack.Translate(light[5].position.x, light[5].position.y, light[5].position.z);
-		RenderMesh(meshList[GEO_HEADLIGHTS], false);
-	modelStack.PopMatrix();
-
 }
 
-void TestDriveScene::InitBrakelights()
-{
-	m_parameters[U_LIGHT6_POSITION] = glGetUniformLocation(m_programID, "lights[6].position_cameraspace");
-	m_parameters[U_LIGHT6_COLOR] = glGetUniformLocation(m_programID, "lights[6].color");
-	m_parameters[U_LIGHT6_POWER] = glGetUniformLocation(m_programID, "lights[6].power");
-	m_parameters[U_LIGHT6_KC] = glGetUniformLocation(m_programID, "lights[6].kC");
-	m_parameters[U_LIGHT6_KL] = glGetUniformLocation(m_programID, "lights[6].kL");
-	m_parameters[U_LIGHT6_KQ] = glGetUniformLocation(m_programID, "lights[6].kQ");
-	m_parameters[U_LIGHT6_TYPE] = glGetUniformLocation(m_programID, "lights[6].type");
-	m_parameters[U_LIGHT6_SPOTDIRECTION] = glGetUniformLocation(m_programID, "lights[6].spotDirection");
-	m_parameters[U_LIGHT6_COSCUTOFF] = glGetUniformLocation(m_programID, "lights[6].cosCutoff");
-	m_parameters[U_LIGHT6_COSINNER] = glGetUniformLocation(m_programID, "lights[6].cosInner");
-	m_parameters[U_LIGHT6_EXPONENT] = glGetUniformLocation(m_programID, "lights[6].exponent");
-	light[6].type = Light::LIGHT_POINT;
-	light[6].color.Set(0.5f, 0.f, 0.f);
-	light[6].power = 0.5;
-	light[6].kC = 1.f;
-	light[6].kL = 0.01f;
-	light[6].kQ = 0.001f;
-	light[6].cosCutoff = cos(Math::DegreeToRadian(20));
-	light[6].cosInner = cos(Math::DegreeToRadian(5));
-	light[6].exponent = 3.f;
-	light[6].spotDirection.Set(0.f, 0.5f, 1.f);
-	light[6].position.Set(movex + 0.2, movey, movez + 2.5);
-	glUniform1i(m_parameters[U_LIGHT6_TYPE], light[6].type);
-	glUniform3fv(m_parameters[U_LIGHT6_COLOR], 1, &light[6].color.r);
-	glUniform1f(m_parameters[U_LIGHT6_POWER], light[6].power);
-	glUniform1f(m_parameters[U_LIGHT6_KC], light[6].kC);
-	glUniform1f(m_parameters[U_LIGHT6_KL], light[6].kL);
-	glUniform1f(m_parameters[U_LIGHT6_KQ], light[6].kQ);
-	glUniform3fv(m_parameters[U_LIGHT6_SPOTDIRECTION], 1, &light[6].spotDirection.x);
-	glUniform1f(m_parameters[U_LIGHT6_COSCUTOFF], light[6].cosCutoff);
-	glUniform1f(m_parameters[U_LIGHT6_COSINNER], light[6].cosInner);
-	glUniform1f(m_parameters[U_LIGHT6_EXPONENT], light[6].exponent);
-
-	meshList[GEO_BRAKELIGHTS] = MeshBuilder::GenerateCuboid("lightCube", Color(1.f, 0.f, 0.f), 2, 0.3, 0.3);
-}
-
-void TestDriveScene::RenderBrakelights()
-{
-	if (light[6].type == Light::LIGHT_DIRECTIONAL)
-	{
-		Vector3 lightDir(light[6].position.x, light[6].position.y, light[6].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-		glUniform3fv(m_parameters[U_LIGHT6_POSITION], 1, &lightDirection_cameraspace.x);
-	}
-	// if it is spot light, pass in position and direction
-	else if (light[6].type == Light::LIGHT_SPOT)
-	{
-		Position lightPosition_cameraspace = viewStack.Top() * light[6].position;
-		glUniform3fv(m_parameters[U_LIGHT6_POSITION], 1, &lightPosition_cameraspace.x);
-		Vector3 spotDirection_cameraspace = viewStack.Top() * light[6].spotDirection;
-		glUniform3fv(m_parameters[U_LIGHT6_SPOTDIRECTION], 1, &spotDirection_cameraspace.x);
-	}
-	else
-	{
-		// default is point light (only position since point light is 360 degrees)
-		Position lightPosition_cameraspace = viewStack.Top() * light[6].position;
-		glUniform3fv(m_parameters[U_LIGHT6_POSITION], 1, &lightPosition_cameraspace.x);
-	}
-
-	modelStack.PushMatrix();
-		modelStack.Translate(light[6].position.x, light[6].position.y, light[6].position.z);
-		RenderMesh(meshList[GEO_BRAKELIGHTS], false);
-	modelStack.PopMatrix();
-}
-
-void TestDriveScene::UpdateBrakelights()
-{
-	if (bCheckBrake) 
-	{
-		light[6].power = 0.5f;
-		glUniform1f(m_parameters[U_LIGHT6_POWER], light[6].power);
-	}
-	else 
-	{
-		light[6].power = 0.f;
-		glUniform1f(m_parameters[U_LIGHT6_POWER], light[6].power);	
-	}
-}
-
-void TestDriveScene::DrivingMovement(double dt)
-{
-	//std::cout << dt;
-	//std::cout << fSpeed;
-	//std::cout << fRotate;
-
-	// max speed
-	if (fSpeed > 0.3)
-		fSpeed = 0.3;
-
-	if (Application::IsKeyPressed('W') && !(Application::IsKeyPressed(VK_SPACE))) 
-	{	// forward
-		if (Application::IsKeyPressed('A'))
-		{	// steer left while moving forward
-			bTurningLeft = true;
-			fRotate += 0.2;
-			movex -= fSpeed / 3.0;
-			movez -= fSpeed / 3.0;
-		}
-		if (Application::IsKeyPressed('D'))
-		{	// steer right while moving forward
-			bTurningRight = true;
-			fRotate -= 0.2;
-			movex += fSpeed / 3.0;
-			movez -= fSpeed / 3.0;
-		}
-
-		if (fRotate > 0)
-		{
-			movex -= fSpeed / 3.0;
-			movez -= fSpeed / 3.0;
-		}
-		else if (fRotate < 0)
-		{
-			movex += fSpeed / 3.0;
-			movez -= fSpeed / 3.0;
-		}
-		else
-		{
-			movez -= fSpeed;
-		}
-
-		fSpeed += dt / 3.0;
-	}
-
-	// slide only works with forward
-	/*if (fSpeed > 0.0 && !(Application::IsKeyPressed('S')) && !(Application::IsKeyPressed('W')))
-	{
-		movez -= fSpeed;
-		fSpeed -= dt / 3.0;
-	}
-	else if (fSpeed < 0.0)
-		fSpeed = 0;
-	
-	if (Application::IsKeyPressed('A') && fSpeed != 0)
-	{
-		bTurningLeft = true;
-		
-		fRotate += 2;
-		movex -= fSpeed / 3.0;
-		movez -= fSpeed / 3.0;
-	}
-	if (Application::IsKeyPressed('D') && fSpeed != 0)
-	{
-		bTurningRight = true;
-		fRotate -= 2;
-		movex += fSpeed / 3.0;
-		movez -= fSpeed / 3.0;
-	}*/
-	
-
-	if (Application::IsKeyPressed('S') && !(Application::IsKeyPressed(VK_SPACE)))
-	{	// backward
-		if (Application::IsKeyPressed('A'))
-		{	// steer left while moving backward
-			bTurningLeft = true;
-			fRotate -= 0.2;
-			movex -= fSpeed / 3.0;
-			movez += fSpeed / 3.0;
-		}
-		if (Application::IsKeyPressed('D'))
-		{	// steer right while moving backward
-			bTurningRight = true;
-			fRotate += 0.2;
-			movex += fSpeed / 3.0;
-			movez += fSpeed / 3.0;
-		}
-
-		if (fRotate > 0)
-		{
-			movex += fSpeed / 3.0;
-			movez += fSpeed / 3.0;
-		}
-		else if (fRotate < 0)
-		{
-			movex -= fSpeed / 3.0;
-			movez += fSpeed / 3.0;
-		}
-		else
-		{
-			movez += fSpeed;
-		}
-
-		fSpeed += dt / 3.0;
-	}
-	
-
-	if (Application::IsKeyPressed(VK_SPACE)) //brake
-	{
-		bCheckBrake = true;
-		
-		if (fSpeed > 0.0)
-			fSpeed -= dt / 2.0;
-	}
-	else
-		bCheckBrake = false;
-}

@@ -7,8 +7,27 @@
 #include "Mesh.h"
 #include "Light.h"
 #include "cameratpp.h"
-#include "collision.h"
+#include "collcorners.h"
+#include <iostream>
 
+struct car {
+	Vector3 pos;
+	Vector3 size;
+	float getX()
+	{
+		return pos.x;
+	}
+	float getY()
+	{
+		return pos.y;
+	}
+	void setSize(corners& c)
+	{
+		this->size.x = (c.getMax().x - c.getMin().x) / 2;
+		this->size.y = (c.getMax().y - c.getMin().y) / 2;
+		this->size.z = (c.getMax().z - c.getMin().z) / 2;
+	}
+};
 class TestDriveScene : public Scene
 {
 	enum GEOMETRY_TYPE
@@ -26,11 +45,9 @@ class TestDriveScene : public Scene
 		GEO_CHAR,
 
 		GEO_TRACK,
-		GEO_LAMPPOST,
-		GEO_LIGHTCUBE,
 
-		GEO_HEADLIGHTS,
-		GEO_BRAKELIGHTS,
+		GEO_LIGHTCUBE,
+		GEO_REVERSELIGHT,
 		GEO_TEXT,
 
 		NUM_GEOMETRY,
@@ -45,7 +62,7 @@ class TestDriveScene : public Scene
 		U_MATERIAL_DIFFUSE,
 		U_MATERIAL_SPECULAR,
 		U_MATERIAL_SHININESS,
-		// lamp posts
+		// floating lights
 		U_LIGHT0_POSITION,
 		U_LIGHT0_COLOR,
 		U_LIGHT0_POWER,
@@ -70,29 +87,23 @@ class TestDriveScene : public Scene
 		U_LIGHT3_KC,
 		U_LIGHT3_KL,
 		U_LIGHT3_KQ,
-		// headlights
+		// day light
 		U_LIGHT4_POSITION,
 		U_LIGHT4_COLOR,
 		U_LIGHT4_POWER,
 		U_LIGHT4_KC,
 		U_LIGHT4_KL,
 		U_LIGHT4_KQ,
+		// headlight
 		U_LIGHT5_POSITION,
 		U_LIGHT5_COLOR,
 		U_LIGHT5_POWER,
 		U_LIGHT5_KC,
 		U_LIGHT5_KL,
 		U_LIGHT5_KQ,
-		// brakelight
-		U_LIGHT6_POSITION,
-		U_LIGHT6_COLOR,
-		U_LIGHT6_POWER,
-		U_LIGHT6_KC,
-		U_LIGHT6_KL,
-		U_LIGHT6_KQ,
 		U_LIGHTENABLED,
 		//add these enum in UNIFORM_TYPE before U_TOTAL
-		//lamp posts
+		// floating lights
 		U_LIGHT0_TYPE,
 		U_LIGHT0_SPOTDIRECTION,
 		U_LIGHT0_COSCUTOFF,
@@ -113,23 +124,18 @@ class TestDriveScene : public Scene
 		U_LIGHT3_COSCUTOFF,
 		U_LIGHT3_COSINNER,
 		U_LIGHT3_EXPONENT,
-		// headlights
+		// day light
 		U_LIGHT4_TYPE,
 		U_LIGHT4_SPOTDIRECTION,
 		U_LIGHT4_COSCUTOFF,
 		U_LIGHT4_COSINNER,
 		U_LIGHT4_EXPONENT,
+		// headlight
 		U_LIGHT5_TYPE,
 		U_LIGHT5_SPOTDIRECTION,
 		U_LIGHT5_COSCUTOFF,
 		U_LIGHT5_COSINNER,
 		U_LIGHT5_EXPONENT,
-		// brakelight
-		U_LIGHT6_TYPE,
-		U_LIGHT6_SPOTDIRECTION,
-		U_LIGHT6_COSCUTOFF,
-		U_LIGHT6_COSINNER,
-		U_LIGHT6_EXPONENT,
 		U_NUMLIGHTS,
 		// add these enum for texture
 		U_COLOR_TEXTURE_ENABLED,
@@ -138,6 +144,7 @@ class TestDriveScene : public Scene
 		U_TEXT_COLOR,
 		U_TOTAL,
 	};
+
 
 private:
 	unsigned m_vertexArrayID;
@@ -148,28 +155,23 @@ private:
 	unsigned m_parameters[U_TOTAL];
 
 	MS modelStack, viewStack, projectionStack;
-	Light light[7];
+	Light light[6];
 
 	cameratpp camera;
 	
 	TRS CUBE;
 	TRS PLAYER;
 	TRS TRACK;
-	TRS CAR4;
-	object cube;
-	object player;
-
+	car player;
+	corners cplayer;
 
 	float movex;
 	float movey;
 	float movez;
-	bool bCheckBrake;
-	float fSpeed;
-	float fRotate;
+	float speed = 0.f;
+	float turnangle = 0.f;
 	int bouncetime;
 	bool switchlights;
-	bool bTurningLeft;
-	bool bTurningRight;
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
@@ -178,19 +180,15 @@ private:
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
 
-	bool CheckCollision(object& one, object& two);
-	void doCollision();
+	bool checkCollision();
 
-	void InitLamppost();
-	void RenderLamppost();
+	void InitFloatingLights();
+	void RenderFloatingLights();
+	void InitDaylight();
+	void RenderDaylight();
 	void DayTimeNightTime();
-	void InitHeadlights();
-	void RenderHeadlights();
-	void InitBrakelights();
-	void RenderBrakelights();
-	void UpdateBrakelights();
-
-	void DrivingMovement(double dt);
+	void InitHeadlight();
+	void RenderHeadlight();
 
 public:
 	TestDriveScene();
@@ -199,7 +197,6 @@ public:
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
-	virtual bool Change();
 	virtual void Exit();
 };
 

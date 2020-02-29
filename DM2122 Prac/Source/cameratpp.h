@@ -9,7 +9,7 @@ public:
 	//Vector3 target;
 	//Vector3 up;
 	Vector3 view;
-
+	Vector3 right;
 	Vector3 defaultPosition;
 	Vector3 defaultTarget;
 	Vector3 defaultUp;
@@ -23,9 +23,6 @@ public:
 	virtual void Update(double dt);
 	virtual void Reset();
 	virtual void mouse_callback();
-
-	void UpdateMovement(const Vector3& pos, const Vector3& target);
-	void UpdateTurningMovement(bool bLeft, bool bRight, double dt);
 };
 
 #endif
