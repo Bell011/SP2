@@ -30,7 +30,7 @@ public:
 
 	void updateLives(int count);
 
-	bool isCollide(entityCar* enemy, entityCar* player);
+	static bool isCollide(entityCar* enemy, entityCar* player);
 	static void updatePos(entityCar* enemy1, entityCar* enemy2, entityCar* enemy3, entityCar* player,double dt);
 
 };

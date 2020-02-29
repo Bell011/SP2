@@ -154,6 +154,12 @@ void Application::Run()
 					matchbp->Init();
 					scene = matchbp;
 				}
+				else if (IsKeyPressed('3'))
+				{
+					Scene* racing = new SceneRacing();
+					racing->Init();
+					scene = racing;
+				}
 				if (IsKeyPressed(VK_BACK)) {
 					scene = showroomscene;
 				}

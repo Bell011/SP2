@@ -38,7 +38,7 @@ void TestDriveScene::Init()
 
 	
 
-	camera.Init(Vector3(player.pos.x, player.pos.y, player.pos.z-10), Vector3(player.pos.x,player.pos.y,player.pos.z), Vector3(0, 1, 0));
+	camera.Init(Vector3(player.pos.x, player.pos.y + 10, player.pos.z-10), Vector3(player.pos.x,player.pos.y,player.pos.z), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);

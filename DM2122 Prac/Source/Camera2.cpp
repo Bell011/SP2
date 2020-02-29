@@ -57,25 +57,35 @@ void Camera2::Update(double dt)
 		position -= view * CAMERA_MOVE_SPEED * (float)dt;
 		target -= view * CAMERA_MOVE_SPEED * (float)dt;
 	}
-	/*if(Application::IsKeyPressed(VK_LEFT))
+	if(Application::IsKeyPressed(VK_LEFT))
 	{
-		float yaw = (float)(-CAMERA_SPEED * dt);
+		Vector3 view = (target - position).Normalized();
+		float yaw = (float)(CAMERA_SPEED * (float)dt);
 		Mtx44 rotation;
 		rotation.SetToRotation(yaw, 0, 1, 0);
-		position = rotation * position;
-		up = rotation * up;
+		view = rotation * view;
+		target = position + view;
+		Vector3 right = view.Cross(up);
+		right.y = 0;
+		right.Normalize();
+		up = right.Cross(view).Normalized();
 	}
 	if(Application::IsKeyPressed(VK_RIGHT))
 	{
-		float yaw = (float)(CAMERA_SPEED * dt);
+		Vector3 view = (target - position).Normalized();
+		float yaw = (float)(-CAMERA_SPEED * (float)dt);
 		Mtx44 rotation;
 		rotation.SetToRotation(yaw, 0, 1, 0);
-		position = rotation * position;
-		up = rotation * up;
+		view = rotation * view;
+		target = position + view;
+		Vector3 right = view.Cross(up);
+		right.y = 0;
+		right.Normalize();
+		up = right.Cross(view).Normalized();
 	}
 	if(Application::IsKeyPressed(VK_UP))
 	{
-		float pitch = (float)(-CAMERA_SPEED * dt);
+		float pitch = (float)(CAMERA_SPEED * (float)dt);
 		Vector3 view = (target - position).Normalized();
 		Vector3 right = view.Cross(up);
 		right.y = 0;
@@ -83,11 +93,12 @@ void Camera2::Update(double dt)
 		up = right.Cross(view).Normalized();
 		Mtx44 rotation;
 		rotation.SetToRotation(pitch, right.x, right.y, right.z);
-		position = rotation * position;
+		view = rotation * view;
+		target = position + view;
 	}
 	if(Application::IsKeyPressed(VK_DOWN))
 	{
-		float pitch = (float)(CAMERA_SPEED * dt);
+		float pitch = (float)(-CAMERA_SPEED * (float)dt);
 		Vector3 view = (target - position).Normalized();
 		Vector3 right = view.Cross(up);
 		right.y = 0;
@@ -95,8 +106,9 @@ void Camera2::Update(double dt)
 		up = right.Cross(view).Normalized();
 		Mtx44 rotation;
 		rotation.SetToRotation(pitch, right.x, right.y, right.z);
-		position = rotation * position;
-	} */
+		view = rotation * view;
+		target = position + view;
+	} 
 	if(Application::IsKeyPressed('N'))
 	{
 		Vector3 direction = target - position;

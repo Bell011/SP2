@@ -85,8 +85,10 @@ FUNCTIONS
 
 bool entityCar::isCollide(entityCar* enemy, entityCar* player)
 {
-	if ((enemy->carPos.x - enemy->carSize.x <= player->carPos.x + player->carPos.x && enemy->carPos.x + enemy->carSize.x >= player->carPos.x - player->carSize.x) &&
-		(enemy->carPos.z - enemy->carSize.z <= player->carPos.z + player->carSize.z && enemy->carPos.z + enemy->carSize.z >= player->carPos.z - player->carSize.z))
+	if (enemy->carPos.x < player->carPos.x + player->carSize.x && 
+		enemy->carPos.x + enemy->carSize.x > player->carPos.x && 
+		enemy->carPos.z > player->carPos.z + player->carSize.z && 
+		enemy->carPos.z + enemy->carSize.z > player->carPos.z)
 	{
 		return true;
 	}
@@ -103,21 +105,21 @@ void entityCar::updatePos(entityCar* enemy1, entityCar* enemy2, entityCar* enemy
 	enemy3->carPos += enemy3->carVel * dt;
 
 
-	if (enemy1->carPos.z <= 0.0f)
+	if (enemy1->carPos.z <= -10.0f)
 	{
 		enemy1->carPos.z = 50.0f;
 	}
-	if (enemy2->carPos.z <= 0.0f)
+	if (enemy2->carPos.z <= -10.0f)
 	{
 		enemy2->carPos.z = 55.0f;
 	}
-	if (enemy3->carPos.z <= 0.0f)
+	if (enemy3->carPos.z <= -10.0f)
 	{
 		enemy3->carPos.z = 65.0f;
 	}
 	if (player->carPos.x <= 10.f)
 	{
-		if (Application::IsKeyPressed(VK_LEFT))
+		if (Application::IsKeyPressed(VK_RIGHT))
 		{
 			player->carPos.x += 5.f * dt;
 		}
@@ -125,14 +127,14 @@ void entityCar::updatePos(entityCar* enemy1, entityCar* enemy2, entityCar* enemy
 	}
 	if (player->carPos.x >= 0.f)
 	{
-		if (Application::IsKeyPressed(VK_RIGHT))
+		if (Application::IsKeyPressed(VK_LEFT))
 		{
 			player->carPos.x -= 5.f * dt;
 		}
 	}
 	if (player->carPos.x >= 10.0f)
 	{
-		player->carPos.x == 9.0f;
+		player->carPos.x = 9.0f;
 		player->updateLives(-1); 
 	}
 	else if (player->carPos.x <= 0.f)

@@ -25,6 +25,8 @@ class SceneRacing : public Scene
 		GEO_CAR3,
 		GEO_CAR4,
 		GEO_MAP,
+		GEO_BARRIER1,
+		GEO_BARRIER2,
 		GEO_LIGHTSPHERE,
 		GEO_TEXT,
 		NUM_GEOMETRY,
@@ -80,6 +82,7 @@ private:
 
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
+	void RenderRoad();
 	void CalculateFrameRate();
 
 	float carSpeed;

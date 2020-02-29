@@ -6,6 +6,7 @@
 #include "MeshBuilder.h"
 #include "Utility.h"
 #include "LoadTGA.h"
+#include <sstream>
 
 #define ROT_LIMIT 45.f;
 #define SCALE_LIMIT 5.f;
@@ -35,15 +36,12 @@ void SceneRacing::Init()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	camera.Init(Vector3(5, 8, -30), Vector3(5, 10, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 50, 10), Vector3(0, -180, 0), Vector3(0, 1, 0));
 
-	Mtx44 perspective;
-	perspective.SetToPerspective(45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
-	projectionStack.LoadMatrix(perspective);
 
-	//Mtx44 projection;
-	//projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
-	//projectionStack.LoadMatrix(projection);
+	Mtx44 projection;
+	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
+	projectionStack.LoadMatrix(projection);
 	/*
 	Mtx44 ortho;
 	ortho.SetToOrtho(0, 40, 0, 60, -10, 10); 
@@ -144,8 +142,11 @@ void SceneRacing::Init()
 	meshList[GEO_CAR4] = MeshBuilder::GenerateOBJ("Car1", "Obj//car1.obj");
 	meshList[GEO_CAR4]->textureID = LoadTGA("Image//car1black.tga");
 
-	meshList[GEO_MAP] = MeshBuilder::GenerateQuad("Map", Color(1, 1, 1), 1, 1);
+	meshList[GEO_MAP] = MeshBuilder::GenerateQuad("Map", Color(1, 1, 1), 13, 100);
 	//meshList[GEO_MAP]->textureID = LoadTGA("Image//map.tga");
+
+	meshList[GEO_BARRIER1] = MeshBuilder::GenerateCuboid("barrierright", Color(1, 0, 0), 1, 1, 100);
+	meshList[GEO_BARRIER2] = MeshBuilder::GenerateCuboid("barrierLEft", Color(1, 0, 0), 1, 1, 100);
 
 	meshList[GEO_LIGHTSPHERE] = MeshBuilder::GenerateSphere("lightBall", Color(1.f, 1.f, 1.f), 9, 36, 1.f);
 
@@ -158,25 +159,25 @@ void SceneRacing::Init()
 
 	Car1->setPos(0, 0, 50);
 	Car1->setVel(0, 0, carSpeed);
-	Car1->setSize(5, 5, 5);
+	Car1->setSize(5, 5, 3);
 
-	Car2->setPos(5, 0, 55);
+	Car2->setPos(5, 0, 65);
 	Car2->setVel(0, 0, carSpeed);
-	Car2->setSize(5, 5, 5);
+	Car2->setSize(5, 5, 3);
 
-	Car3->setPos(10, 0, 65);
+	Car3->setPos(10, 0, 75);
 	Car3->setVel(0, 0, carSpeed);
-	Car3->setSize(5, 5, 5);
+	Car3->setSize(5, 5, 3);
 
 
 	carPlayer->setPos(5, 0, 0);
 	carPlayer->setVel(0, 0, 0);
-	carPlayer->setSize(5, 5, 5);
+	carPlayer->setSize(5, 5, 3);
 	carPlayer->setLives(3);
 
-	invinTime = 0.f;
+	//invinTime = 0.f;
 
-	lives = carPlayer->getLives();
+	lives = std::to_string(carPlayer->getLives());
 }
 
 void SceneRacing::Update(double dt)
@@ -235,31 +236,44 @@ void SceneRacing::Update(double dt)
 		light[0].type = Light::LIGHT_SPOT;
 	}*/
 
-	if (invinTime <= 0.f)
-	{
-		if (Car1->isCollide(Car1, carPlayer))
+	
+		if (Car1->getPos().x < carPlayer->getPos().x + carPlayer->getSize().x &&
+			Car1->getPos().x + Car1->getSize().x > carPlayer->getPos().x &&
+			Car1->getPos().z < carPlayer->getPos().z + carPlayer->getSize().z &&
+			Car1->getPos().z + Car1->getSize().z > carPlayer->getPos().z)
 		{
 			Car1->setPos(0, 0, 50);
-			carPlayer->updateLives(-1);
+			//carPlayer->updateLives(-1);
 			invinTime = 2.f;
 		}
 
-		if (Car2->isCollide(Car2, carPlayer))
+		
+		if (Car2->getPos().x < carPlayer->getPos().x + carPlayer->getSize().x &&
+			Car2->getPos().x + Car1->getSize().x > carPlayer->getPos().x &&
+			Car2->getPos().z < carPlayer->getPos().z + carPlayer->getSize().z &&
+			Car2->getPos().z + Car1->getSize().z > carPlayer->getPos().z)
 		{
-			Car2->setPos(5, 0, 55);
+			Car2->setPos(5, 0, 60);
 			carPlayer->updateLives(-1);
 			invinTime = 2.f;
 		}
 
-		if (Car3->isCollide(Car3, carPlayer))
+		 
+		if (Car3->getPos().x < carPlayer->getPos().x + carPlayer->getSize().x &&
+			Car3->getPos().x + Car1->getSize().x > carPlayer->getPos().x &&
+			Car3->getPos().z < carPlayer->getPos().z + carPlayer->getSize().z &&
+			Car3->getPos().z + Car1->getSize().z > carPlayer->getPos().z)
 		{
-			Car3->setPos(10, 0, 50);
-			carPlayer->updateLives(-1);
+			Car3->setPos(10, 0, 75);
+			//carPlayer->updateLives(-1);
 			invinTime = 2.f;
 		}
-	}
+		
+	
 
-	camera.Update(dt);
+	lives = std::to_string(carPlayer->getLives());
+
+	//camera.Update(dt);
 	CalculateFrameRate();
 }
 
@@ -296,6 +310,7 @@ void SceneRacing::Render()
 
 	RenderSkybox();
 	RenderCars();
+	RenderRoad();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(light[0].position.x, light[0].position.y, light[0].position.z);
@@ -314,6 +329,11 @@ void SceneRacing::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Lives: " + lives, Color(1, 1, 1), 3, 8, 15);
 		modelStack.PopMatrix();
 	}
+
+	std::ostringstream ss1;
+	ss1.precision(4);
+	ss1 << "cam(" << camera.position.x << ", " << camera.position.y << ", " << camera.position.z << ")";
+	RenderTextOnScreen(meshList[GEO_TEXT], ss1.str(), Color(0, 1, 0), 3, 0, 3);
 }
 
 void SceneRacing::Exit()
@@ -376,29 +396,56 @@ void SceneRacing::RenderCars()
 {
 	modelStack.PushMatrix();
 	modelStack.Translate(Car1->getPos().x, Car1->getPos().y, Car1->getPos().z);
+	//modelStack.Rotate(90, 0, 1, 0);
 	modelStack.Scale(1, 1, 1);
 	RenderMesh(meshList[GEO_CAR1], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(carPlayer->getPos().x, carPlayer->getPos().y, carPlayer->getPos().z);
+	//modelStack.Rotate(90, 0, 1, 0);
 	modelStack.Scale(1, 1, 1);
 	RenderMesh(meshList[GEO_CAR2], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(Car2->getPos().x, Car2->getPos().y, Car2->getPos().z);
+	//modelStack.Rotate(90, 0, 1, 0);
 	modelStack.Scale(1, 1, 1);
 	RenderMesh(meshList[GEO_CAR3], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(Car3->getPos().x, Car3->getPos().y, Car3->getPos().z);
+	//modelStack.Rotate(90, 0, 1, 0);
 	modelStack.Scale(1, 1, 1);
 	RenderMesh(meshList[GEO_CAR4], false);
 	modelStack.PopMatrix();
 }
 
+void SceneRacing::RenderRoad()
+{
+	modelStack.PushMatrix();
+	modelStack.Translate(5, -1, 0);
+	modelStack.Rotate(270, 1, 0, 0);
+	modelStack.Scale(1, 1, 1);
+	RenderMesh(meshList[GEO_MAP], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-2, 0, 0);
+	//modelStack.Rotate(90, 1, 0, 0);
+	modelStack.Scale(1, 1, 1);
+	RenderMesh(meshList[GEO_BARRIER1], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(12, 0, 0);
+	//modelStack.Rotate(90, 1, 0, 0);
+	modelStack.Scale(1, 1, 1);
+	RenderMesh(meshList[GEO_BARRIER2], false);
+	modelStack.PopMatrix();
+}
 
 
 void SceneRacing::RenderSkybox()
