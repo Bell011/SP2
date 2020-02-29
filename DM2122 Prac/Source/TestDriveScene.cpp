@@ -322,7 +322,7 @@ void TestDriveScene::Render()
 
 
 	RenderSkybox();
-//	RenderOBJ(meshList[GEO_TRACK], TRACK, true, true);
+	RenderOBJ(meshList[GEO_TRACK], TRACK, true, true);
 
 	//RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
 	////Update the translate vector if theres is any transformation
