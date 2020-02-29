@@ -35,8 +35,8 @@ void TestDriveScene::Init()
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	camera.Init(Vector3(0,10,10), Vector3(0,1,0), Vector3(0, 1, 0));
+	player.pos = Vector3(0, 0, 1);
+	camera.Init(Vector3(0.f, 1.f, -10.f), player.pos, Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
@@ -165,10 +165,10 @@ void TestDriveScene::Init()
 	movex = 0;	movey = -0;	movez = 0;
 	PLAYER.Translate = Vector3(0, -0, 1);
 	PLAYER.Scale = Vector3(2, 2, 2);
-	player.pos = Vector3(0, 0, 1);
+	
 	cplayer.getCoords("OBJ//mushroom.obj", cplayer);
 	player.setSize(cplayer);
-	PLAYER.RotateY = Vector4(90, 0, 1, 0);
+	PLAYER.RotateY = Vector4(0, 0, 1, 0);
 	
 
 	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -207,40 +207,37 @@ void TestDriveScene::Init()
 
 void TestDriveScene::Update(double dt)
 {
-	speed = 0.5;
-	camera.view = PLAYER.Translate;
-	//camera.position = PLAYER.Translate;
-	//camera.position.y = PLAYER.Translate.y +10;
-	//camera.position.x = PLAYER.Translate.x - 10;
+	if(speed<0.5)
+	speed +=dt*0.1;
+	Vector3 movement = Vector3(speed * cos(Math::DegreeToRadian(180 - PLAYER.RotateY.degree)), 0, speed * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+
+	PLAYER.Translate = player.pos;
+	camera.target = player.pos;
+	camera.position = (camera.target - camera.view)/*.Normalized()*/;
+	std::cout << speed;
+
 	if (Application::IsKeyPressed('W')) {
-		//PLAYER.RotateY = Vector4(90, 0, 1, 0);
-		if (PLAYER.RotateY.y < 90) {
-			PLAYER.RotateY.y++;
-			PLAYER.Translate -= Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
-			if (PLAYER.RotateY.y >= 90)
-				PLAYER.RotateY.y = 90;
-		}
-		
+		player.pos -= movement;
 	}
 	if (Application::IsKeyPressed('S')) {
-		PLAYER.RotateY = Vector4(90, 0, 1, 0);
-		PLAYER.Translate += Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+		player.pos += movement;
 	}
 	if (Application::IsKeyPressed('A')) {
-		PLAYER.RotateY = Vector4(180, 0, 1, 0);
-		PLAYER.Translate += Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+			turnangle += 5;
+		PLAYER.RotateY.degree = turnangle;
+		
 	}
 	if (Application::IsKeyPressed('D')) {
-		PLAYER.RotateY = Vector4(180, 0, 1, 0);
-		PLAYER.Translate -= Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+			turnangle -= 5;
+		PLAYER.RotateY.degree = turnangle;
 	}
-
-
-	CalculateFrameRate();
 	
-	camera.mouse_callback();
+	CalculateFrameRate();
+	camera.Update(dt);
+	//camera.mouse_callback();
 }
-void TestDriveScene::doCollision() {
+bool TestDriveScene::checkCollision() {
+	return false;
 
 }
 /******************************************************************************/
@@ -325,7 +322,7 @@ void TestDriveScene::Render()
 
 
 	RenderSkybox();
-	RenderOBJ(meshList[GEO_TRACK], TRACK, true, true);
+//	RenderOBJ(meshList[GEO_TRACK], TRACK, true, true);
 
 	//RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
 	////Update the translate vector if theres is any transformation

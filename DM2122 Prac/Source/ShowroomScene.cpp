@@ -398,17 +398,18 @@ void ShowroomScene::InitObjects() {
 void ShowroomScene::Update(double dt)
 {
 
-	player->setPos(Vector3(camera.position.x,camera.position.y,camera.position.z));
+	//player->setPos(Vector3(camera.position.x,camera.position.y,camera.position.z));
 	camera.position = player->getPos();
-	Vector3 temp = player->getPos();
+	
 	Object* objects[11] = {
 		arcade,bench,npc,screen,screen1,ssign,car1,car2,car3,stage,structure
 	};
 
 	if (Application::IsKeyPressed('A')){
+		Vector3 temp = player->getPos();
 		Vector3 movement = camera.right;
-		movement.y = 0;
-		movement.Normalize();
+	//	movement.y = 0;
+	//	movement.Normalize();
 		player->setPos(player->getPos() - (movement * dt * 10));
 		for (int i = 0; i < 11; i++) {
 			if (player->checkCollision(objects[i])) {
@@ -418,9 +419,10 @@ void ShowroomScene::Update(double dt)
 		}
 	}
 	if (Application::IsKeyPressed('D')){
+		Vector3 temp = player->getPos();
 		Vector3 movement = camera.right;
-		movement.y = 0;
-		movement.Normalize();
+	//	movement.y = 0;
+	//	movement.Normalize();
 		player->setPos(player->getPos() + (movement * dt * 10));
 		for (int i = 0; i < 11; i++) {
 			if (player->checkCollision(objects[i])) {
@@ -430,6 +432,7 @@ void ShowroomScene::Update(double dt)
 		}
 	}
 	if (Application::IsKeyPressed('W')) {
+		Vector3 temp = player->getPos();
 		Vector3 movement = camera.view;
 		movement.y = 0;
 		movement.Normalize();
@@ -442,6 +445,7 @@ void ShowroomScene::Update(double dt)
 		}
 	}
 	if (Application::IsKeyPressed('S')) {
+		Vector3 temp = player->getPos();
 		Vector3 movement = camera.view;
 		movement.y = 0;
 		movement.Normalize();

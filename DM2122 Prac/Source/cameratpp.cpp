@@ -28,7 +28,7 @@ void cameratpp::Init(const Vector3& pos, const Vector3& target, const Vector3& u
 
 void cameratpp::Update(double dt)
 {
-	mouse_callback();
+	//mouse_callback();
 	position = target - view;
 }
 
@@ -41,7 +41,7 @@ void cameratpp::Reset()
 
 void cameratpp::mouse_callback()
 {
-	Vector3 right = view.Cross(up).Normalized();
+	 right = view.Cross(up).Normalized();
 	POINT mousePos;
 	GetCursorPos(&mousePos);
 	int xpos = mousePos.x;

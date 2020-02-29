@@ -6,7 +6,7 @@
 #include "Camera2.h"
 #include "Mesh.h"
 #include "Light.h"
-#include "camerafps.h"
+#include "cameratpp.h"
 #include "collcorners.h"
 #include <iostream>
 
@@ -98,7 +98,7 @@ private:
 	MS modelStack, viewStack, projectionStack;
 	Light light[2];
 
-	camerafps camera;
+	cameratpp camera;
 	
 	TRS CUBE;
 	TRS PLAYER;
@@ -109,7 +109,8 @@ private:
 	float movex;
 	float movey;
 	float movez;
-	float speed = 10.f;
+	float speed = 0.f;
+	float turnangle = 0.f;
 	int bouncetime;
 	bool switchlights;
 
@@ -121,7 +122,7 @@ private:
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
 
 
-	void doCollision();
+	bool checkCollision();
 public:
 	TestDriveScene();
 	~TestDriveScene();
