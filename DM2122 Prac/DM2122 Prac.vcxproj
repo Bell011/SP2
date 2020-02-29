@@ -129,6 +129,7 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera2.h" />
+    <ClInclude Include="Source\carParts.h" />
     <ClInclude Include="Source\g3CarEntity.h" />
     <ClInclude Include="Source\camerafps.h" />
     <ClInclude Include="Source\cameratpp.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneRacing.h" />
     <ClInclude Include="Source\SceneLuckyDraw.h" />
+    <ClInclude Include="Source\selectionMenu.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\ShowroomScene.h" />
     <ClInclude Include="Source\TestDriveScene.h" />
@@ -160,6 +162,7 @@
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\camerafps.cpp" />
+    <ClCompile Include="Source\carParts.cpp" />
     <ClCompile Include="Source\g3CarEntity.cpp" />
     <ClCompile Include="Source\cameratpp.cpp" />
     <ClCompile Include="Source\cirObject.cpp" />
@@ -175,6 +178,7 @@
     <ClCompile Include="Source\Object.cpp" />
     <ClCompile Include="Source\rectObject.cpp" />
     <ClCompile Include="Source\SceneLuckyDraw.cpp" />
+    <ClCompile Include="Source\selectionMenu.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\ShowroomScene.cpp" />
     <ClCompile Include="Source\TestDriveScene.cpp" />

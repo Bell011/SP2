@@ -425,6 +425,7 @@ void ShowroomScene::Update(double dt)
 		}
 			camera.position = player->getPos();
 	}
+	animateStage(dt);
 	SwitchLightColours();
 	//SetCursorPos(camera.setCursorX, camera.setCursorY);
 	//camera.mouse_callback();
@@ -554,9 +555,14 @@ void ShowroomScene::Render()
 	RenderOBJ(meshList[GEO_SSIGN], SSIGN, true, true);
 
 
+	modelStack.PushMatrix();
+	modelStack.Translate(0, stageTrans, 0);
 	RenderOBJ(meshList[GEO_STAGE], STAGE, false, true);
+	modelStack.Rotate(stageRAngle, 0, 1, 0);
 	RenderOBJ(meshList[GEO_CAR4], CAR4, true, true);
 	modelStack.PopMatrix();
+	modelStack.PopMatrix();
+
 
 
 	RenderOBJ(meshList[GEO_STRUCTUREBIG], STRUCTUREBIG, false, true);
@@ -574,7 +580,7 @@ void ShowroomScene::Render()
 	if (player->checkCollision(checkarcade)) {
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to Play", Color(0, 0, 0), 3.f, 0, 2);
 		if (Application::IsKeyPressed(VK_RETURN)) {
-			Application::scenechange(2);
+			Application::scenechange(7);
 		
 		}
 	}
@@ -1185,7 +1191,66 @@ void ShowroomScene::RenderHeadlights()
 		// default is point light (only position since point light is 360 degrees)
 		Position lightPosition_cameraspace = viewStack.Top() * light[7].position;
 		glUniform3fv(m_parameters[U_LIGHT7_POSITION], 1, &lightPosition_cameraspace.x);
+	}	
+}
+void ShowroomScene::animateStage(double dt)
+{
+	if (stageMoving)
+	{
+		if (stageUp) // At the start, until it reaches the top
+		{
+			if (stageRAngle <= 360.0)
+			{
+				stageRAngle += 36 * dt;
+			}
+			if (stageTrans <= 10.0) // Max height the stage will translate upwards
+			{
+				stageTrans += 1.0 * dt;
+			}
+			else
+			{
+				stageUp = false;
+			}
+		}
+		else if (!stageUp && !stageDown) // The stage is staying at the top
+		{
+			if (stageRAngle > 360 && stageRAngle <= 720)
+			{
+				stageRAngle += 72 * dt;
+			}
+			else
+			{
+				stageDown = true;
+			}
+		}
+		else if (stageDown) // The stage is going down
+		{
+			if (stageRAngle <= 1080.0)
+			{
+				stageRAngle += 36.0 * dt;
+			}
+			if (stageTrans >= 0.0)
+			{
+				stageTrans -= 1.0 * dt;
+			}
+			else
+			{
+				stageDown = false;
+				stageMoving = false;
+			}
+		}
 	}
-
-	
+	else if (!stageMoving) // Stage is at the bottom
+	{
+		if (stageRAngle > 1080.0 && stageRAngle <= 1440.0)
+		{
+			stageRAngle += 72 * dt;
+		}
+		else
+		{
+			stageMoving = true;
+			stageUp = true;
+			stageRAngle = 0.0;
+		}
+	}
 }
