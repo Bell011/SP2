@@ -146,13 +146,13 @@ void SceneShop::Init()
 
 	
 	meshList[GEO_ENGINE1] = MeshBuilder::GenerateQuad("engine1", Color(1, 1, 1), 10, 10);
-	//meshList[GEO_ENGINE1]->textureID = LoadTGA("Image//engine1.tga");
+	meshList[GEO_ENGINE1]->textureID = LoadTGA("Image//engine1.tga");
 
 	meshList[GEO_ENGINE2] = MeshBuilder::GenerateQuad("engine2", Color(1, 1, 1), 10, 10);
-	//meshList[GEO_ENGINE2]->textureID = LoadTGA("Image//engine2.tga");
+	meshList[GEO_ENGINE2]->textureID = LoadTGA("Image//engine2.tga");
 
 	meshList[GEO_ENGINE3] = MeshBuilder::GenerateQuad("engine3", Color(1, 1, 1), 10, 10);
-	//meshList[GEO_ENGINE3]->textureID = LoadTGA("Image//engine3.tga");
+	meshList[GEO_ENGINE3]->textureID = LoadTGA("Image//engine3.tga");
 
 	meshList[GEO_WHEEL1] = MeshBuilder::GenerateQuad("wheel1", Color(1, 1, 1), 10, 10);
 	meshList[GEO_WHEEL1]->textureID = LoadTGA("Image//wheelDesignNum1.tga");
@@ -356,10 +356,36 @@ void SceneShop::Render()
 	RenderMesh(meshList[GEO_LIGHTSPHERE], false);
 	modelStack.PopMatrix();
 
+	RenderItem();
+
 	//No transform needed
-	RenderTextOnScreen(meshList[GEO_TEXT], "Hello World", Color(0, 1, 0), 2, 0, 0);
+	//RenderTextOnScreen(meshList[GEO_TEXT], "Hello World", Color(0, 1, 0), 2, 0, 0);
 
+	if (itemType == 0)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Engine", Color(0.4, 0.4, 0.4), 3, 100, 0);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Suspension", Color(1, 1, 1), 3, 90, 0);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Wheels", Color(1, 1, 1), 3, 80, 0);
+	}
+	else if (itemType == 1)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Engine", Color(1, 1, 1), 3, 100, 0);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Suspension", Color(0.4, 0.4, 0.4), 3, 90, 0);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Wheels", Color(1, 1, 1), 3, 80, 0);
+	}
+	else if (itemType == 2)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Wheels", Color(0.4, 0.4, 0.4), 3, 80, 0);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Engine", Color(1, 1, 1), 3, 100, 0);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Suspension", Color(1, 1, 1), 3, 90, 0);
+	}
+	else
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Engine", Color(1, 1, 1), 3, 100, 0);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Suspension", Color(1, 1, 1), 3, 90, 0);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Wheels", Color(1, 1, 1), 3, 80, 0);
 
+	}
 }
 
 void SceneShop::Exit()

@@ -184,6 +184,7 @@ void SceneRacing::Init()
 	carPlayer->setLives(3);
 
 	invinTime = 0.f;
+	timer = 30.f;
 }
 
 void SceneRacing::Update(double dt)
@@ -192,8 +193,13 @@ void SceneRacing::Update(double dt)
 	if (isPlaying)
 	{
 		g3CarEntity::updatePos(Car1, Car2, Car3, carPlayer, dt);
+		timer -= dt;
 	}
 	if (carPlayer->getLives() <= 0)
+	{
+		isPlaying = false;
+	}
+	if (timer <= 0.f)
 	{
 		isPlaying = false;
 	}
@@ -547,8 +553,3 @@ void SceneRacing::CalculateFrameRate()
 }
 
 
-
-void SceneRacing::Change()
-{
-
-}

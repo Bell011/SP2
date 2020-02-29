@@ -98,6 +98,7 @@ private:
 	float invinTime;
 	float bouncetime;
 	int lives;
+	float timer;
 
 public:
 	SceneRacing();
@@ -107,7 +108,6 @@ public:
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
-	virtual void Change();
 };
 
 

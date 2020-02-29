@@ -17,6 +17,7 @@
 #include "miniGameTwo.h"
 #include "TestDriveScene.h"
 #include "selectionMenu.h"
+#include "SceneShop.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -120,6 +121,7 @@ void Application::Run()
 	scenes[GAME3] = new SceneRacing();
 	scenes[TESTDRIVE] = new TestDriveScene();
 	scenes[SELECTIONMENU] = new selectionMenu();
+	scenes[SHOP] = new SceneShop();
 
 	for (int i = 0; i < NUM_SCENE; i++) {
 		if (scenes[i] != nullptr) {

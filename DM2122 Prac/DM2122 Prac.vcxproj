@@ -150,6 +150,7 @@
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneRacing.h" />
     <ClInclude Include="Source\SceneLuckyDraw.h" />
+    <ClInclude Include="Source\SceneShop.h" />
     <ClInclude Include="Source\selectionMenu.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\ShowroomScene.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Source\Object.cpp" />
     <ClCompile Include="Source\rectObject.cpp" />
     <ClCompile Include="Source\SceneLuckyDraw.cpp" />
+    <ClCompile Include="Source\SceneShop.cpp" />
     <ClCompile Include="Source\selectionMenu.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\ShowroomScene.cpp" />
