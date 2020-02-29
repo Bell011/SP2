@@ -159,6 +159,13 @@ private:
 
 	int fps;
 
+	// Animation for the stage
+	bool isMoving;
+	bool isGoingUp;
+	bool isGoingDown;
+	double verticalTranslation;
+	double rotationAngle;
+
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
 	void InitObjects();
@@ -166,6 +173,7 @@ private:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
+	void animateStage(double dt);
 public:
 	ShowroomScene();
 	~ShowroomScene();

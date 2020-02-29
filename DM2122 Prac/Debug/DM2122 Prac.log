@@ -1,29 +1,31 @@
 ﻿  ShowroomScene.cpp
 C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(169,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(170,8): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(200,159): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(200,120): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(200,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(297,163): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(297,112): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(297,75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(353,89): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(353,68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(353,47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(372,105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(372,51): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(412,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(424,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(436,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(448,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(555,41): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(557,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(559,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(561,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(569,43): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(571,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(575,38): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(585,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(587,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(589,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(206,159): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(206,120): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(206,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(303,163): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(303,112): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(303,75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(359,89): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(359,68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(359,47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(378,105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(378,51): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(418,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(430,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(442,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(454,49): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(565,41): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(567,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(569,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(571,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(579,43): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(581,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(585,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(595,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(597,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(599,38): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(612,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\gohbe\Documents\GitHub\SP2\DM2122 Prac\Source\ShowroomScene.cpp(614,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   DM2122 Prac.vcxproj -> C:\Users\gohbe\Documents\GitHub\SP2\Debug\DM2122 Prac.exe

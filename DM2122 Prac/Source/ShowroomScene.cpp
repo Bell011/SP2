@@ -168,6 +168,12 @@ void ShowroomScene::Init()
 	InitObjects();
 	bouncetime = 0.f;
 	fps = 0.f;
+
+	isMoving = true;
+	isGoingUp = true;
+	isGoingDown = false;
+	verticalTranslation = 0.0;
+	rotationAngle = 0.0;
 }
 /*=============================================================================*/
 /*!
@@ -453,7 +459,8 @@ void ShowroomScene::Update(double dt)
 			camera.position = player->getPos();
 		}
 	}
-
+	// Animation will go on non-stop without any key presses
+	animateStage(dt);
 
 	//SetCursorPos(camera.setCursorX, camera.setCursorY);
 	camera.mouse_callback();
@@ -597,9 +604,12 @@ void ShowroomScene::Render()
 	RenderOBJ(meshList[GEO_SCREEN1], SCREEN1, true, true);
 	RenderOBJ(meshList[GEO_SSIGN], SSIGN, true, true);
 
-
-	RenderOBJ(meshList[GEO_STAGE], STAGE, false, true);
-	RenderOBJ(meshList[GEO_CAR4], CAR4, true, true);
+	modelStack.PushMatrix();
+		modelStack.Translate(0, verticalTranslation, 0);
+		RenderOBJ(meshList[GEO_STAGE], STAGE, false, true);
+		modelStack.Rotate(rotationAngle, 0, 1, 0);
+		RenderOBJ(meshList[GEO_CAR4], CAR4, true, true);
+		modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 
@@ -829,5 +839,67 @@ void ShowroomScene::CalculateFrameRate()
 		lastTime = currentTime;
 		fps = (int)framesPerSecond;
 		framesPerSecond = 0;
+	}
+}
+
+void ShowroomScene::animateStage(double dt)
+{
+	if (isMoving) 
+	{
+		if (isGoingUp) // At the start, until it reaches the top
+		{
+			if (rotationAngle <= 360.0)
+			{
+				rotationAngle += 36 * dt;
+			}
+			if (verticalTranslation <= 10.0) // Max height the stage will translate upwards
+			{
+				verticalTranslation += 1.0 * dt;
+			}
+			else 
+			{
+				isGoingUp = false;
+			}
+		}
+		else if (!isGoingUp && !isGoingDown) // The stage is staying at the top
+		{
+			if (rotationAngle > 360 && rotationAngle <= 720)
+			{
+				rotationAngle += 72 * dt;
+			}
+			else
+			{
+				isGoingDown = true;
+			}
+		}
+		else if (isGoingDown) // The stage is going down
+		{
+			if (rotationAngle <= 1080.0)
+			{
+				rotationAngle += 36.0 * dt;
+			}
+			if (verticalTranslation >= 0.0)
+			{
+				verticalTranslation -= 1.0 * dt;
+			}
+			else
+			{
+				isGoingDown = false;
+				isMoving = false;
+			}
+		}
+	}
+	else if (!isMoving) // Stage is at the bottom
+	{
+		if (rotationAngle > 1080.0 && rotationAngle <= 1440.0)
+		{
+			rotationAngle += 72 * dt;
+		}
+		else
+		{
+			isMoving = true;
+			isGoingUp = true;
+			rotationAngle = 0.0;
+		}
 	}
 }
