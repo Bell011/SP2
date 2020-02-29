@@ -168,7 +168,7 @@ void TestDriveScene::Init()
 	player.pos = Vector3(0, 0, 1);
 	cplayer.getCoords("OBJ//mushroom.obj", cplayer);
 	player.setSize(cplayer);
-	PLAYER.RotateY = Vector4(90, 0, 1, 0);
+	PLAYER.RotateY = Vector4(0, 0, 1, 0);
 	
 
 	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
@@ -207,34 +207,30 @@ void TestDriveScene::Init()
 
 void TestDriveScene::Update(double dt)
 {
+	Vector3 movement = Vector3(speed * cos(Math::DegreeToRadian(180 - PLAYER.RotateY.degree)), 0, speed * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
 	speed = 0.5;
-	camera.view = PLAYER.Translate;
+	camera.target = player.pos;
+	camera.position = camera.target - camera.view;
+	PLAYER.Translate = player.pos;
+	std::cout << PLAYER.RotateY.degree;
 	//camera.position = PLAYER.Translate;
 	//camera.position.y = PLAYER.Translate.y +10;
 	//camera.position.x = PLAYER.Translate.x - 10;
 	if (Application::IsKeyPressed('W')) {
-		//PLAYER.RotateY = Vector4(90, 0, 1, 0);
-		if (PLAYER.RotateY.y < 90) {
-			PLAYER.RotateY.y++;
-			PLAYER.Translate -= Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
-			if (PLAYER.RotateY.y >= 90)
-				PLAYER.RotateY.y = 90;
-		}
-		
+		player.pos -= movement;
 	}
 	if (Application::IsKeyPressed('S')) {
-		PLAYER.RotateY = Vector4(90, 0, 1, 0);
-		PLAYER.Translate += Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+		player.pos += movement;
 	}
 	if (Application::IsKeyPressed('A')) {
-		PLAYER.RotateY = Vector4(180, 0, 1, 0);
-		PLAYER.Translate += Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+			turnangle += 5;
+		PLAYER.RotateY.degree = turnangle;
+		
 	}
 	if (Application::IsKeyPressed('D')) {
-		PLAYER.RotateY = Vector4(180, 0, 1, 0);
-		PLAYER.Translate -= Vector3(1 * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, 1 * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+			turnangle -= 5;
+		PLAYER.RotateY.degree = turnangle;
 	}
-
 
 	CalculateFrameRate();
 	

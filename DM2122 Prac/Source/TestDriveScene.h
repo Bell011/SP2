@@ -110,6 +110,7 @@ private:
 	float movey;
 	float movez;
 	float speed = 10.f;
+	float turnangle = 0.f;
 	int bouncetime;
 	bool switchlights;
 

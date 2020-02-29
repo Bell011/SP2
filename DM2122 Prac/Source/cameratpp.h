@@ -9,7 +9,7 @@ public:
 	//Vector3 target;
 	//Vector3 up;
 	Vector3 view;
-
+	Vector3 right;
 	Vector3 defaultPosition;
 	Vector3 defaultTarget;
 	Vector3 defaultUp;

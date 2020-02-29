@@ -13,6 +13,7 @@ public:
 	Vector3 defaultTarget;
 	Vector3 defaultUp;
 
+	Vector3 front;
 	Vector3 view;
 	Vector3 right;
 	int setCursorX;
