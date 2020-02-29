@@ -37,7 +37,7 @@ void ShowroomScene::Init()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
-	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, -1), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
@@ -86,7 +86,7 @@ void ShowroomScene::Init()
 	light[0].type = Light::LIGHT_DIRECTIONAL;
 	light[0].position.Set(0, 90, 0);
 	light[0].color.Set(0.5f, 0.5f, 0.5f);
-	light[0].power = 1;
+	light[0].power = 2;
 	light[0].kC = 1.f;
 	light[0].kL = 0.01f;
 	light[0].kQ = 0.001f;
@@ -376,28 +376,28 @@ void ShowroomScene::Update(double dt)
 	if (Application::IsKeyPressed('A')){
 		Vector3 temp = player->getPos();
 		Vector3 movement = camera.right;
-	//	movement.y = 0;
+		movement.y = 0;
 		movement.Normalize();
 		player->setPos(player->getPos() - (movement * dt * 10));
 		for (int i = 0; i < 11; i++) {
 			if (player->checkCollision(objects[i])) {
 				player->setPos(temp);
 			}
-			camera.position = player->getPos();
 		}
+			camera.position = player->getPos();
 	}
 	if (Application::IsKeyPressed('D')){
 		Vector3 temp = player->getPos();
 		Vector3 movement = camera.right;
-	//	movement.y = 0;
-	//	movement.Normalize();
+		movement.y = 0;
+		movement.Normalize();
 		player->setPos(player->getPos() + (movement * dt * 10));
 		for (int i = 0; i < 11; i++) {
 			if (player->checkCollision(objects[i])) {
 				player->setPos(temp);
 			}
-			camera.position = player->getPos();
 		}
+			camera.position = player->getPos();
 	}
 	if (Application::IsKeyPressed('W')) {
 		Vector3 temp = player->getPos();
@@ -409,8 +409,8 @@ void ShowroomScene::Update(double dt)
 			if (player->checkCollision(objects[i])) {
 				player->setPos(temp);
 			}
-			camera.position = player->getPos();
 		}
+			camera.position = player->getPos();
 	}
 	if (Application::IsKeyPressed('S')) {
 		Vector3 temp = player->getPos();
@@ -422,13 +422,13 @@ void ShowroomScene::Update(double dt)
 			if (player->checkCollision(objects[i])) {
 				player->setPos(temp);
 			}
-			camera.position = player->getPos();
 		}
+			camera.position = player->getPos();
 	}
 	SwitchLightColours();
 	//SetCursorPos(camera.setCursorX, camera.setCursorY);
-	camera.mouse_callback();
-	///camera.Update(dt);
+	//camera.mouse_callback();
+	camera.Update(dt);
 	CalculateFrameRate();
 }
 /*=============================================================================*/
@@ -575,6 +575,7 @@ void ShowroomScene::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to Play", Color(0, 0, 0), 3.f, 0, 2);
 		if (Application::IsKeyPressed(VK_RETURN)) {
 			Application::scenechange(2);
+		
 		}
 	}
 	if (player->checkCollision(checknpc)) {
@@ -852,12 +853,12 @@ void ShowroomScene::RenderSpotlights()
 		Position lightPosition_cameraspace = viewStack.Top() * light[1].position;
 		glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightPosition_cameraspace.x);
 	}
-
 	modelStack.PushMatrix();
 	modelStack.Translate(light[1].position.x, light[1].position.y, light[1].position.z);
 	modelStack.Rotate(30, 0, 1, 0);
 	RenderMesh(meshList[GEO_SPOTLIGHT], true);
 	modelStack.PopMatrix();
+
 }
 
 void ShowroomScene::SwitchLightColours()
@@ -895,7 +896,7 @@ void ShowroomScene::InitHeadlights()
 	for (int i = 2; i < 8; i++)
 	{
 		light[i].type = Light::LIGHT_SPOT;
-		light[i].power = 1;
+		light[i].power = 0.5;
 		light[i].kC = 1.f;
 		light[i].kL = 0.01f;
 		light[i].kQ = 0.001f;
@@ -1186,48 +1187,5 @@ void ShowroomScene::RenderHeadlights()
 		glUniform3fv(m_parameters[U_LIGHT7_POSITION], 1, &lightPosition_cameraspace.x);
 	}
 
-	for (int i = 2; i < 8; i++)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(light[i].position.x, light[i].position.y, light[i].position.z);
-
-		if (i == 2 || i == 3)
-		{
-
-			modelStack.Rotate(40, 0, 1, 0);
-			modelStack.Rotate(90, 0, 1, 0);
-			modelStack.Scale(3, 3, 3);
-		}
-
-		if (i == 4 || i == 5)
-		{
-			modelStack.Rotate(180, 1, 0, 0);
-			modelStack.Scale(4, 4, 4);
-			modelStack.Rotate(40, 0, 1, 0);
-		}
-
-		if (i == 6 || i == 7)
-		{
-			modelStack.Rotate(70, 0, 1, 0);
-			modelStack.Rotate(-40, 0, 0, 1);
-			modelStack.Scale(4.5, 4.5, 4.5);
-		}
-
-		RenderMesh(meshList[GEO_HEADLIGHTS], true);
-		modelStack.PopMatrix();
-	}
-
-	modelStack.PushMatrix();
-	modelStack.Translate(-19.3, 0.5, -5.7);
-	modelStack.Rotate(30, 0, 1, 0);
-	modelStack.Scale(2.5, 2.5, 2.5);
-	RenderMesh(meshList[GEO_HEADLIGHTS], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(-14, 0.5, -8.9);
-	modelStack.Rotate(30, 0, 1, 0);
-	modelStack.Scale(2.5, 2.5, 2.5);
-	RenderMesh(meshList[GEO_HEADLIGHTS], true);
-	modelStack.PopMatrix();
+	
 }

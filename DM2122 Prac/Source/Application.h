@@ -4,7 +4,17 @@
 #include "timer.h"
 #include "Scene.h"
 
+enum SCENES {
+	MAINMENU,
+	SHOWROOM,
+	GAMEMENU,
+	GAME1,
+	GAME2,
+	GAME3,
+	TESTDRIVE,
+	NUM_SCENE
 
+};
 class Application
 {
 public:
@@ -16,19 +26,8 @@ public:
 	static bool IsKeyPressed(unsigned short key);
 	static void scenechange(int no);
 	
-	
 private:
-	enum SCENES {
-		MAINMENU,
-		SHOWROOM,
-		GAMEMENU,
-		GAME1,
-		GAME2,
-		GAME3,
-		TESTDRIVE,
-		NUM_SCENE
 
-	};
 	static Scene* scene;
 	static Scene* scenes[NUM_SCENE];
 	//Declare a window object
