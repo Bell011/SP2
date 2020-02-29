@@ -16,16 +16,14 @@ public:
 	Vector3 front;
 	Vector3 view;
 	Vector3 right;
-	int setCursorX;
-	int setCursorY;
+
+	int newcursorx;
+	int newcursory;
 	float yaw, pitch, fov, lastX, lastY;
-	bool firstMouse;
-	float CAMERA_SPEED;
+
 	camerafps();
 	~camerafps();
-	void setcameraspeed(float c) {
-		CAMERA_SPEED = c;
-	}
+
 	virtual void Init(const Vector3& pos, const Vector3& target, const Vector3& up);
 	virtual void Update(double dt);
 	virtual void Reset();

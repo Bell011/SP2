@@ -76,8 +76,9 @@ void MainMenu::Update(double dt)
 	if (Application::IsKeyPressed(VK_DOWN))
 		cursory = 15;
 	
-	if ((cursory == 15 || cursory == 35) && Application::IsKeyPressed(VK_RETURN))
+	if ((cursory == 15 || cursory == 35) && Application::IsKeyPressed(VK_RETURN)) {
 		Application::scenechange(1);
+	}
 	CalculateFrameRate();
 }
 
