@@ -155,13 +155,13 @@ void SceneShop::Init()
 	//meshList[GEO_ENGINE3]->textureID = LoadTGA("Image//engine3.tga");
 
 	meshList[GEO_WHEEL1] = MeshBuilder::GenerateQuad("wheel1", Color(1, 1, 1), 10, 10);
-	//meshList[GEO_WHEEL1]->textureID = LoadTGA("Image//wheel1.tga");
+	meshList[GEO_WHEEL1]->textureID = LoadTGA("Image//wheelDesignNum1.tga");
 
 	meshList[GEO_WHEEL2] = MeshBuilder::GenerateQuad("wheel2", Color(1, 1, 1), 10, 10);
-	//meshList[GEO_WHEEL2]->textureID = LoadTGA("Image//wheel2.tga");
+	meshList[GEO_WHEEL2]->textureID = LoadTGA("Image//wheelDesignNum2.tga");
 
 	meshList[GEO_WHEEL3] = MeshBuilder::GenerateQuad("wheel3", Color(1, 1, 1), 10, 10);
-	//meshList[GEO_WHEEL3]->textureID = LoadTGA("Image//wheel3.tga");
+	meshList[GEO_WHEEL3]->textureID = LoadTGA("Image//wheelDesignNum3.tga");
 
 	meshList[GEO_SUSPENSION1] = MeshBuilder::GenerateQuad("suspension1", Color(1, 1, 1), 10, 10);
 	//meshList[GEO_SUSPENSION1]->textureID = LoadTGA("Image//suspension1.tga");
