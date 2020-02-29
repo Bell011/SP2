@@ -28,7 +28,7 @@ void cameratpp::Init(const Vector3& pos, const Vector3& target, const Vector3& u
 
 void cameratpp::Update(double dt)
 {
-	mouse_callback();
+	//mouse_callback();
 	position = target - view;
 }
 
