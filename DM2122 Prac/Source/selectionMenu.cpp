@@ -61,14 +61,16 @@ void selectionMenu::Init()
 	glUseProgram(m_programID);
 
 	meshList[GEO_MENU] = MeshBuilder::GenerateQuad("menu", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_MENU]->textureID = LoadTGA("Image//menu_texture.tga");
+	meshList[GEO_MENU]->textureID = LoadTGA("Image//indoor_Back.tga");
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	
 	meshList[GEO_TARGET] = MeshBuilder::GenerateOBJ("target", "OBJ//target.obj");
-	meshList[GEO_TARGET]->textureID = LoadTGA("Image//targetTexture.tga");
+	meshList[GEO_TARGET]->textureID = LoadTGA("image//targetTexture.tga");
 	target = new rectObj();
-	
+	target->setPos(Vector3(0,0,0));
+	TARGET.Translate = Vector3(0,0,-1);
+
 	meshList[GEO_CHECKBOX1] = MeshBuilder::GenerateQuad("checkBox1", Color(0, 0, 0), 0.4f, 0.4f); // Suspension
 	CHECKBOX1.Translate = Vector3(1.5, -7.7,0);
 
@@ -267,10 +269,7 @@ void selectionMenu::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(numOfParts) + " /7 CAR PARTS SELECTED", Color(0, 0, 0), 2.5, 5, 2);
 	}
 
-	TARGET.Translate = Vector3(movex, movey, movez);
-
-	target->setPos(Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z));
-	RenderOBJ(meshList[GEO_TARGET], TARGET, true, true);
+	
 
 	if (pressedSpace) // player try to check a box
 	{
@@ -573,6 +572,9 @@ void selectionMenu::Render()
 			RenderOBJ(meshList[GEO_CFCOLOUR4], CFCOLOUR4, true, true);
 		}
 	}
+	TARGET.Translate = Vector3(movex, movey, -1);
+	target->setPos(Vector3(TARGET.Translate.x, TARGET.Translate.y, -1));
+	RenderOBJ(meshList[GEO_TARGET], TARGET, true, true);
 }
 
 /******************************************************************************/
