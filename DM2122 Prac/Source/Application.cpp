@@ -53,6 +53,7 @@ bool Application::IsKeyPressed(unsigned short key)
 
 Application::Application()
 {
+	
 }
 
 Application::~Application()
@@ -110,6 +111,14 @@ void Application::scenechange(int no) {
 	scene = scenes[no];
 	scene->Init();
  }
+void Application::setCar(Car* c)
+{
+	car = c;
+}
+Car* Application::getCar()
+{
+	return car;
+}
 void Application::Run()
 {
 	//Main Loop

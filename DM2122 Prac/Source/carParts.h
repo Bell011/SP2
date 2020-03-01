@@ -54,14 +54,15 @@ enum car_texture {
 class Car
 {
 private:
-	Mesh* swheel[NUM_WHEEL];
-	Mesh* scarframe[NUM_CAR];
+	Mesh* swheel;
+	Mesh* scarframe;
 public:
+	Car();
 	Car(Mesh* w, Mesh* f);
 	Mesh* getWheel();
 	Mesh* getCarframe();
-	static void setWheel(Mesh* w);
-	static void setCarFrame(Mesh* f);
+	void setWheel(Mesh* w);
+	void setCarFrame(Mesh* f);
 };
 
 

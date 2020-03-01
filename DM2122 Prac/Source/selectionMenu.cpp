@@ -66,10 +66,10 @@ void selectionMenu::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	
 	meshList[GEO_TARGET] = MeshBuilder::GenerateOBJ("target", "OBJ//target.obj");
-	meshList[GEO_TARGET]->textureID = LoadTGA("image//targetTexture.tga");
+	meshList[GEO_TARGET]->textureID = LoadTGA("Image//targetTexture.tga");
 	target = new rectObj();
-	target->setPos(Vector3(0,0,0));
-	TARGET.Translate = Vector3(0,0,-1);
+	movex = 0; movey = -10; movez = 0;
+	target->setPos(Vector3(TARGET.Translate.x, TARGET.Translate.y, 5));
 
 	meshList[GEO_CHECKBOX1] = MeshBuilder::GenerateQuad("checkBox1", Color(0, 0, 0), 0.4f, 0.4f); // Suspension
 	CHECKBOX1.Translate = Vector3(1.5, -7.7,0);
@@ -163,26 +163,12 @@ void selectionMenu::Init()
 	nextColour = prevColour = nextDesign = prevDesign = false;
 	// To see how many parts are selected
 	numOfParts = 0;
+	initCars();
 }
 
 void selectionMenu::Update(double dt)
 {
-	if (Application::IsKeyPressed(0x31))
-	{
-		glDisable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x32))
-	{
-		glEnable(GL_CULL_FACE);
-	}
-	else if (Application::IsKeyPressed(0x33))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-	else if (Application::IsKeyPressed(0x34))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	}
+	
 	CalculateFrameRate();
 
 	if (Application::IsKeyPressed(VK_LEFT))
@@ -201,7 +187,7 @@ void selectionMenu::Update(double dt)
 	{
 		movey -= 5 * dt;
 	}
-	std::cout << target->getPos().x << " " << target->getPos().y << std::endl;
+	std::cout << TARGET.Translate.x << " " << TARGET.Translate.x << std::endl;
 	if (Application::IsKeyPressed(VK_SPACE))
 	{
 		static float lastTime = 0.0f;
@@ -545,6 +531,9 @@ void selectionMenu::Render()
 		if (cfDesignNum == 1)
 		{
 			RenderOBJ(meshList[GEO_CFDESIGN1], CFDESIGN1, true, true);
+			if (Application::IsKeyPressed(VK_RETURN)) { 
+				//Application::setCar();
+			}
 		}
 		else if (cfDesignNum == 2)
 		{
@@ -572,8 +561,9 @@ void selectionMenu::Render()
 			RenderOBJ(meshList[GEO_CFCOLOUR4], CFCOLOUR4, true, true);
 		}
 	}
-	TARGET.Translate = Vector3(movex, movey, -1);
-	target->setPos(Vector3(TARGET.Translate.x, TARGET.Translate.y, -1));
+
+	TARGET.Translate = Vector3(movex, movey, movez);
+	target->setPos(Vector3(TARGET.Translate.x, TARGET.Translate.y, TARGET.Translate.z));
 	RenderOBJ(meshList[GEO_TARGET], TARGET, true, true);
 }
 
@@ -826,4 +816,45 @@ void selectionMenu::doCheckBoxCollision()
 {
 	// Check whether target has collision with any checkboxes
 	CheckCollision(target);
+}
+
+void selectionMenu::initCars() {
+	meshList[GEO_WHEEL1] = MeshBuilder::GenerateOBJ("wheel1", "OBJ//wheel1.obj");
+	meshList[GEO_WHEEL1]->textureID = LoadTGA("Image//wheel1.tga");
+	meshList[GEO_WHEEL1]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
+	meshList[GEO_WHEEL1]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_WHEEL1]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_WHEEL1]->material.kShininess = 1.f;
+
+	meshList[GEO_WHEEL2] = MeshBuilder::GenerateOBJ("wheel2", "OBJ//wheel2.obj");
+	meshList[GEO_WHEEL2]->textureID = LoadTGA("Image//wheel1.tga");
+	meshList[GEO_WHEEL2]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
+	meshList[GEO_WHEEL2]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_WHEEL2]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_WHEEL2]->material.kShininess = 1.f;
+
+	meshList[GEO_WHEEL3] = MeshBuilder::GenerateOBJ("wheel3", "OBJ//wheel3.obj");
+	meshList[GEO_WHEEL3]->textureID = LoadTGA("Image//wheel1.tga");
+	meshList[GEO_WHEEL3]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
+	meshList[GEO_WHEEL3]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_WHEEL3]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_WHEEL3]->material.kShininess = 1.f;
+
+	meshList[GEO_CAR1] = MeshBuilder::GenerateOBJ("wheel1", "OBJ//car1.obj");
+	meshList[GEO_CAR1]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
+	meshList[GEO_CAR1]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_CAR1]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_CAR1]->material.kShininess = 1.f;
+
+	meshList[GEO_CAR2] = MeshBuilder::GenerateOBJ("wheel2", "OBJ//car2.obj");
+	meshList[GEO_CAR2]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
+	meshList[GEO_CAR2]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_CAR2]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_CAR2]->material.kShininess = 1.f;
+
+	meshList[GEO_CAR3] = MeshBuilder::GenerateOBJ("wheel3", "OBJ//car3.obj");;
+	meshList[GEO_CAR3]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
+	meshList[GEO_CAR3]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_CAR3]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
+	meshList[GEO_CAR3]->material.kShininess = 1.f;
 }

@@ -83,15 +83,14 @@ void GameMenu::Update(double dt)
 		cursorx = 48;
 	}
 
-
 	if (Application::IsKeyPressed('1')) {
-		Application::scenechange(3);
-	}
-	else if (Application::IsKeyPressed('2')) {
 		Application::scenechange(4);
 	}
-	else if (Application::IsKeyPressed('3')) {
+	else if (Application::IsKeyPressed('2')) {
 		Application::scenechange(5);
+	}
+	else if (Application::IsKeyPressed('3')) {
+		Application::scenechange(6);
 	}
 	if (Application::IsKeyPressed(VK_BACK)) {
 		float currentTime = GetTickCount() * 0.001f;

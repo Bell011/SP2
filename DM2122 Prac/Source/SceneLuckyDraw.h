@@ -66,7 +66,7 @@ private:
 	MS modelStack, viewStack, projectionStack;
 	Light light[1];
 
-	camerafps camera;
+	Camera2 camera;
 	
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void AnimateWheel(double dt);

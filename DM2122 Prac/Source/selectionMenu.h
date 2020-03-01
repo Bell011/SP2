@@ -20,7 +20,7 @@ class selectionMenu : public Scene
 		GEO_AXES = 0,
 		GEO_CHAR,
 		GEO_TEXT,
-
+		
 		GEO_MENU,
 		GEO_TARGET,
 		// For the checkboxes
@@ -45,6 +45,14 @@ class selectionMenu : public Scene
 		GEO_WINDOWCOLOUR1,
 		GEO_WINDOWCOLOUR2,
 		
+		GEO_CAR1,
+		GEO_CAR2,
+		GEO_CAR3,
+
+		GEO_WHEEL1,
+		GEO_WHEEL2,
+		GEO_WHEEL3,
+
 		NUM_GEOMETRY,
 	};
 
@@ -69,9 +77,8 @@ private:
 	unsigned m_parameters[U_TOTAL];
 
 	MS modelStack, viewStack, projectionStack;
-	TRS chara;
 
-	camerafps camera;
+	Camera2 camera;
 
 	TRS TARGET;
 	// For the checkboxes
@@ -96,7 +103,7 @@ private:
 	TRS WINDOWCOLOUR1;
 	TRS WINDOWCOLOUR2;
 
-	rectObj* target;
+	Object* target;
 	// For the checkboxes
 	bool inCheckBox;
 	bool numberBox1;
@@ -124,7 +131,7 @@ private:
 
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
-
+	void initCars();
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderMeshOnScreen(Mesh* mesh, float x, float y, float sizex, float sizey);
