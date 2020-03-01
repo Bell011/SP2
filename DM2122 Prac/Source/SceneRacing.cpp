@@ -110,22 +110,22 @@ void SceneRacing::Init()
 	glUniform1i(m_parameters[U_NUMLIGHTS], 1);
 
 	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_LEFT]->textureID = LoadTGA("Image//left.tga");
+	meshList[GEO_LEFT]->textureID = LoadTGA("Image//indoor_Bottom.tga");
 
 	meshList[GEO_RIGHT] = MeshBuilder::GenerateQuad("right", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_RIGHT]->textureID = LoadTGA("Image//right.tga");
+	meshList[GEO_RIGHT]->textureID = LoadTGA("Image//indoor_Bottom.tga");
 
 	meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_TOP]->textureID = LoadTGA("Image//top.tga");
+	meshList[GEO_TOP]->textureID = LoadTGA("Image//indoor_Bottom.tga");
 
 	meshList[GEO_BOTTOM] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_BOTTOM]->textureID = LoadTGA("Image//bottom.tga");
+	meshList[GEO_BOTTOM]->textureID = LoadTGA("Image//indoor_Bottom.tga");
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
+	meshList[GEO_FRONT]->textureID = LoadTGA("Image//indoor_Bottom.tga");
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_BACK]->textureID = LoadTGA("Image//back.tga");
+	meshList[GEO_BACK]->textureID = LoadTGA("Image//indoor_Bottom.tga");
 
 	meshList[GEO_CHAR] = MeshBuilder::GenerateQuad("char", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_CHAR]->textureID = LoadTGA("Image//char.tga");
@@ -142,11 +142,11 @@ void SceneRacing::Init()
 	meshList[GEO_CAR4] = MeshBuilder::GenerateOBJ("Car1", "Obj//g3car.obj");
 	meshList[GEO_CAR4]->textureID = LoadTGA("Image//g3carenemy.tga");
 
-	meshList[GEO_MAP] = MeshBuilder::GenerateQuad("Map", Color(1, 1, 1), 13, 100);
+	meshList[GEO_MAP] = MeshBuilder::GenerateQuad("Map", Color(0, 0, 0), 13, 100);
 	//meshList[GEO_MAP]->textureID = LoadTGA("Image//map.tga");
 
-	meshList[GEO_BARRIER1] = MeshBuilder::GenerateCuboid("barrierright", Color(1, 0, 0), 1, 1, 100);
-	meshList[GEO_BARRIER2] = MeshBuilder::GenerateCuboid("barrierLEft", Color(1, 0, 0), 1, 1, 100);
+	meshList[GEO_BARRIER1] = MeshBuilder::GenerateCuboid("barrierright", Color(0,0,1), 1, 1, 100);
+	meshList[GEO_BARRIER2] = MeshBuilder::GenerateCuboid("barrierLEft", Color(0,0,1), 1, 1, 100);
 
 	car.getCoords("Obj//g3car.obj", car);
 	meshList[GEO_LIGHTSPHERE] = MeshBuilder::GenerateSphere("lightBall", Color(1.f, 1.f, 1.f), 9, 36, 1.f);
@@ -239,7 +239,7 @@ void SceneRacing::Update(double dt)
 			carPlayer->updateLives(-1);
 			invinTime = 2.f;
 		}
-	camera.Update(dt);
+	//camera.Update(dt);
 	CalculateFrameRate();
 }
 
@@ -292,14 +292,14 @@ void SceneRacing::Render()
 	if (isPlaying == true)
 	{
 		modelStack.PushMatrix();
-		RenderTextOnScreen(meshList[GEO_TEXT], "Lives: " + std::to_string(lives), Color(1, 1, 1), 3, 8, 15);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Lives: " + std::to_string(lives), Color(1,1,1), 3, 8, 15);
 		modelStack.PopMatrix();
 	}
 
 	std::ostringstream ss1;
 	ss1.precision(4);
 	ss1 << "cam(" << camera.position.x << ", " << camera.position.y << ", " << camera.position.z << ")";
-	RenderTextOnScreen(meshList[GEO_TEXT], ss1.str(), Color(0, 1, 0), 3, 0, 3);
+	RenderTextOnScreen(meshList[GEO_TEXT], ss1.str(), Color(1,1,1), 3, 0, 3);
 }
 
 void SceneRacing::Exit()
