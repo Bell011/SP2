@@ -3,7 +3,6 @@
 
 #include "timer.h"
 #include "Scene.h"
-#include "carParts.h"
 
 enum SCENES {
 	MAINMENU,
@@ -28,11 +27,9 @@ public:
 	void Exit();
 	static bool IsKeyPressed(unsigned short key);
 	static void scenechange(int no);
-	void setCar(Car*);
-	Car* getCar();
+	static Scene* getScene(int);
 
 private:
-	Car* car;
 	static Scene* scene;
 	static Scene* scenes[NUM_SCENE];
 	//Declare a window object

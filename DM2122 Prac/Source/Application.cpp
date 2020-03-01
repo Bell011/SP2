@@ -111,14 +111,12 @@ void Application::scenechange(int no) {
 	scene = scenes[no];
 	scene->Init();
  }
-void Application::setCar(Car* c)
+
+Scene* Application::getScene(int no)
 {
-	car = c;
+	return scenes[no];
 }
-Car* Application::getCar()
-{
-	return car;
-}
+
 void Application::Run()
 {
 	//Main Loop

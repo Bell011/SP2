@@ -12,6 +12,8 @@
 #include "Object.h"
 #include "cirObject.h"
 #include "rectObject.h"
+#include"carParts.h"
+#include "TestDriveScene.h"
 
 class selectionMenu : public Scene
 {
@@ -84,48 +86,30 @@ private:
 	// For the checkboxes
 	TRS CHECKBOX1;
 	TRS CHECKBOX2;
-	TRS CHECKBOX3;
-	TRS CHECKBOX4;
-	TRS CHECKBOX5;
-	TRS CHECKBOX6;
-	TRS CHECKBOX7;
-	// For the selection of colours and designs for window,wheel,carframe
-	TRS CFDESIGN1;
-	TRS CFDESIGN2;
-	TRS CFDESIGN3;
-	TRS CFCOLOUR1;
-	TRS CFCOLOUR2;
-	TRS CFCOLOUR3;
-	TRS CFCOLOUR4;
-	TRS WHEELDESIGN1;
-	TRS WHEELDESIGN2;
-	TRS WHEELDESIGN3;
-	TRS WINDOWCOLOUR1;
-	TRS WINDOWCOLOUR2;
+	TRS MENU;
+	TRS CAR1;
+	TRS CAR2;
+	TRS CAR3;
+	TRS WHEEL1;
+	TRS WHEEL2;
+	TRS WHEEL3;
 
+	Car car;
 	Object* target;
 	// For the checkboxes
 	bool inCheckBox;
 	bool numberBox1;
 	bool numberBox2;
-	bool numberBox3;
-	bool numberBox4;
-	bool numberBox5;
-	bool numberBox6;
-	bool numberBox7;
+
+	bool checkCar1 = false;
+	bool checkCar2 = false;
+	bool checkCar3 = false;
+	bool frameChoice = true;
+	bool texChoice = false;
 	bool pressedSpace;
 	int numberBox;
 	// For the selection of colours and designs for window,wheel,carframe
-	bool nextColour;
-	bool prevColour;
-	bool nextDesign;
-	bool prevDesign;
-	bool nextButton;
-	bool prevButton;
-	int cfColourNum;
-	int cfDesignNum;
-	int wheelDesignNum;
-	int windowColourNum;
+
 	// To see how many parts are selected
 	int numOfParts;
 

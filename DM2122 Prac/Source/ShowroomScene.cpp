@@ -545,7 +545,7 @@ void ShowroomScene::Render()
 	modelStack.PopMatrix();
 
 	RenderOBJ(meshList[GEO_CAR3], CAR3, false, true);
-	WHEEL1.Translate = Vector3(0.5,-1.5,1.75);
+	WHEEL1.Translate = Vector3(0.5,-0.8,1.75);
 	RenderOBJ(meshList[GEO_WHEEL1], WHEEL1, false, true);
 	WHEEL1.Translate = Vector3(0, 0, -3.3);
 	RenderOBJ(meshList[GEO_WHEEL1], WHEEL1, false, true);

@@ -8,6 +8,10 @@
 #include "Light.h"
 #include "cameratpp.h"
 #include "collcorners.h"
+#include "carParts.h"
+#include "Object.h"
+#include "cirObject.h"
+#include "rectObject.h"
 #include <iostream>
 
 struct car {
@@ -36,7 +40,7 @@ class TestDriveScene : public Scene
 
 		GEO_CUBE,
 		GEO_CHAR,
-
+		
 		GEO_TRACK,
 
 		GEO_LIGHTSPHERE,
@@ -99,11 +103,12 @@ private:
 	Light light[2];
 
 	cameratpp camera;
-	
+	Car car;
 	TRS CUBE;
 	TRS PLAYER;
 	TRS TRACK;
-	car player;
+	TRS WHEEL;
+	Object* player;
 	corners cplayer;
 
 	float movex;
@@ -120,12 +125,12 @@ private:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
-
-
+	void RenderCar();
 	bool checkCollision();
 public:
 	TestDriveScene();
 	~TestDriveScene();
+	void setCar(Car*);
 
 	virtual void Init();
 	virtual void Update(double dt);
