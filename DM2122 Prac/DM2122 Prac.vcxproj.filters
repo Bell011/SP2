@@ -79,6 +79,9 @@
     <ClCompile Include="Source\SceneShop.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Currency.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera.h">
@@ -100,9 +103,6 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Source\collcorners.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\collision.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Source\g3CarEntity.h">
@@ -172,6 +172,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneShop.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Currency.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

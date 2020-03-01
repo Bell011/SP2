@@ -66,7 +66,7 @@ private:
 	MS modelStack, viewStack, projectionStack;
 	Light light[1];
 
-	camerafps camera;
+	Camera2 camera;
 	
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void AnimateWheel(double dt);
@@ -75,7 +75,7 @@ private:
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void CalculateFrameRate();
-
+	void setPrizes();
 	bool bSpinAnimation;
 	float fAnimationDuration;
 	float fRotateAngle;

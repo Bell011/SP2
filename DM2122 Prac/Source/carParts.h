@@ -3,42 +3,26 @@
 
 #include "Scene.h"
 #include <MatrixStack.h>
-#include "Camera2.h"
 #include "Mesh.h"
-#include "Light.h"
-#include "camerafps.h"
-#include <iostream>
-#include <string>
-#include "collision.h"
-enum car_wheel {
-	WHEEL1,
-	WHEEL2,
-	WHEEL3,
-};
-enum carframe {
-	cf1,
-	cf2,
-	cf3,
-};
-enum car_texture {
-	// 16 combi here (refer to text file)
-};
+
 class Car
 {
 private:
-
-	Mesh* swheel;
-	Mesh* scarframe;
-
-	
+	Mesh* car;
+	Mesh* wheel;
+	Vector3 wheelpos[4];
+	Vector3 front;
 
 public:
-	Car(Mesh* w, Mesh* f);
+	Car();
+	Vector3 getFront();
+	void setFront(Vector3);
+	Mesh* getCar();
+	void setCar(Mesh*);
 	Mesh* getWheel();
-	Mesh* getCarframe();
-	void setWheel(Mesh* w);
-	void setCarFrame(Mesh* f);
-
+	void setWheel(Mesh*);
+	void setWheelPos(int, Vector3);
+	Vector3 getWheelPos(int);
 };
 
 

@@ -14,7 +14,6 @@ enum SCENES {
 	GAME3,
 	SELECTIONMENU,
 	TESTDRIVE,
-	RACE_MINGAME,
 	NUM_SCENE
 
 };
@@ -28,9 +27,9 @@ public:
 	void Exit();
 	static bool IsKeyPressed(unsigned short key);
 	static void scenechange(int no);
-	
-private:
+	static Scene* getScene(int);
 
+private:
 	static Scene* scene;
 	static Scene* scenes[NUM_SCENE];
 	//Declare a window object

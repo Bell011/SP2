@@ -545,7 +545,7 @@ void ShowroomScene::Render()
 	modelStack.PopMatrix();
 
 	RenderOBJ(meshList[GEO_CAR3], CAR3, false, true);
-	WHEEL1.Translate = Vector3(0.5,-1.5,1.75);
+	WHEEL1.Translate = Vector3(0.5,-0.8,1.75);
 	RenderOBJ(meshList[GEO_WHEEL1], WHEEL1, false, true);
 	WHEEL1.Translate = Vector3(0, 0, -3.3);
 	RenderOBJ(meshList[GEO_WHEEL1], WHEEL1, false, true);
@@ -584,20 +584,20 @@ void ShowroomScene::Render()
 		float currentTime = GetTickCount() * 0.001f;
 		if (currentTime - bouncetime > 3.f)
 		{
-			Application::scenechange(6);
+			Application::scenechange(7);
 		}
 	}
 	if (player->checkCollision(checkarcade)) {
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to Play", Color(0, 0, 0), 3.f, 0, 2);
 		if (Application::IsKeyPressed(VK_RETURN)) {
-			Application::scenechange(7);
+			Application::scenechange(2);
 		
 		}
 	}
 	if (player->checkCollision(checknpc)) {
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press ENTER to Buy", Color(0, 0, 0), 3.f, 0, 2);
 		if (Application::IsKeyPressed(VK_RETURN)) {
-			//Application::scenechange();
+			Application::scenechange(3);
 		}
 	}
 	RenderTextOnScreen(meshList[GEO_TEXT], "WASD to move,Mouse to pan", Color(0, 0, 0), 3.f, 0, 1);

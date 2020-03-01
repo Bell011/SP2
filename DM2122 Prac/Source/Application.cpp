@@ -53,6 +53,7 @@ bool Application::IsKeyPressed(unsigned short key)
 
 Application::Application()
 {
+	
 }
 
 Application::~Application()
@@ -110,6 +111,12 @@ void Application::scenechange(int no) {
 	scene = scenes[no];
 	scene->Init();
  }
+
+Scene* Application::getScene(int no)
+{
+	return scenes[no];
+}
+
 void Application::Run()
 {
 	//Main Loop
@@ -128,7 +135,9 @@ void Application::Run()
 			scenes[i]->Init();
 		}
 	}
-	scene = scenes[GAME2];
+
+	scene = scenes[MAINMENU];
+
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{		

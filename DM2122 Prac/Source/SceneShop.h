@@ -7,7 +7,6 @@
 #include "Mesh.h"
 #include "Light.h"
 #include "camerafps.h"
-#include "collision.h"
 #include "Object.h"
 
 class SceneShop : public Scene

@@ -285,6 +285,8 @@ void SceneLuckyDraw::RenderPrizes()
 		{
 			std::string prizes[12] = { "ENGINE", "600", "HEADLIGHTS", "1000", "WINDOWS",
 									 "1500", "BRAKELIGHTS", "300", "NOTHING", "WHEELS", "100", "NOTHING" };
+			//std::string prizes[12] = { "300", "NOTHING", "1000", "NOTHING", "PAINT",
+			//						 "WINDOWS", "600", "NOTHING", "1500", "PAINT", "500", "PAINT" };
 
 			RenderTextOnScreen(meshList[GEO_TEXT], "YOU WON " + prizes[iRNG], Color(0, 1, 1), 5, 0, 0);
 
@@ -380,5 +382,16 @@ void SceneLuckyDraw::CalculateFrameRate()
 		lastTime = currentTime;
 		fps = (int)framesPerSecond;
 		framesPerSecond = 0;
+	}
+}
+
+void SceneLuckyDraw::setPrizes()
+{
+	std::string prizes[12] = { "ENGINE", "600", "HEADLIGHTS", "1000", "WINDOWS",
+									 "1500", "BRAKELIGHTS", "300", "NOTHING", "WHEELS", "100", "NOTHING" };
+	//std::string prizes[12] = { "300", "NOTHING", "1000", "NOTHING", "PAINT",
+	//		 "WINDOWS", "600", "NOTHING", "1500", "PAINT", "500", "PAINT" };			
+	if (iRNG == 1) {
+		//Currency::setMoney(m)
 	}
 }

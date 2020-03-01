@@ -12,6 +12,8 @@
 #include "Object.h"
 #include "cirObject.h"
 #include "rectObject.h"
+#include"carParts.h"
+#include "TestDriveScene.h"
 
 class selectionMenu : public Scene
 {
@@ -20,7 +22,7 @@ class selectionMenu : public Scene
 		GEO_AXES = 0,
 		GEO_CHAR,
 		GEO_TEXT,
-
+		
 		GEO_MENU,
 		GEO_TARGET,
 		// For the checkboxes
@@ -45,6 +47,14 @@ class selectionMenu : public Scene
 		GEO_WINDOWCOLOUR1,
 		GEO_WINDOWCOLOUR2,
 		
+		GEO_CAR1,
+		GEO_CAR2,
+		GEO_CAR3,
+
+		GEO_WHEEL1,
+		GEO_WHEEL2,
+		GEO_WHEEL3,
+
 		NUM_GEOMETRY,
 	};
 
@@ -69,62 +79,43 @@ private:
 	unsigned m_parameters[U_TOTAL];
 
 	MS modelStack, viewStack, projectionStack;
-	TRS chara;
 
-	camerafps camera;
+	Camera2 camera;
 
 	TRS TARGET;
 	// For the checkboxes
 	TRS CHECKBOX1;
 	TRS CHECKBOX2;
-	TRS CHECKBOX3;
-	TRS CHECKBOX4;
-	TRS CHECKBOX5;
-	TRS CHECKBOX6;
-	TRS CHECKBOX7;
-	// For the selection of colours and designs for window,wheel,carframe
-	TRS CFDESIGN1;
-	TRS CFDESIGN2;
-	TRS CFDESIGN3;
-	TRS CFCOLOUR1;
-	TRS CFCOLOUR2;
-	TRS CFCOLOUR3;
-	TRS CFCOLOUR4;
-	TRS WHEELDESIGN1;
-	TRS WHEELDESIGN2;
-	TRS WHEELDESIGN3;
-	TRS WINDOWCOLOUR1;
-	TRS WINDOWCOLOUR2;
+	TRS MENU;
+	TRS CAR1;
+	TRS CAR2;
+	TRS CAR3;
+	TRS WHEEL1;
+	TRS WHEEL2;
+	TRS WHEEL3;
 
-	rectObj* target;
+	Car car;
+	Object* target;
 	// For the checkboxes
 	bool inCheckBox;
 	bool numberBox1;
 	bool numberBox2;
-	bool numberBox3;
-	bool numberBox4;
-	bool numberBox5;
-	bool numberBox6;
-	bool numberBox7;
+
+	bool checkCar1 = false;
+	bool checkCar2 = false;
+	bool checkCar3 = false;
+	bool frameChoice = true;
+	bool texChoice = false;
 	bool pressedSpace;
 	int numberBox;
 	// For the selection of colours and designs for window,wheel,carframe
-	bool nextColour;
-	bool prevColour;
-	bool nextDesign;
-	bool prevDesign;
-	bool nextButton;
-	bool prevButton;
-	int cfColourNum;
-	int cfDesignNum;
-	int wheelDesignNum;
-	int windowColourNum;
+
 	// To see how many parts are selected
 	int numOfParts;
 
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
-
+	void initCars();
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderMeshOnScreen(Mesh* mesh, float x, float y, float sizex, float sizey);
