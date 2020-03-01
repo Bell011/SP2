@@ -92,7 +92,7 @@ void GameMenu::Update(double dt)
 	else if (Application::IsKeyPressed('3')) {
 		Application::scenechange(6);
 	}
-	if (Application::IsKeyPressed(VK_BACK)) {
+	if (Application::IsKeyPressed(VK_SHIFT)) {
 		float currentTime = GetTickCount() * 0.001f;
 		if (currentTime - bouncetime > 0.5f)
 		{
@@ -124,7 +124,7 @@ void GameMenu::Render()
 	//Render in order from Background to Foreground
 	RenderMeshOnScreen(meshList[GEO_BG], 40, 60, 0.5, 0.5);
 	
-	RenderTextOnScreen(meshList[GEO_TEXT], "Press BACKSPACE to leave", Color(0, 0, 0), 3, 0, 1);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Press SHIFT to leave", Color(0, 0, 0), 3, 0, 1);
 	RenderTextOnScreen(meshList[GEO_TEXT], "Press 1/2/3 to play", Color(0, 0, 0), 3, 0, 0);
 
 }

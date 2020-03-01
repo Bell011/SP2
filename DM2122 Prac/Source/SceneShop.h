@@ -95,7 +95,7 @@ private:
 	MS modelStack, viewStack, projectionStack;
 	Light light[2];
 
-	camerafps camera;
+	Camera2 camera;
 
 	int itemCount;
 	int itemType;

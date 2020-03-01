@@ -9,6 +9,7 @@
 #include <string.h>
 #include <iostream>
 #include "collcorners.h"
+#include "camerafps.h"
 class SceneRacing : public Scene
 {
 	enum GEOMETRY_TYPE
@@ -76,7 +77,7 @@ private:
 	MS modelStack, viewStack, projectionStack;
 	Light light[1];
 
-	Camera2 camera;
+	camerafps camera;
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();

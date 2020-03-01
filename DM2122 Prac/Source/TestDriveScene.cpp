@@ -347,7 +347,7 @@ void TestDriveScene::Render()
 	modelStack.PopMatrix();
 
 	//No transform needed
-	RenderTextOnScreen(meshList[GEO_TEXT], "Hello World", Color(0, 1, 0), 2, 0, 0);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Press WASD to drive", Color(1, 1, 1), 2, 0, 0);
 
 
 }
