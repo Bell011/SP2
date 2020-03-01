@@ -39,8 +39,8 @@ void TestDriveScene::Init()
 	
 	player = new rectObj();
 	//camera.Init(Vector3(player.pos.x, player.pos.y + 10, player.pos.z-10), Vector3(player.pos.x,player.pos.y,player.pos.z), Vector3(0, 1, 0));
-	player->setPos(Vector3(0, 0.5, 1));
-	camera.Init(Vector3(0.f, 2.f, -10.f), player->getPos(), Vector3(0, 1, 0));
+	player->setPos(Vector3(0, 0, 1));
+	camera.Init(Vector3(0.f, 5.f, -10.f), player->getPos(), Vector3(0, 1, 0));
 
 	Mtx44 projection;
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 1000.f);
@@ -97,10 +97,10 @@ void TestDriveScene::Init()
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
 
-	light[0].type = Light::LIGHT_DIRECTIONAL;
-	light[0].position.Set(0, 5, 0);
-	light[0].color.Set(0.5f, 0.5f, 0.5f);
-	light[0].power = 1;
+	light[0].type = Light::LIGHT_SPOT;
+	light[0].position.Set(-25, 60, 0);
+	light[0].color.Set(0.5f, 0.5f, 1.f);
+	light[0].power = 20;
 	light[0].kC = 1.f;
 	light[0].kL = 0.01f;
 	light[0].kQ = 0.001f;
@@ -111,9 +111,9 @@ void TestDriveScene::Init()
 
 
 	light[1].type = Light::LIGHT_SPOT;
-	light[1].position.Set(10, 5, 0);
+	light[1].position.Set(25,60, 0);
 	light[1].color.Set(0.5f, 0.5f, 0.5f);
-	light[1].power = 1;
+	light[1].power = 20;
 	light[1].kC = 1.f;
 	light[1].kL = 0.01f;
 	light[1].kQ = 0.001f;
@@ -164,39 +164,6 @@ void TestDriveScene::Init()
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//outdoor_Back.tga");
 
-	meshList[GEO_CHAR] = MeshBuilder::GenerateOBJ("Dice", "OBJ//g3car.obj");
-	meshList[GEO_CHAR]->textureID = LoadTGA("Image//g3car.tga");
-	movex = 0;	movey = -0;	movez = 0;
-	//PLAYER.Translate = Vector3(0, 0, 1);
-	
-	cplayer.getCoords("OBJ//mushroom.obj", cplayer);
-	((rectObj*)player)->setSize(cplayer);
-	((rectObj*)player)->setManualSize(Vector3(((rectObj*)player)->getSize().x* PLAYER.Scale.x, ((rectObj*)player)->getSize().y* PLAYER.Scale.y, ((rectObj*)player)->getSize().z* PLAYER.Scale.z));
-	PLAYER.RotateY = Vector4(0, 0, 1, 0);
-	
-
-	meshList[GEO_CHAR]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_CHAR]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_CHAR]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_CHAR]->material.kShininess = 1.f;
-
-	meshList[GEO_CUBE] = MeshBuilder::GenerateCuboid("Cube", Color(1, 0, 0), 1.f, 1.f, 1.f);
-	CUBE.Translate = Vector3(2, 0, 0);
-	CUBE.Scale = Vector3(2, 2, 2);
-	meshList[GEO_CUBE]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_CUBE]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_CUBE]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_CUBE]->material.kShininess = 1.f;
-
-
-	meshList[GEO_TRACK] = MeshBuilder::GenerateOBJ("track", "OBJ//track.obj");
-	meshList[GEO_TRACK]->textureID = LoadTGA("Image//track.tga");
-	meshList[GEO_TRACK]->material.kAmbient.Set(0.4f, 0.4f, 0.4f);
-	meshList[GEO_TRACK]->material.kDiffuse.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_TRACK]->material.kSpecular.Set(0.8f, 0.8f, 0.8f);
-	meshList[GEO_TRACK]->material.kShininess = 1.f;
-	TRACK.Scale = Vector3(4, 4, 4);
-	TRACK.Translate = Vector3(0,-3, 0);
 
 	meshList[GEO_LIGHTSPHERE] = MeshBuilder::GenerateSphere("lightBall", Color(1.f, 1.f, 1.f), 9, 36, 1.f);
 
@@ -204,46 +171,63 @@ void TestDriveScene::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	
 	bouncetime = 0.f;
-	switchlights = false;
+
 
 
 }
 
 void TestDriveScene::Update(double dt)
 {
-	if(speed<0.5)
-	speed +=dt*0.1;
-	Vector3 movement = Vector3(speed * cos(Math::DegreeToRadian(PLAYER.RotateY.degree)), 0, speed * sin(Math::DegreeToRadian(PLAYER.RotateY.degree)));
+
+	if(speed<1)
+		speed += dt*0.1;
+	
+	Vector3 movement;
 
 	PLAYER.Translate = player->getPos();
 	camera.target = player->getPos();
 	camera.position = (camera.target - camera.view)/*.Normalized()*/;
-	std::cout << speed;
 
-	if (Application::IsKeyPressed('W')) {
-		player->setPos(player->getPos() - movement);
-	}
-	if (Application::IsKeyPressed('S')) {
-		player->setPos(player->getPos() + movement);
-	}
 	if (Application::IsKeyPressed('A')) {
-			turnangle += 5;
+		turnangle += 30 * dt;
 		PLAYER.RotateY.degree = turnangle;
+		Mtx44 rotation;
+		rotation.SetToRotation(30 * dt, 0, 1, 0);
+		car.setFront(rotation * car.getFront());
 		
 	}
 	if (Application::IsKeyPressed('D')) {
-			turnangle -= 5;
+		turnangle -= 30 * dt;
 		PLAYER.RotateY.degree = turnangle;
+		Mtx44 rotation;
+		rotation.SetToRotation(-30*dt, 0, 1, 0);
+		car.setFront(rotation * car.getFront());
 	}
-	
+	movement = car.getFront().Normalized() * speed;
+	if (Application::IsKeyPressed('W')) {
+		Vector3 temp = player->getPos();
+		player->setPos(player->getPos() - movement);
+		if (camera.position.z > 30 || camera.position.z<-60 || camera.position.x < -45 || camera.position.x > 50) {
+			player->setPos(Vector3(0, 0, 1));
+
+		}
+	}
+	if (Application::IsKeyPressed('S')) {
+		Vector3 temp = player->getPos();
+		player->setPos(player->getPos() + movement);
+		if (camera.position.z > 30 || camera.position.z < -60 || camera.position.x < -45 || camera.position.x > 50) {
+			player->setPos(Vector3(0, 0, 1));
+		}
+
+	}
+
+
+
 	CalculateFrameRate();
 	camera.Update(dt);
-	//camera.mouse_callback();
-}
-bool TestDriveScene::checkCollision() {
-	return false;
 
 }
+
 /******************************************************************************/
 /*!
 \brief
@@ -274,6 +258,7 @@ void TestDriveScene::RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight)
 }
 void TestDriveScene::RenderCar()
 {
+	PLAYER.Scale = Vector3(0.5, 0.5, 0.5);
 	RenderOBJ(car.getCar(), PLAYER, false, true);
 		WHEEL.Translate = Vector3(car.getWheelPos(0));
 		RenderOBJ(car.getWheel(), WHEEL, false, true);
@@ -347,7 +332,7 @@ void TestDriveScene::Render()
 
 
 	RenderSkybox();
-	RenderOBJ(meshList[GEO_TRACK], TRACK, true, true);
+	//RenderOBJ(meshList[GEO_TRACK], TRACK, true, true);
 
 	//RenderOBJ(meshList[GEO_CUBE], CUBE, true, true);
 	////Update the translate vector if theres is any transformation
@@ -457,7 +442,7 @@ void TestDriveScene::RenderSkybox()
 		modelStack.Rotate(-90.f, 1.f, 0.f, 0.f);
 		modelStack.PushMatrix();
 		modelStack.Rotate(90.f, 0.f, 0.f, 1.f);
-		RenderMesh(meshList[GEO_BOTTOM], false);
+		RenderMesh(meshList[GEO_BOTTOM], true);
 		modelStack.PopMatrix();
 		modelStack.PopMatrix();
 	modelStack.PushMatrix();

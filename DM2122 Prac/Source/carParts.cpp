@@ -10,10 +10,17 @@
 
 Car::Car() {
 	car = nullptr;
+	front = Vector3(0, 0, -1);
 }
-Car::Car(Mesh* c)
+
+Vector3 Car::getFront()
 {
-	car = c;
+	return front;
+}
+
+void Car::setFront(Vector3 f)
+{
+	front = f;
 }
 
 Mesh* Car::getCar()

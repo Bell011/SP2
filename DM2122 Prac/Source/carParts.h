@@ -11,10 +11,12 @@ private:
 	Mesh* car;
 	Mesh* wheel;
 	Vector3 wheelpos[4];
+	Vector3 front;
 
 public:
 	Car();
-	Car(Mesh* c);
+	Vector3 getFront();
+	void setFront(Vector3);
 	Mesh* getCar();
 	void setCar(Mesh*);
 	Mesh* getWheel();

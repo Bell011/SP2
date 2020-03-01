@@ -136,7 +136,7 @@ void Application::Run()
 		}
 	}
 
-	scene = scenes[SELECTIONMENU];
+	scene = scenes[MAINMENU];
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
