@@ -249,6 +249,12 @@ private:
 	bool stageDown;
 	double stageTrans;
 	double stageRAngle;
+	// Animation for the structure
+	bool structureBottom;
+	bool structureUp;
+	bool structureDown;
+	double structureTrans;
+	double structureRAngle;
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
 	void RenderSkybox();
@@ -258,6 +264,7 @@ private:
 	void CalculateFrameRate();
 	void RenderOBJ(Mesh* mesh, TRS& trs, bool end, bool enableLight);
 	void animateStage(double dt);
+	void animateStructure(double dt);
 	void InitSpotlights();
 	void RenderSpotlights();
 	void SwitchLightColours();

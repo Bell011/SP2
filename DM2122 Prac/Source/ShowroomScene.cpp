@@ -136,6 +136,12 @@ void ShowroomScene::Init()
 	InitObjects();
 	bouncetime = 0.f;
 	fps = 0.f;
+
+	structureBottom = false;
+	structureUp = true;
+	structureDown = false;
+	structureTrans = 0.0;
+	structureRAngle = 0.0;
 }
 /*=============================================================================*/
 /*!
@@ -426,6 +432,8 @@ void ShowroomScene::Update(double dt)
 			camera.position = player->getPos();
 	}
 	animateStage(dt);
+	animateStructure(dt);
+	
 	SwitchLightColours();
 	//SetCursorPos(camera.setCursorX, camera.setCursorY);
 	//camera.mouse_callback();
@@ -563,11 +571,13 @@ void ShowroomScene::Render()
 	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
-
-
+	modelStack.PushMatrix();
 	RenderOBJ(meshList[GEO_STRUCTUREBIG], STRUCTUREBIG, false, true);
-	STRUCTURESMALL.Translate = Vector3(-1, 1, 0);
-	RenderOBJ(meshList[GEO_STRUCTURESMALL], STRUCTURESMALL, true, true);
+	STRUCTURESMALL.Translate = Vector3(1, 6, -1);
+	modelStack.Rotate(structureRAngle, 0, 1, 0);
+	modelStack.Translate(0, structureTrans, 0);
+	RenderOBJ(meshList[GEO_STRUCTURESMALL], STRUCTURESMALL, false, true);
+	modelStack.PopMatrix();
 	modelStack.PopMatrix();
 
 	if (player->checkCollision(door)) {
@@ -1251,6 +1261,84 @@ void ShowroomScene::animateStage(double dt)
 			stageMoving = true;
 			stageUp = true;
 			stageRAngle = 0.0;
+		}
+	}
+}
+
+void ShowroomScene::animateStructure(double dt)
+{
+	if (!structureBottom)
+	{
+		if (structureUp)
+		{
+			// Structure going up
+			if (structureTrans <= 2.0)
+			{
+				structureTrans += 0.267 * dt;
+			}
+			else if (structureTrans <= 4.0)
+			{
+				structureTrans += 0.686 * dt;
+			}
+			// Rotation rate increases
+			if (structureRAngle <= 360.0)
+			{
+				structureRAngle += 72 * dt;
+			}
+			else if (structureRAngle <= 720.0)
+			{
+				structureRAngle += 144 * dt;
+			}
+			else if (structureRAngle <= 1080.0)
+			{
+				structureRAngle += 216 * dt;
+			}
+			else if (structureRAngle <= 1440.0)
+			{
+				structureRAngle += 288 * dt;
+			}
+			else
+			{
+				structureUp = false;
+				structureDown = true;
+			}
+		}
+		else if (structureDown) // Structure will immediately go down while rotating
+		{
+			if (structureTrans >= 0)
+			{
+				structureTrans -= 1.0 * dt;
+			}
+			if (structureRAngle <= 2592.0)
+			{
+				structureRAngle += 288 * dt;
+			}
+			else
+			{
+				structureDown = false;
+				structureBottom = true;
+			}
+		}
+	}
+	else if (structureBottom) // Structure rotation slows down
+	{
+		if (structureRAngle <= 3000.0)
+		{
+			structureRAngle += 216 * dt;
+		}
+		else if (structureRAngle <= 3300.0)
+		{
+			structureRAngle += 144 * dt;
+		}
+		else if (structureRAngle <= 3600.0)
+		{
+			structureRAngle += 72 * dt;
+		}
+		else
+		{
+			structureBottom = false;
+			structureUp = true;
+			structureRAngle = 0.0;
 		}
 	}
 }
