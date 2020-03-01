@@ -88,7 +88,6 @@ private:
 	int numberOfBP;
 
 	void RenderMesh(Mesh* mesh, bool enableLight);
-	void RenderSkybox();
 
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
@@ -98,7 +97,7 @@ private:
 	float movex;
 	float movey;
 	float movez;
-	bool CheckCollision(Object* one, Object* two);
+	bool CheckCollision(Object* one);
 	void doPickUpCollision();
 	void doMatchingCollision();
 
